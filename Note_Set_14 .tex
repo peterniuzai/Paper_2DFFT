@@ -1,0 +1,134 @@
+%\documentclass{article}  
+\documentclass{aastex61}
+%\pagestyle{empty}  
+%\setcounter{page}{6}  
+%\setlength\textwidth{266.0pt}  
+%\usepackage{CJK}  
+\usepackage{graphicx}
+\usepackage{amsmath}  
+
+
+\begin{document}
+\title{Note 2017 sept 14}
+\section{General Idea of 2D-FFT Algorithm}
+\subsection{Rebin Data}
+
+As the data matrix has a uniform f axis,The dispersion is a curve. We interpolate the frequency
+axis and change it into wave square axis. Thus the dispersion should be a line in the matrix. 
+\begin{figure}[ht!]
+\epsscale{0.8}
+\plotone{./pictures/rebin.png}
+\caption{Rebin process.\label{fig:rebin}}
+\end{figure}
+
+
+As we tested before , fix other things, only change the bins number $N_{bin}$, we find out when $N_{bin}$ is equal to how many frequency channel $N_{ch}$, the SNR get it's max value.
+To keep the information conservation, The data after changed should have same pixels as before in order to obtain the most information.At DM=100 (last time is DM=50), SNR varied with Nbins looks like:
+\begin{figure}[ht!]
+\epsscale{1}
+\plottwo{./pictures/nbin_DM_50.png}{./pictures/nbin_DM_100.png}
+\epsscale{0.2}
+\plotone{./pictures/nbin_1000}
+\caption{Top 2 are DM at 50 and 100 ,but $N_{ch}=500$, bottom is $N_{ch}=1024$. We could find when $N_{bins}=N_{ch}$, The SNR is likely max. \label{fig:nbin}}
+\end{figure}
+
+\subsection{2D FFT}
+The next job is to find this line in the image. Firstly We do the 2-D FFT on the re-bin data. This helps to make the line of the image ,if it exists,pass through the center of image. After this All the lines will pass through the center.I got simple math analysis about 2D-FFT method. If we have a straight line $y=ax +b$, after 2D FFT:
+\begin{equation} \begin{aligned}
+&\int_{-\infty}^{+\infty}\int_{-\infty}^{+\infty}\delta(ax+b-y)e^{-i2\pi(ux+vy)}dxdy
+\\ &= \int_{-\infty}^{+\infty}e^{-i2\pi(ux+v(ax+b))}dx
+\\ &= \int_{-\infty}^{+\infty}e^{-i2\pi(u+av)x}dx \cdot e^{-i2\pi vb}
+\\ &=\delta(u+av)\cdot e^{-i2\pi vb}
+\end{aligned}
+\end{equation}
+
+In $(u,v)$ map ,straight line will become $v=-\frac{1}{a} x$, The b will be the module factor in $e^{-i2\pi vb}$.  
+
+
+\subsection{polar transform}
+
+In last Email, I found the interpolation in polar coordinate transform will bring a disaster time  consuming when data matrix got larger. I found a new way to search straight line according to angle,  we might not need to transform the map into polar coordinates , we could calculate the angle of each pixel, then using a histogram with weight of data to do this. This will have a high speed even at larger matrix. 
+\begin{figure}[ht!]
+\epsscale{1}
+\plotone{./pictures/histogram.png}
+\caption{Histogram ,with input SNR \label{fig:histogram}}
+\plotone{./pictures/interpolation.png}
+\caption{Interpolation \label{fig:interpolation}}
+\end{figure}
+It looks Histogram method has higher SNR , and I also have a sensitivity test, with SNR input is 12.8,initial DM =300/
+Histogram's result is DM = 299, SNR =7.06, but interpolation only 283, with 5.6.  Those are get from 2nd FFT along radius. when signal get smaller , the 2nd FFT is necessary. But the angle resolution or angle bin width is still confusing.
+\section{Question Left}
+\subsection{Sum along radius}
+If we sum along angle directly with complex data after 2D FFT, the periodical both on real and imaginary part will vanish. This situation only happens in start time of signal is zero, in that situation , signal are all real number. but if we sum the absolute data, the GWN will contribute alot to signal. So the 2nd FFT along frequency is nessesary.
+\subsection{How to choose $\delta \theta$ in polar coordinate transform no matter in Interpolation or Histogram Method}
+\subsubsection{the relationship between DM and slope K}
+As we know the relationship of time delay and frequency is:
+\begin{equation}
+\Delta t = 4.15 \times 10 ^{-6}ms \cdot DM \times (f^{-2}_{ref} -f^{-2}_{chan})
+\end{equation}
+
+We usually use $C = 4.15 \times 10^{-6} ms \cdot MHz^2 \cdot pc^{-1} \cdot cm^3$.
+If we assume $k_{1}$ stand for the slope of original line, and denote $k_{2}$ be the slop of line after 2-D FFT, and $k_{3}$=$\cot( \theta)$= $\frac{1}{k_2}$, We could get:
+\begin{equation}
+\centering  k_1 \cdot unit(k_1) = \frac{f^{-2}_{chan}}{\Delta t} = \frac{1}{C\cdot DM} 
+\end{equation}
+Here $k_1,k_2,k_3$ are from geometry, they only stand the digital value of the slop.If we want using it to calculate the DM ,we should add a unit of them when calculate slope. The $unit(k_1)$in equation (2) is:
+\begin{equation}
+unit(k_1)= \frac{max(f^{-2})-min(f^{-2})}{N_{bins}} \cdot \frac{1}{t_{samp}} 
+\end{equation}
+
+
+If we have a original data shape like $[N_{chan},N_{tsamp}]$, then we do a Re-bin process on it to make FRB curve be a straight line. Let $N_{bins}$parameter equal $N_{chan}$ could get the highest SNR as last note talking about.Then the data shape is becoming $[N_{bins}, N_{samp}]$. Next step is proceed 2D-FFT on data, then the straight line will go cross the center of the map. However , the slops are not necessary perpendicular to each other between the two straight signal lines before and after 2-D FFT. only if the data shape is square , like $N_{bins}=N_{tsamp}$ , the perpendicular relationship($k_1\cdot k_2=-1$) is satisfied. \\
+
+When $N_{bins} \neq N_{tsamp}$, the two slopes $k_1,k_2$ are also obeyed one rule:
+\begin{equation}
+ k_1 =\frac{-1\cdot N_{bins}}{k_2 \cdot N_{tsamp}}
+\end{equation}That's derived from properties of 2-D FFT.
+\subsubsection{Using DM smearing to constrain $k_2$}
+
+Time delay defined in Formula (1) is from 2 continuous frequency channel. It's fine for coherent de-dispersion, However , for incoherent de-dispersion, we need to consider the time delay in one frequency bin.That not match will cause DM smearing. 
+
+\subsubsection{DM smearing}
+
+DM smearing is kind of a signal broaden caused by wrong decision of parameter. In incoherent de-dispersion, time sample interval $t_{samp}$ ,and bandwidth of each frequency channel dominate the resolution of each DM. If we take wrong DM step, signal in each frequency channel and time bin will be broadened which will bring a low SNR. That is not what we want.To get rid of this, we can calculate the time delay between each frequency channel by take derivation of formula (1) , then we get:
+\begin{equation}
+t_{DM}=8.3 \times 10^6ms \times DM \cdot \Delta f \cdot f^{-3}_{ref} 
+\end{equation}
+
+
+In (5) , $t_{DM}$ is the time delay between each frequency channel caused by specific DM value. If we don't want  $t_{DM}$ be the main factor of pulse width, $t_{DM}$ should satisfied:
+
+{\centering \[ t_{DM} \leq t_{samp} \]}
+Take equal of items above and combine equation (5),we could get  reasonable DM step :
+\begin{equation}
+DM_i = 1.205 \times 10^{-7} cm^{-3} pc (i-1) t_{samp}(f^3_{ref} / \Delta f)
+\end{equation}
+When $\Delta f $ reach maximum, all other situation will not have DM smearing.Then we can get:
+\begin{equation}
+\Delta DM=1.205 \times 10^{-7} cm^{-3} pc\cdot t_{samp}\cdot(f^3_{ref} / \Delta f)
+\end{equation}
+\subsubsection{Constrain $k_2$}
+From (2)(3)(4), we could get relationship between DM and $k_2$:
+\begin{equation}
+DM = \frac{-1}{C}  \cdot\frac{N_{tsamp}\cdot t_{samp}}{max(f^{-2})-min(f^{-2})}\cdot k_2
+\end{equation}
+where C is the $4.15 \times 10^{-6} ms \cdot {MHz}^2 \cdot pc^{-1} \cdot cm^3$; k2 is the geometric slope (without unit) of line in 2-D FFT map. This is deduct from $unit(k_1)$, we can find out, if we use $unit(k_2)$:
+
+{\centering \[unit(k_2)=\frac{[max(f^{-2})-min(f^{-2})]^{-1}}{T^{-1}} \]}
+We could also get equation (8).
+\pagebreak
+
+From (7)(8), We can constrain parameter $k_2$  :
+\begin{equation}
+\Delta k_2 = -1 \cdot \Delta DM \cdot C \cdot \frac{max(f^{-2})-min(f^{-2})}{N_{tsamp}\cdot t_{samp}}
+\end{equation}
+Using parameters of Tianlai project:
+
+{\center \[t_{samp} =1 ms, f_{ref}=750 MHz , BW = 100 MHz , N_{tsamp}=512\]}
+The $\Delta DM$ = 0.508 $cm^{-3}\cdot pc$, then we cold get :$\Delta k_2$= 0.00197
+
+But there is a problem ,  $\delta K = \delta(\tan(\theta ))=\frac{1}{\cos^2(\theta)} \cdot \delta \theta$, it's not linear. I am not sure if we could constrain angle resolution with this.
+Actually , As Yichao suggested, we could change $(x,y)$ coordinate into $(r,k)$  space. I have tried this in interpolation.
+
+\end{document}
+

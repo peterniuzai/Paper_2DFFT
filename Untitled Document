@@ -1,0 +1,84 @@
+\def \frb {FRB Search Algorithm}
+\def \halpha {\ensuremath{\mathrm{H\alpha}}}
+\def \hbeta {\ensuremath{\mathrm{H\beta}}}
+
+
+\newcommand{\be}{\begin{eqnarray}}
+\newcommand{\ee}{\end{eqnarray}}
+\newcommand{\etal}{et al.}
+
+
+\newcommand{\Halpha}{\rm H\alpha}
+\newcommand{\EM}{{\rm EM}}
+\newcommand{\DM}{{\rm DM}}
+\newcommand{\SM}{{\rm SM}}
+\newcommand{\SFR}{\ensuremath{\mathrm{SFR}}}
+
+\newcommand{\DMhatzero}{\rm \widehat{\DM}}
+\newcommand{\DMhatFRB}{\rm \widehat{\DM}({\rm FRB})}
+
+\newcommand{\Ss}{S({\rm\halpha})_{\rm s}}
+\newcommand{\EMs}{{\rm EM}_{\rm s}}
+\newcommand{\EMsHalpha}{{\rm EM}(\halpha)_{\rm s}}
+\newcommand{\EMsHbeta}{{\rm EM}(\hbeta)_{\rm s}}
+\newcommand{\DMsHalpha}{{\rm DM}(\halpha)_{\rm s}}
+\newcommand{\DMs}{\widehat{\rm DM}_{\rm s}}
+
+
+\newcommand{\EMDM}{{\rm EM_{\rm DM}}}
+\newcommand{\EMSM}{{\rm EM_{\rm SM}}}
+
+\turnoffedit
+
+\begin{document}
+
+%\setlength{\fboxsep}{0pt}%
+%\setlength{\fboxrule}{0.5pt}%
+
+%\received{\today}
+\revised{\today}
+%\accepted{\today}
+%\submitjournal{ApJ}
+
+\shorttitle{2D-FFT search Algorithm }
+\shortauthors{C.H.Niu~et al.}
+
+\title{Using 2D-FFT to search Fast Radio Burst\footnote{peterniu@nao.cas.cn}}
+
+
+\correspondingauthor{Xuelei~Chen}
+\email{}
+
+\author{C.H. Niu}
+\affil{Central China Normal University \\
+Luoyu Road,Wuhan, China}
+\affil{National Astronomy Observatory , Chinese Academy of Sciences \\
+Datun(A) Road,No.30,Beijing, China}
+\affil{University of California Berkeley, Campbell Hall 339, Berkeley CA 94720}
+
+\author{Y.C. Li}
+\affil{National Astronomy Observatory , Chinese Academy of Sciences \\
+Datun(A) Road,No.30,Beijing, China}
+
+\author{F.Q. Wu}
+\affil{National Astronomy Observatory , Chinese Academy of Sciences \\
+Datun(A) Road,No.30,Beijing, China}
+
+\author{Ue-li Pen}
+\affil{CITA}
+\affil{National Astronomy Observatory , Chinese Academy of Sciences \\
+Datun(A) Road,No.30,Beijing, China}
+
+\author{X.L. Chen}
+\affil{National Astronomy Observatory , Chinese Academy of Sciences \\
+Datun(A) Road,No.30,Beijing, China}
+
+
+
+
+
+
+
+\begin{abstract}
+
+Fast Radio Burst have been found from pulsar data for many years. There are several FRB search algorithm like tree algorithm ,FDMT et. Here we proposed a different FRB searching algorithm which basically trace a curve in frequency-time image. This algorithm is mainly realized by two dimensional Fast Fourier Transform. This will bring a speed up benefit in well-developed 2D FFT library both in CPU and GPU code. We take a 2D FFT on the $f^{-2}(t)$ data map, if there is a FRB signal , it will shows up in the center and perpendicular to the original one in map after 2D FFT. 

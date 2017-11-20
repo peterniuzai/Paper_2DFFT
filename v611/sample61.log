@@ -1,0 +1,43 @@
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.9.1)  1 SEP 2017 16:24
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**sample61.tex -synctex=1
+(./sample61.tex
+LaTeX2e <2016/02/01>
+Babel <3.9q> and hyphenation patterns for 5 language(s) loaded.
+(./aastex61.cls
+Document Class: aastex61 2016/04/16 Version 6.1/AAS markup document class
+Class aastex Info: 
+ 
+ Original \LaTeX2.09 style by Chris Biemesderfer (chris@seagoat.com). 
+ Adapted to \LaTeXe by A. Ogawa (ogawa@teleport.com)
+ emulateapj.cls included, Copyright 2000-2015 Alexey Vikhlinin 
+ Rewrite and update of emulateapj.cls, revised and enhanced with table macros, 
+gridlines, draft watermark,
+ track changes, new `modern' style and much more, by Amy Hendrickson,
+ (amyh@texnology.com, http://www.texnology.com) 
+ 
+  on input line 106.
+\bibbaselineskip=\skip41
+
+
+ Please update your system to include revtex4-1.cls
+
+
+ ) ) 
+Here is how much of TeX's memory you used:
+ 93 strings out of 494910
+ 1298 string characters out of 6179837
+ 46424 words of memory out of 5000000
+ 3480 multiletter control sequences out of 15000+600000
+ 3640 words of font info for 14 fonts, out of 8000000 for 9000
+ 36 hyphenation exceptions out of 8191
+ 16i,1n,17p,152b,12s stack positions out of 5000i,500n,10000p,200000b,80000s
+
+No pages of output.
+PDF statistics:
+ 0 PDF objects out of 1000 (max. 8388607)
+ 0 named destinations out of 1000 (max. 500000)
+ 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+
