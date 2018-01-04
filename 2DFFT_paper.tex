@@ -141,7 +141,7 @@ Here we report a new algorithm to search FRBs .
 \section{Basics of Incoherent Dedispersion}
 \label{sec:obs}
 
-The dispersion of the electromagnaetic wave pulse cause a delay in arrival time at frequency $\nu$ compared with thre reference frequency $\nu_0$, which is given by :
+The dispersion of the electromagnaetic wave pulse cause a delay in arrival time at frequency $\nu$ compared with the reference frequency $\nu_0$, which is given by :
 \begin{equation}
 \Delta t (\nu) = -D(\nu^{-2} -\nu^{-2}_{0})
 \end{equation}
@@ -230,29 +230,28 @@ we find the above indeed form a Fourier pair. However , here we want to use $\nu
 f(t) &= 2\pi \int \widetilde{f}(\nu) e^{i2\pi \nu t} d\nu
 \end{aligned}
 \end{equation}
-The 2d transform of the signal $I(\nu,t)$ is 
+\underline{ The 2D transform of the signal $I(\nu,t)$ is} 
 \begin{equation}
-\widetilde{I}(f,\tau)=\int d\nu~e^{2\pi i \nu \tau} \int dt~e^{-2\pi ift}I(t,\nu)
+\widetilde{I}(f,\tau)=\int d\nu~e^{-2\pi i \nu \tau} \int dt~e^{-2\pi ift}I(t,\nu)
 \end{equation}
 where we denote the Fourier conjugate variable of $\nu,t$ as $\tau,f$ to avoid confusion. For the pulse signal given by Eq.(2),
 \begin{equation}
 \begin{aligned}
-\widetilde{I}(f,\tau) &= \int d\nu e^{2\pi i\nu \tau}I_0 e^{-2\pi i f(t_0 - \frac{2D}{\nu ^3 _0}\Delta \nu)} \\
-								&= I_0 e^{-i2\pi f(t_0 + \frac{2D}{\nu ^2 _0})}\int d\nu~ e^{i2\pi \nu (\tau + \frac{2Df}{\nu ^2 _0})} \\
-								&= \frac{I_0}{2\pi}exp[-i2\pi f(t_0 + \frac{2D}{\nu ^2 _0})]\delta
-								 _D (\tau + \frac{2Df}{\nu ^2 _0})
+\widetilde{I}(f,\tau) &= \int d\nu e^{-2\pi i\nu \tau}I_0 e^{-2\pi i f(t_0 - \frac{2D}{\nu ^3 _0}\Delta \nu)} \\								
+								&= I_0 e^{-i2\pi f(t_0 + \frac{2D}{\nu ^2 _0})} 
+								\delta_D (\tau - \frac{2Df}{\nu ^3 _0})
 \end{aligned}
 \end{equation} 
-Note $\widetilde{I}(\tau,f)$ is non-zero only on the staight line $\tau + \frac{2Df}{\nu ^2 _0}=0$, and the value is a complex number whose phase angle gives the arrival time. For the pulse with finite width,
+Note $\widetilde{I}(\tau,f)$ is non-zero only on the staight line $\tau - \frac{2Df}{\nu ^2 _0}=0$, and the value is a complex number whose phase angle gives the arrival time. For the pulse with finite width,
 \begin{equation}
-\widetilde{I}(f,\tau) = \int d\nu e^{2\pi i \nu \tau}\int dt~e^{-2\pi ift} \frac{1}{\sqrt{2\pi}\sigma}e^{-\frac{(t-t')^2}{2\sigma ^2}}
+\widetilde{I}(f,\tau) = \int d\nu e^{-2\pi i \nu \tau}\int dt~e^{-2\pi ift}\cdot I_0 \frac{1}{\sqrt{2\pi}\sigma}e^{-\frac{(t-t')^2}{2\sigma ^2}}
 \end{equation}
-where $t'=t_0 + \frac{2D}{\nu _0 ^3}\Delta \nu$. Complete the t integral , we get
+where $t'=t_0 - \frac{2D}{\nu _0 ^3}\Delta \nu$.  
 \begin{equation}
 \begin{aligned}
-\widetilde{I}(f,\tau)  & = \int d\nu~ e^{2\pi i\nu \tau}I_0  e^{-i2\pi ft'}e^{-\frac{(2\pi f\sigma)^2}{2}} \\
-&= I_0e^{-i2\pi f(t_0 - \frac{2D}{\nu _0 ^2})}e^{-\frac{(2\pi f\sigma)^2}{2}}\int d\nu~exp[i2\pi\nu(\tau + \frac{2Df}{\nu ^2_0})] \\
-&= \frac{I_0}{2\pi}e^{-i2\pi f(t_0-\frac{2D}{\nu ^2 _0})}e^{-\frac{(2\pi f\sigma)^2}{2}}\delta _D (\tau + \frac{2Df}{\nu ^2 _0})
+\widetilde{I}(f,\tau)  & = \int d\nu~ e^{-2\pi i\nu \tau}I_0  e^{-i2\pi ft'}e^{-\frac{(2\pi f\sigma)^2}{2}} \\
+&= I_0e^{-i2\pi f(t_0 + \frac{2D}{\nu _0 ^2})}e^{-\frac{(2\pi f\sigma)^2}{2}}\int d\nu~exp[-i2\pi\nu(\tau - \frac{2Df}{\nu ^3_0})] \\
+&= {I_0} e^{-i2\pi f(t_0+\frac{2D}{\nu ^2 _0})}e^{-\frac{(2\pi f\sigma)^2}{2}}\delta _D (\tau - \frac{2Df}{\nu ^3 _0})
 \end{aligned}
 \end{equation}
 Note this is similar to Eq(18) except for the factor $e^{-\frac{(2\pi f \sigma)^2}{2}}$, this limits the usable range of f to $|f|<(2\pi\sigma)^{-1}$.
@@ -282,162 +281,12 @@ Then
 \cdot & ~e^{-\frac{\pi^2\sigma ^2 \nu _0 ^4}{2}\rho ^2 \cos ^2 \theta}\rho ^{-1} \delta _D (\theta + \arctan D)
 \end{aligned}
 \end{equation}
-\subsection{Ionized Gas  Properties in the Host}
-
-%The $\Halpha$ luminosity of the host also allows us to estimate the properties of the ionized ISM in the host and its contribution to the total DM of \frb.
-
-The Balmer lines from the host also allow us to estimate the properties its ionized ISM  and its contribution to the total DM of \frb.
-
-The $\Halpha$ surface density for the galaxy with  flux $F_{\halpha}$, semi-major axis $a$, and semi-minor axis $b$ is
-\be
-S(\halpha) &=& \frac{F_{\halpha}}{\pi a b}, \nonumber\\
-&\approx&  6.8 \times 10^{-16}\,\mathrm{erg\,cm^{-2}\,s^{-1}\,arcsecond^{-2}}, \nonumber\\
-&\approx&  120 \,\mathrm{Rayleigh},
-\ee
-where we have used the extinction corrected flux $F_{\halpha} = 2.6\times10^{-16}\,\mathrm{erg\,cm^{-2}\,s^{-1}}$ and the semi-major and minor axes ($a = 0\farcs44$, $b/a=0.68$) from the $i^\prime$ and $r^\prime$ images. In the source frame (denoted below by the subscript, `s'), the surface density is
-% (1+z)^4 = (1 + 0.193)^4 = 2.03
-\be
-\Ss = (1+z)^4 S(\halpha) = 243\,\mathrm{Rayleigh}. 
-\ee
-
-For a temperature  $T = 10^4 T_4$~K, we express the  emission measure ($\EM\ = \int n_e^2 \mathrm{d}s$) given by \citet{reyn77}  in the galaxy's frame
-\be
-\EMsHalpha &=& 2.75 \mathrm{pc\,cm^{-6}} \, T_4^{0.9}\,  \left[\frac{\Ss}{\mathrm{Rayleigh}}\right], \nonumber \\
-&\approx& 670\,\mathrm{pc\,cm^{-6}}\,T_4^{0.9}.
-%\,(\theta_s/ 0\farcs7)^{-2}.
-\ee
-We get a smaller  value from the extinction-corrected  $\hbeta$ flux,  $\EMsHbeta \approx 530\,\mathrm{pc\,cm^{-6}}$. For the calculations below, we proceed with a combined  estimate,  $\EMs\ \approx 600\,\mathrm{pc\,cm^{-6}}$.
-
-This value is fairly large compared to measurements of the local Galactic disk. The WHAM  $\Halpha$ survey, for example, gives values of tens of pc~cm$^{-6}$ in the Galactic plane  and about 1 pc~cm$^{-6}$ looking out of the plane \citep[][]{hbk+08}. However, 
-lines of sight to distant pulsars and studies of other galaxies give EM values in the hundreds \citep[][]{reyn77, hdb+09}. 
-
-The estimate for $\EMs$ is sensitive to the inferred solid angle of the galaxy and emitting regions. Ongoing observations with the \textit{Hubble Space Telescope} will better resolve the $\halpha$ emitting structures and improve our constraint on the EM with respect to the location of the burst. 
-
- The implied optical depth for free-free absorption at an observation frequency $\nu$ (in GHz) is
- \be
-\tau_{\rm ff} &\approx&  3.3\times10^{-6} [(1+z)\nu_\mathrm{GHz}]^{-2.1} T_4^{-1.35} \EMs \nonumber \\ 
-&\approx& 1.4 \times 10^{-3}  \nu_\mathrm{GHz}^{-2.1} T_4^{-0.45}.
-\ee
-%Therefore,
-% unless a substantial fraction of the emitting gas is highly clumped, 
- Free-free absorption for \frb\ is therefore negligible even at 100\,MHz. This suggests that the radio spectra of the bursts and possibly the persistent source  are unaffected by absorption and are inherent to the emission process or to propagation effects near the sources, confirming the inference made by \citep{ssh+16b} based on the widely varying spectral shapes of the bursts alone.
-
- 
- 
-\subsubsection{Implied DM from $\Halpha$-emitting Gas}
-The EM implies a DM value sometimes given by $\DM = (\EM f_{\rm f} L)^{1/2}$, where
-$f_{\rm f}$ is the volume filling factor of ionized clouds in a region of total size $L$ \citep{reyn77}. As summarized in Appendix~B of \citet[][]{cws+16},  additional fluctuations  decrease the  DM derived from EM, giving a source-frame value,
-\be
-\DMs &\approx & 
-387\ \text{pc cm$^{-3}$}\, 
-%550\ \text{pc cm$^{-3}$}\, 
-	L_{\rm kpc}^{1/2}
-	\left[ \frac{f_{\rm f}}{\zeta(1+\epsilon^2)/4}\right]^{1/2} \nonumber \\
-& & \times \left(\frac{\EM}{600\ \text{pc cm$^{-6}$}} \right)^{1/2},
-\label{eq:em2dm}
-\ee
- where $\epsilon\le 1$ is the fractional variation inside discrete clouds due to turbulent-like density variations and  $\zeta\ge 1$ defines cloud-to-cloud density variations  in the ionized region of depth  $L_{\rm kpc}$  in kpc. Here we have used $\EMs\ = 600$ \text{pc cm$^{-6}$} and assumed 100\% cloud-to-cloud variations ($\zeta = 2$) and fully modulated electron densities inside clouds ($\epsilon=1$).
+%%%%%%%%%%%%%%%%%%
 
 
 
-%We also note that since the galaxy is at $z=0.1927$, the effective contribution to the radio-measured DM (i.e. time delay as a function of frequency) will be a factor of $1/(1+z) = 0.84$ times the host galaxy DM, corresponding to $\DM(\Halpha) \lesssim230\,\mathrm{pc\,cm^{-3}}$. 
-
-The host contribution to the {\it measured} \DM\ is a factor $(1+z)^{-1}$ smaller than the source frame DM\footnote{The factor of $(1+z)^{-1}$ is a combination of the photon redshift, time dilation and the frequency$^{-2}$ dependence of cold plasma dispersion.}.
-%or $\DMhatzero = \DMs / (1+z) \approx 324 \ \text{pc cm$^{-3}$}$ multipled by the other factors in Eq.~\ref{eq:em2dm}.
-Also, the line of sight to the  FRB source may  sample only a fraction of  $\DMs$  depending on if
-it is embedded in or offset from the $\Halpha$-emitting gas.  For an effective path length through the ionized gas
-$L_{\rm FRB} \le L$,  we then have
-%\be
-%\DMhatFRB & =& 
- %324 \ \text{pc cm$^{-3}$} \times
- %\nonumber \\
-  %&&	\hspace{-0.75in}  
-  %(L_{\rm FRB} / L)   (L_{\rm kpc}f_{\rm f})^{1/2}  \left[ 4/ \zeta(1+\epsilon^2)\right]^{1/2}.
-%\ee
-%
-%{\bf Alternative to above equation: we could instead just say:}
-\be
-\DMhatFRB &=& \frac{\DMs}{1+z} \left(\frac{L_{\rm FRB}}{L} \right) 
-\nonumber \\
-&&\hspace{-0.85in}   \approx  324 \ \text{pc cm$^{-3}$}  \left(\frac{L_{\rm FRB}}{L} \right)
-\left[\frac{4L_{\rm kpc}f_{\rm f}}{ \zeta(1+\epsilon^2)} \right]^{1/2}.
-\ee
-
-This estimate can be compared with empirical constraints  discussed in  \citet{clw+16} on contributions from the host and the intergalactic medium (IGM) to the total \DM\  made by subtracting the NE2001 model's DM contribution from the Milky Way \citep{cl02} %\authorcomment1{Jim/Joe: Pls add a comment on the uncertainties in MW+Halo contributions}  
-($\DM_{\rm MW} = 188 \ \text{pc cm$^{-3}$}$) and the Milky Way halo ($\DM_{\rm MW_{halo}} = 30 \ \text{pc cm$^{-3}$}$) from the total $\DM\ = 558\,\mathrm{pc\,cm^{-3}}$. This gives $\DM_\mathrm{IGM} + \DM_\mathrm{host} = 340\,\mathrm{pc\,cm^{-3}}$.  
-The Milky Way contributions have uncertain errors but are likely of order 20\%. 
-The  measured redshift implies a mean IGM contribution $\DM_{\rm IGM} \approx 200\ \text{pc cm$^{-3}$}$ \citep{ioka03,inou04} but can vary by about $\pm 85 \ \text{pc cm$^{-3}$}$ \citep[][]{mcqu14}.   This yields a range of possible values for $\DM_{\rm host}$: $55 \lesssim \DM_{\rm host} \lesssim 225\,\mathrm{pc\,cm^{-3}}$ that further implies   
- %$0.12 \lesssim (L_{\rm FRB} / L)^{1/2}   f_{\rm f}^{1/2}  \left[ 4/ \zeta(1+\epsilon^2)\right]^{1/2} \lesssim 0.5$ or 
-% $0.014 \lesssim (L_{\rm FRB} / L)   f_{\rm f}  \left[ 4/ \zeta(1+\epsilon^2)\right] \lesssim 0.25$.   
-$0.09 \lesssim (L_{\rm FRB} / L) \left [L_{\rm kpc}  f_{\rm f} /  \zeta(1+\epsilon^2)\right]^{1/2} \lesssim 0.35$.
-The ionized region therefore must have some degree of clumpiness or the effective path length is significantly  smaller than the size of the ionized region. 
-
-%Radio pulsars believed to be in the Large Magellanic Cloud have DMs spanning the range 45--273\,$\mathrm{pc\,cm^{-3}}$; similarly Small Magellanic Cloud pulsars have DMs spanning the range 70--200 $\mathrm{pc\,cm^{-3}}$ \citep{mhth05}. 
-Radio pulsars  in the Large and Small Magellanic Clouds have DMs spanning the range 45--273\,$\mathrm{pc\,cm^{-3}}$
- and  70--200 $\mathrm{pc\,cm^{-3}}$, respectively \citep{mhth05}. 
-This empirically demonstrates that the free electron content of star-forming dwarf galaxies is of the order we estimate. The relatively large DM contribution from the host galaxy (as inferred from the $\Halpha$ emission) implies that any contributions from the vicinity of the FRB source itself are probably quite small. This may rule out a very young ($<100$\,yr) supernova remnant \citep[e.g. ][]{piro16}. 
-%unless it was from a star stripped of its outer envelope before the explosion.
 
 
-
-\subsection{Implications for Source Models}
-\citet{clw+16} reported the locations of the radio bursts, the optical and variable radio counterparts and the absence of millimeter-wave and X-ray emission. \citet{mph+16} have shown that the bursts and the persistent radio source are colocated to within a linear projected separation of 40\,pc, suggesting that the two emission sources should be physically related, though not necessarily the same source. The radio source properties are consistent with a low luminosity AGN or a young ($<$1000\,yr) supernova remnant (SNR) powered by an energetic neutron star \citep[e.g. ][]{mkm16}. 
-
-The optical properties of the galaxies reported here do not add support to the AGN interpretation although it cannot be conclusively ruled out. The BPT diagnostics for the host (Figure~\ref{fig:bpt}) show no indication of AGN activity. However, this may not be conclusive as the majority of radio-loud AGN show no optical signatures of activity \citep{ms07}. This is further supported by five low luminosity AGN with no optical signatures have also recently been discovered \citep{pyop16}. However, these objects are almost exclusively hosted in galaxies with much larger stellar masses ($\sim10^{10}\,M_\sun$).
-We also note that the radio source is offset from the optical center of the galaxy by 170--300\,mas, corresponding to a transverse linear distance of 0.5--1\,kpc, nearly a quarter to half of the radial extent, which is not consistent with a central AGN, but such offsets have been seen before in dwarf galaxies, e.g. Henize 2-10 \citep{rsjb11}. 
-
-The association of an optical/X-ray AGN with a dwarf galaxy is also extremely rare. A search of emission-line dwarf galaxies ($10^{8.5} \lesssim M_* \lesssim 10^{9.5}\,M_\sun$) using BPT line diagnostics identified an AGN rate of $\sim$ 0.5 \% \citep{rgg13}, with an additional 0.05 \% of dwarf galaxies searched exhibiting narrow emission lines consistent with star formation band broad \halpha\ consistent with an AGN. Similarly, an X-ray survey of $z<1$ dwarf galaxies reported an AGN rate of 0.6--3\% \citep{pgg+16}. Of the dwarf galaxies known to host AGN, only two exhibit nuclear radio emission that appears to originate from a black-hole jet, Henize 2-10 and Mrk 709 \citep{rsjb11,rpr+14}.  Both have strong nuclear X-ray emission that originates from the AGN but optical emission lines that are dominated by star-formation processes. The combination of a compact radio source, absent nuclear X-ray emission, strong star-formation optical emission lines, and weak or non-existent broad optical emission lines that we observe in the host of \frb\ has no analogue in any known galaxy to the best of our knowledge. 
-
-The high star formation rate is consistent with the presence of a young SNR or a cluster of young massive stars (i.e. an OB association), which would naturally link FRBs to neutron stars which are the favored progenitor models.
-
-
-\subsubsection{Relation to Dwarf Galaxies}
-It is interesting to note that the only FRB host directly identified so far is a low metallicity dwarf galaxy rather than, say, an extremely high-star-formation-rate galaxy such as Arp\,220 or a galaxy with a very powerful AGN or some other extreme characteristics. Dwarf galaxies are also a small fraction of the stellar mass in the Universe \citep{pch+12}. \citet{rsb+16} also suggested that the extremely low scattering of FRB\,150807 compared to its DM may be linked to its origin from a low-mass ($<10^{9}\,M_\sun$) galaxy. However, the strong polarization and scattering properties of FRB\,110523 do suggest the presence of turbulent magnetized plasma around the source \citep{mls+15}, suggesting that individual FRB environments may be quite diverse.
-
-
-
-%As dwarf galaxies are much more common than larger galaxies, while having lower total stellar mass and lower total star formation rate \citep{pch+12}, this discovery may point to an FRB source that is linked to the galactic host itself rather than its contents (\authorcomment1{I feel like we should take out this statement.}). Another way 
-
-If FRBs are indeed more commonly hosted by dwarf galaxies in the low redshift Universe, they would share this preference with two other classes of high-energy transients --- long duration gamma-ray bursts and superluminous supernovae, both of which prefer low-mass, low-metallicity, and high star formation rate hosts \citep[e.g., ][ and other works]{fls+06,plt+13,vsj+15,pqy+16}. Indeed, superluminous supernovae are prefentially hosted by EELGs \citep{lsk+15}. If this relation is true, it may point to a link between FRBs and extremely massive progenitor stars, possibly extending to magnetars that have been associated with massive progenitor stars \citep[e.g.  ][]{ok14}.
-
-
-
-\subsection{Future Optical Follow-Up of FRBs}
-A link between FRBs and dwarf galaxies will impact future multi-wavelength follow-up plans. Without the precise localization for \frb\ \citep{clw+16}, the host galaxy is scarcely distinguishable from other objects in the deep Gemini images. 
-
- Due to the trade-off between field of view and localization precision, FRB search projects that have a large FRB detection rate such as CHIME (Kaspi V. M. et al,. 2017, in preparation), UTMOST \citep{cfb+16}, and HIRAX \citep{nbb+16} will localize high signal to noise detections to only sub-arcmin precision. If FRB hosts are star-forming galaxies with strong emission lines, slitless objective prism spectroscopy could efficiently distinguish these objects from a field of stars and elliptical galaxies, leading to putative host identifications without very precise localization. However, this strongly depends on the link between FRBs and their host properties and the homogeneity of FRBs --- which will first have to be confirmed with more interferometric localizations.
-
-%We also note that \frb\ is in the Galactic plane ($b=-0.23\deg$) and hence has a very high density of objects and a large foreground extinction. Most FRBs detected at higher Galactic latitudes are in less crowded and less extincted fields and hence may not need as accurate a localization to identify a putative counterpart.
-
-We note, of course, that our above discussion regarding the possible relationship between FRBs and dwarf galaxies in general is based on a single data point of a repeating FRB, which may not be representative of the broader FRB population \citep[see][for more details]{ssh+16a,ssh+16b}. 
-
-
-%However, we do not yet know whether there are other galaxies around \frb's host with bright emission lines in the few arcsecond region that may lead to a false positive signal for such efforts --- that will be addressed in a future paper. 
-
-
-%The largest uncertainty in this rate estimate is in the volume term, since we do not know the host DM contribution for other FRBs.
-% To do:
-% - Need to confirm that converting to "per galaxy" requires scaling by galaxy count of a given size.
-% - Would be nice to make this independent of radio flux (standard candle?).
-
-
-%\subsection{Summary}
-%We have shown that the optical counterpart for \frb\ reported by \citet{clw+16} is a dwarf  galaxy ($M_*\sim4-7\times 10^{7}\,\mathrm{M_\sun}$) at a redshift of $z=0.1927$, consistent with the estimates from its DM. This proves the extragalactic nature of \frb, a first for any FRB. Thus we rule out any Galactic origin models for \frb\ and also show that the FRB source or its immediate environment need not separately contribute a significant DM to be viable, thus reducing the constraints for FRB source models. The host galaxy shows spectroscopic signatures of a high star formation rate ($0.4 \,\mathrm{M_\sun\,yr^{-1}}$) and no optical signatures of AGN activity. If FRBs are indeed generally related to dwarf galaxies, they may be linked to the two other phenomena preferring low-metallicity, low-mass hosts --- long duration $\gamma$-ray bursts and superluminous supernovae. Separately, if the FRB-dwarf galaxy relation holds, then identifying the optical counterparts of FRBs without very precise localization will be challenging due to their faintness and ubiquity of their potential hosts. 
-
-
-
-\acknowledgements 
-We are very grateful to the staff of the Gemini Observatory for their help and flexibility throughout this program. We also thank R.~F.~Trainor and A.~Delahaye for helpful discussions.
-
-Our work is based on observations obtained at the Gemini Observatory (program GN-2016B-DD-2), which is operated by the Association of Universities for Research in Astronomy, Inc., under a cooperative agreement with the NSF on behalf of the Gemini partnership: the National Science Foundation (United States), the National Research Council (Canada), CONICYT (Chile), Ministerio de Ciencia, Tecnolog\'{i}a e Innovaci\'{o}n Productiva (Argentina), and Minist\'{e}rio da Ci\^{e}ncia, Tecnologia e Inova\c{c}\~{a}o (Brazil). 
-
-This work has made use of data from the European Space Agency (ESA) mission {\it Gaia} (\url{http://www.cosmos.esa.int/gaia}), processed by the {\it Gaia} Data Processing and Analysis Consortium (DPAC, \url{http://www.cosmos.esa.int/web/gaia/dpac/consortium}). Funding for the DPAC has been provided by national institutions, in particular the institutions participating in the {\it Gaia} Multilateral Agreement. This research made use of Astropy, a community-developed core Python package for Astronomy (Astropy Collaboration, 2013, \url{http://www.astropy.org}).
-
-S.P.T acknowledges support from a McGill Astrophysics postdoctoral fellowship. The research leading to these results has received funding from the European Research Council (ERC) under the European Union's Seventh Framework Programme (FP7/2007-2013). C.G.B. and J.W.T.H. gratefully acknowledge funding for this work from ERC Starting Grant DRAGNET under contract number 337062. J.M.C., R.S.W., and S.C. acknowledge prior support from the National Science Foundation through grants AST-1104617 and AST-1008213. This work was partially supported by the University of California Lab Fees program under award number LF-12-237863. The research leading to these results has received funding from the European Research Council (ERC) under the European Union’s Seventh Framework Programme (FP7/2007-2013).  J.W.T.H. is an NWO Vidi Fellow. V.M.K. holds the Lorne Trottier and a Canada Research Chair and receives support from an NSERC Discovery Grant and Accelerator Supplement, from a R. Howard Webster Foundation Fellowship from the Canadian Institute for Advanced Research (CIFAR), and from the FRQNT Centre de Recherche en Astrophysique du Quebec. B.M. acknowledges support by the Spanish Ministerio de Econom\'ia y Competitividad (MINECO/FEDER, UE) under grants AYA2013-47447-C3-1-P, AYA2016-76012-C3-1-P, and MDM-2014-0369 of ICCUB (Unidad de Excelencia `Mar\'ia de Maeztu'). L.G.S. gratefully acknowledge financial support from the ERC Starting Grant BEACON under contract number 279702 and the Max Planck Society. Part of this research was carried out at the Jet Propulsion Laboratory, California Institute of Technology, under a contract with the National Aeronautics and Space Administration. E.A.K.A. is supported by TOP1EW.14.105, which is financed by the Netherlands Organisation for Scientific Research (NWO). M.A.M. is supported by NSF award \#1458952. S.B.S is a Jansky Fellow of the National Radio Astronomy Observatory. P.S. is a Covington Fellow at the Dominion Radio Astrophysical Observatory.
-
-
-\facility{Gemini:Gillett (GMOS)}
-\software{ESO-MIDAS, astro-py, galfit, SExtractor}
 %\bibliography{paper}
 
 \begin{thebibliography}{}
