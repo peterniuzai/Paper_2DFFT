@@ -1,7 +1,7 @@
 \documentclass[twocolumn]{aastex61}
 \pdfoutput=1 
 \usepackage{upgreek}
-
+\usepackage{color} 
 \usepackage{amsmath}
 %\usepackage{graphicx}
 
@@ -74,6 +74,9 @@ Datun(A) Road,No.30,Beijing, China}
 \affil{University of California Berkeley, Campbell Hall 339, Berkeley CA 94720}
 
 \author{Y.C. Li}
+\affil{National Astronomy Observatory , Chinese Academy of Sciences \\
+Datun(A) Road,No.30,Beijing, China}
+\author{S.F. Zuo}
 \affil{National Astronomy Observatory , Chinese Academy of Sciences \\
 Datun(A) Road,No.30,Beijing, China}
 
@@ -254,13 +257,13 @@ where $t'=t_0 - \frac{2D}{\nu _0 ^3}\Delta \nu$.
 &= {I_0} e^{-i2\pi f(t_0+\frac{2D}{\nu ^2 _0})}e^{-\frac{(2\pi f\sigma)^2}{2}}\delta _D (\tau - \frac{2Df}{\nu ^3 _0})
 \end{aligned}
 \end{equation}
-Note this is similar to Eq(18) except for the factor $e^{-\frac{(2\pi f \sigma)^2}{2}}$, this limits the usable range of f to $|f|<(2\pi\sigma)^{-1}$.
+Note this is similar to Eq(18) except for the factor $e^{-\frac{(2\pi f \sigma)^2}{2}}$,  {\color{red}this limits the usable range of f to $|f|<(2\pi\sigma)^{-1}$. }
 \\ \\
 %%%%%%%%%%%%%%%%%%
 
 \section{Transform to polar coordinates}
 \label{sec:discussion}
-We can take $\frac{2f}{\nu _0 ^2},\tau$ as the $x,y$ in Cartesian coordinates, then the polar cpprdinates $\rho,\theta$ can be defined as 
+We can take $\frac{2f}{\nu _0 ^3},\tau$ as the $x,y$ in Cartesian coordinates, then the polar coordinates $\rho,\theta$ can be defined as 
 \begin{equation}
 \begin{aligned}
 \rho ^2 &= \left(\frac{2f}{\nu _0 ^2}\right) ^2 + \tau ^2 \\
