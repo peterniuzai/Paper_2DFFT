@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2018.1.3)  15 MAR 2018 10:13
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2018.1.3)  15 MAR 2018 20:45
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -480,7 +480,11 @@ Class revtex4-1 Info: cite was not loaded (OK!) on input line 50.
 Class revtex4-1 Info: mcite was not loaded (OK!) on input line 50.
 Class revtex4-1 Info: multicol was not loaded (OK!) on input line 50.
 
-(./2DFFT_paper.aux)
+(./2DFFT_paper.aux
+
+LaTeX Warning: Label `fig:2DFFT' multiply defined.
+
+)
 \openout1 = `2DFFT_paper.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 50.
@@ -497,8 +501,7 @@ LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 50.
 LaTeX Font Info:    ... okay on input line 50.
 LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 50.
 LaTeX Font Info:    ... okay on input line 50.
-
-(/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
+ (/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count157
 \scratchdimen=\dimen138
@@ -703,22 +706,36 @@ Underfull \hbox (badness 1237) in paragraph at lines 290--291
 File: ./pictures/1stFFT.png Graphic file (type png)
 
 <use ./pictures/1stFFT.png>
-Package pdftex.def Info: ./pictures/1stFFT.png used on input line 316.
+Package pdftex.def Info: ./pictures/1stFFT.png used on input line 319.
 (pdftex.def)             Requested size: 205.92802pt x 195.67198pt.
- [4 <./pictures/1stFFT.png>] [5]
+ [4 <./pictures/1stFFT.png>] (./2DFFT_paper.bbl
+
+LaTeX Warning: Empty `thebibliography' environment on input line 5.
+
+) <./pictures/procedure1.png, id=91, 1517.67pt x 915.42pt>
+File: ./pictures/procedure1.png Graphic file (type png)
+
+<use ./pictures/procedure1.png>
+Package pdftex.def Info: ./pictures/procedure1.png used on input line 339.
+(pdftex.def)             Requested size: 436.15294pt x 263.07645pt.
+ [5] [6 <./pictures/procedure1.png>]
 
 Package natbib Warning: There were undefined citations.
 
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 345.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 359.
 (./2DFFT_paper.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 345.
-Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 345.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 359.
+Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 359.
+
+
+LaTeX Warning: There were multiply-defined labels.
+
  ) 
 Here is how much of TeX's memory you used:
- 9379 strings out of 493304
- 127521 string characters out of 6139872
- 275978 words of memory out of 5000000
- 12680 multiletter control sequences out of 15000+600000
+ 9392 strings out of 493304
+ 127743 string characters out of 6139872
+ 276078 words of memory out of 5000000
+ 12686 multiletter control sequences out of 15000+600000
  15747 words of font info for 62 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
  36i,9n,37p,914b,370s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -742,10 +759,10 @@ onts/type1/public/amsfonts/cm/cmsy6.pfb></usr/share/texlive/texmf-dist/fonts/ty
 pe1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/pub
 lic/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/am
 sfonts/cm/cmti8.pfb>
-Output written on 2DFFT_paper.pdf (5 pages, 267184 bytes).
+Output written on 2DFFT_paper.pdf (6 pages, 993136 bytes).
 PDF statistics:
- 172 PDF objects out of 1000 (max. 8388607)
- 141 compressed objects within 2 object streams
- 44 named destinations out of 1000 (max. 500000)
- 6 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 180 PDF objects out of 1000 (max. 8388607)
+ 147 compressed objects within 2 object streams
+ 47 named destinations out of 1000 (max. 500000)
+ 11 words of extra memory for PDF output out of 10000 (max. 10000000)
 
