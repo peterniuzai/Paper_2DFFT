@@ -2,8 +2,8 @@ This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdf
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**2DFFT_paper.tex
-(./2DFFT_paper.tex
+**2DFFT_paper1.tex
+(./2DFFT_paper1.tex
 LaTeX2e <2011/06/27>
 Babel <3.9h> and hyphenation patterns for 78 languages loaded.
 (./aastex61.cls
@@ -480,8 +480,8 @@ Class revtex4-1 Info: cite was not loaded (OK!) on input line 50.
 Class revtex4-1 Info: mcite was not loaded (OK!) on input line 50.
 Class revtex4-1 Info: multicol was not loaded (OK!) on input line 50.
 
-(./2DFFT_paper.aux)
-\openout1 = `2DFFT_paper.aux'.
+No file 2DFFT_paper1.aux.
+\openout1 = `2DFFT_paper1.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 50.
 LaTeX Font Info:    ... okay on input line 50.
@@ -497,7 +497,6 @@ LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 50.
 LaTeX Font Info:    ... okay on input line 50.
 LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 50.
 LaTeX Font Info:    ... okay on input line 50.
-
 (/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count157
@@ -540,7 +539,7 @@ Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 LaTeX Info: Redefining \ref on input line 50.
 LaTeX Info: Redefining \pageref on input line 50.
 LaTeX Info: Redefining \nameref on input line 50.
-\openout3 = `2DFFT_paperNotes.bib'.
+\openout3 = `2DFFT_paper1Notes.bib'.
 
 LaTeX Font Info:    Try loading font information for U+lasy on input line 66.
 
@@ -689,6 +688,10 @@ Underfull \hbox (badness 10000) in paragraph at lines 259--263
  []
 
 [3]
+
+LaTeX Warning: Reference `eq:1' on page 4 undefined on input line 290.
+
+
 Underfull \hbox (badness 3668) in paragraph at lines 290--291
 []\OT1/cmr/m/n/10 Assuming data out-put from Tran-sient In-co-her-
  []
@@ -699,29 +702,63 @@ Underfull \hbox (badness 1237) in paragraph at lines 290--291
 10 )$ for-mat with size
  []
 
-<./pictures/1stFFT.png, id=71, 282.05376pt x 268.00125pt>
+
+LaTeX Warning: Reference `eq:1' on page 4 undefined on input line 292.
+
+
+LaTeX Warning: Reference `eq:1' on page 4 undefined on input line 292.
+
+
+LaTeX Warning: Reference `eq:line function' on page 4 undefined on input line 2
+97.
+
+
+LaTeX Warning: Reference `fig:2DFFT' on page 4 undefined on input line 312.
+
+<./pictures/1stFFT.png, id=66, 282.05376pt x 268.00125pt>
 File: ./pictures/1stFFT.png Graphic file (type png)
 
 <use ./pictures/1stFFT.png>
 Package pdftex.def Info: ./pictures/1stFFT.png used on input line 316.
 (pdftex.def)             Requested size: 205.92802pt x 195.67198pt.
- [4 <./pictures/1stFFT.png>] [5]
+
+
+LaTeX Warning: Reference `fig:2DFFT' on page 4 undefined on input line 320.
+
+
+LaTeX Warning: Reference `sec:parameter of polar transf' on page 4 undefined on
+ input line 322.
+
+[4 <./pictures/1stFFT.png>] [5]
 
 Package natbib Warning: There were undefined citations.
 
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 345.
-(./2DFFT_paper.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 345.
-Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 345.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 344.
+(./2DFFT_paper1.aux
+
+Package natbib Warning: Citation(s) may have changed.
+(natbib)                Rerun to get citations correct.
+
+)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 344.
+Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 344.
+
+
+LaTeX Warning: There were undefined references.
+
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right .
+
+
  ) 
 Here is how much of TeX's memory you used:
- 9379 strings out of 493304
- 127521 string characters out of 6139872
- 275978 words of memory out of 5000000
- 12680 multiletter control sequences out of 15000+600000
+ 9378 strings out of 493304
+ 127528 string characters out of 6139872
+ 275288 words of memory out of 5000000
+ 12681 multiletter control sequences out of 15000+600000
  15747 words of font info for 62 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
- 36i,9n,37p,914b,370s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 36i,9n,37p,915b,370s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></us
 r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb></usr/share
 /texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb></usr/share/texliv
@@ -742,10 +779,10 @@ onts/type1/public/amsfonts/cm/cmsy6.pfb></usr/share/texlive/texmf-dist/fonts/ty
 pe1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/pub
 lic/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/am
 sfonts/cm/cmti8.pfb>
-Output written on 2DFFT_paper.pdf (5 pages, 267184 bytes).
+Output written on 2DFFT_paper1.pdf (5 pages, 266817 bytes).
 PDF statistics:
- 172 PDF objects out of 1000 (max. 8388607)
- 141 compressed objects within 2 object streams
+ 166 PDF objects out of 1000 (max. 8388607)
+ 135 compressed objects within 2 object streams
  44 named destinations out of 1000 (max. 500000)
  6 words of extra memory for PDF output out of 10000 (max. 10000000)
 
