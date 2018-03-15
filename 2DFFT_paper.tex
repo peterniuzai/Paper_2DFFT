@@ -15,7 +15,7 @@
 
 %\usepackage{mathrsfs}
 
-\def \frb {FRB Search Algorithm}
+\def \frb {FRB .0Search Algorithm}
 \def \halpha {\ensuremath{\mathrm{H\alpha}}}
 \def \hbeta {\ensuremath{\mathrm{H\beta}}}
 
@@ -146,11 +146,11 @@ Here we report a new algorithm to search FRBs .
 
 The dispersion of the electromagnaetic wave pulse cause a delay in arrival time at frequency $\nu$ compared with the reference frequency $\nu_0$, which is given by :
 \begin{equation}
-\Delta t (\nu) = -D(\nu^{-2} -\nu^{-2}_{0})
+\Delta t (\nu) = -D(\nu^{-2} -\nu^{-2}_{0})\label{eq:1}
 \end{equation}
-where D is the dispersion measure. Thus , We may model a burst with a very short intrinsic width as :
+where D is the dispersion measure times a dispersion constant. Thus , We may model a burst with a very short intrinsic width as :
 \begin{equation}
-I(t,\nu)=I_0(\nu)\delta_D(t-t_s -\frac{D}{\nu^2})
+I(t,\nu)=I_0(\nu)\delta_D(t-t_s -\frac{D}{\nu^2})  
 \end{equation}
 Where $\delta D$ is the Dirac delta function, $t_s$ marks the signal starting time for infinitely high frequency. If the bandwidth is small, we can approximate
 \begin{equation*}
@@ -286,9 +286,43 @@ Then
 \end{equation}
 %%%%%%%%%%%%%%%%%%
 
-\section{Implemented on burst search}
-The data
+\section{Implemented 2DFFT on burst search}
+Assuming data output from Transient Incoherent Search backend are in $(f,t)$ format with size $[N_{ch},N_{tsamp}]$. We could get the signal line are showing up as a curve line which are complied with relationship of $f^{-2}\sim t$ in raw data map from eq. (\ref{eq:1}). As the form of curve after 2D-FFT is much more complex than a straight line. Hence we take the 2D-FFT on $(f^{-2},t)$ map. In order to get $(f^{-2},t)$ map, we use interpolation along the frequency axis in $(f,t)$ map. The $(f^{-2},t)$ map still has shape of $[N_{ch},N_{tsamp}]$\label{rebin_shape}, in this case total information could get conservation.
 
+From eq.(\ref{eq:1})~,~define $k_1 =- \frac{1}{D} $.~We could rewrite eq.(\ref{eq:1}) as 
+\begin{equation}
+f^{-2}=k_1t +b\label{eq:line function}
+\end{equation}
+~,where $b$ is decided by start time. Apply Fourier pair:
+$(f^{-2},t) \sim (v,u)$,~Then process 2D FFT on eq.(\ref{eq:line function}) :
+\begin{equation} \begin{aligned}
+&\int\int\delta(k_1t+b-f^{-2})e^{-i2\pi(ut+vf^{-2})}dtdf^{-2}
+\\ &=\delta(u+k_1v)\cdot e^{-i2\pi vb}
+\end{aligned}
+\end{equation}
+
+In $(v,u)$ map ,Signal line format has been changed into $v=-k_1^{-1} u$ with slope $k_2 =-\frac{1}{k_1}=D$, where $D=DM\cdot4.15 \times 10^{-6} ms \cdot MHz^2 \cdot pc^{-1} \cdot cm^3$. 
+
+And the $b$ comes to module factor in $e^{-i2\pi vb}$. It is still straight but perpendicular to previous straight. Furthermore,  wherever the signal arise in raw data map , it always go cross the center of 2D-FFT map. Take advantage of these property, we could search transient signal on 2D-FFT map along specific angle. 
+
+For the phase term $e^{-i2\pi vb}$, it will modulate the signal intensity monotonically along straight line of 2D-FFT map. if we sum along straight line directly, we might not get the highest signal noise ratio. An effective and feasible method is to take a second FFT along straight line, then whole signal will turn into a spot. The whole process will take 4 steps to accomplish, we called them : Re-bin, 2D-FFT, Polar transform, 1D-FFT. Data after these process called map with process suffix separately,e.g. data after Re-bin  Re-bin map.
+
+\subsection{polar coordinate transform}
+
+As DM always bigger than zero, so $k_2$ is always positive. It indicate signal after 2D-FFT is a straight line which will only appear in 1/2 of 2DFFT map. For example, Fig.\ref{fig:2DFFT} shows a signal line location after 2DFFT, it won't show up in quadrant \uppercase\expandafter{\romannumeral2} and  \uppercase\expandafter{\romannumeral4}, but only quadrant \uppercase\expandafter{\romannumeral1} and \uppercase\expandafter{\romannumeral3}. nevertheless quadrant \uppercase\expandafter{\romannumeral1} and \uppercase\expandafter{\romannumeral3} are conjugate to each other, we can only take 1 of them.
+
+\begin{figure}[ht!]
+\epsscale{1}
+\plotone{./pictures/1stFFT.png}
+\caption{Signal on 2DFFT map \label{fig:2DFFT}}
+\end{figure}
+
+For purpose of search transient on 2D-FFT map, we need trace every slope of line that go cross center. It's easier to get each straight which are pass through center from parameter raius and angle  coordinate $(r,\theta)$. In Fig. \ref{fig:2DFFT},  If we make use of quadrant \uppercase\expandafter{\romannumeral1}, we can take center as origin $O$, and vertical or horizontal axis as original axis, then each line go cross center will have radius and angle information. 
+
+It's not necessary to take the whole quadrant \uppercase\expandafter{\romannumeral1}, like the yellow part can be cast off. Because signal line go through 2DFFT will be not that long. Data after 2DFFT are in shape of square, $[N_{ch},N_t]$ for example, we can take the radius as ${\min(N_{ch}/2,N_t/2)}$ when we do polar coordinate transform. There are a lot of ways to take polar coordinate transform. But here we are taking interpolation which might be more smooth. After polar coordinate transform, signal line will exist at some exact angle $\theta$. As shows in mid bottom of Fig ??? 
+
+\subsection{Turn signal line into spot}
+As we discussed before, the phase term $e^{-i2\pi vb}$ could disturb the signal. Since phase term is monotonically and data are complex number, if we integrate along radius directly, signal intensity will be blended. We also can't take absolute value then sum,  due to noise will be amplified. A reasonable method is to take another FFT along radius axis, so that the influence of phase term will be eliminated. 
 
 
 %\bibliography{paper}
@@ -302,398 +336,6 @@ The data
   et~al.}]{aaa+15}
 {Alam}, S., {Albareti}, F.~D., {Allende Prieto}, C., {et~al.} 2015, \apjs, 219,
   12
-
-\bibitem[{{Astropy Collaboration} {et~al.}(2013){Astropy Collaboration},
-  {Robitaille}, {Tollerud}, {Greenfield}, {Droettboom}, {Bray}, {Aldcroft},
-  {Davis}, {Ginsburg}, {Price-Whelan}, {Kerzendorf}, {Conley}, {Crighton},
-  {Barbary}, {Muna}, {Ferguson}, {Grollier}, {Parikh}, {Nair}, {Unther},
-  {Deil}, {Woillez}, {Conseil}, {Kramer}, {Turner}, {Singer}, {Fox}, {Weaver},
-  {Zabalza}, {Edwards}, {Azalee Bostroem}, {Burke}, {Casey}, {Crawford},
-  {Dencheva}, {Ely}, {Jenness}, {Labrie}, {Lim}, {Pierfederici}, {Pontzen},
-  {Ptak}, {Refsdal}, {Servillat}, \& {Streicher}}]{astropy2013}
-{Astropy Collaboration}, {Robitaille}, T.~P., {Tollerud}, E.~J., {et~al.} 2013,
-  \aap, 558, A33
-
-\bibitem[{{Atek} {et~al.}(2011){Atek}, {Siana}, {Scarlata}, {Malkan},
-  {McCarthy}, {Teplitz}, {Henry}, {Colbert}, {Bridge}, {Bunker}, {Dressler},
-  {Fosbury}, {Hathi}, {Martin}, {Ross}, \& {Shim}}]{ass+11}
-{Atek}, H., {Siana}, B., {Scarlata}, C., {et~al.} 2011, \apj, 743, 121
-
-\bibitem[{{Baldwin} {et~al.}(1981){Baldwin}, {Phillips}, \&
-  {Terlevich}}]{bpt81}
-{Baldwin}, J.~A., {Phillips}, M.~M., \& {Terlevich}, R. 1981, \pasp, 93, 5
-
-%\bibitem[{{Bandura} {et~al.}(2014){Bandura}, {Addison}, {Amiri}, {Bond},
-%  {Campbell-Wilson}, {Connor}, {Cliche}, {Davis}, {Deng}, {Denman}, {Dobbs},
-%  {Fandino}, {Gibbs}, {Gilbert}, {Halpern}, {Hanna}, {Hincks}, {Hinshaw},
-%  {H{\"o}fer}, {Klages}, {Landecker}, {Masui}, {Mena Parra}, {Newburgh}, {Pen},
-%  {Peterson}, {Recnik}, {Shaw}, {Sigurdson}, {Sitwell}, {Smecher}, {Smegal},
-%  {Vanderlinde}, \& {Wiebe}}]{baa+14}
-%{Bandura}, K., {Addison}, G.~E., {Amiri}, M., {et~al.} 2014, in \procspie, Vol.
-%  9145, Ground-based and Airborne Telescopes V, 914522
-
-\bibitem[{{Barentsen} {et~al.}(2014){Barentsen}, {Farnhill}, {Drew},
-  {Gonz{\'a}lez-Solares}, {Greimel}, {Irwin}, {Miszalski}, {Ruhland}, {Groot},
-  {Mampaso}, {Sale}, {Henden}, {Aungwerojwit}, {Barlow}, {Carter}, {Corradi},
-  {Drake}, {Eisl{\"o}ffel}, {Fabregat}, {G{\"a}nsicke}, {Gentile Fusillo},
-  {Greiss}, {Hales}, {Hodgkin}, {Huckvale}, {Irwin}, {King}, {Knigge},
-  {Kupfer}, {Lagadec}, {Lennon}, {Lewis}, {Mohr-Smith}, {Morris}, {Naylor},
-  {Parker}, {Phillipps}, {Pyrzas}, {Raddi}, {Roelofs}, {Rodr{\'{\i}}guez-Gil},
-  {Sabin}, {Scaringi}, {Steeghs}, {Suso}, {Tata}, {Unruh}, {van Roestel},
-  {Viironen}, {Vink}, {Walton}, {Wright}, \& {Zijlstra}}]{bfd+14}
-{Barentsen}, G., {Farnhill}, H.~J., {Drew}, J.~E., {et~al.} 2014, \mnras, 444,
-  3230
-
-\bibitem[{{Bassa} {et~al.}(2016){Bassa}, {Beswick}, {Tingay}, {Keane},
-  {Bhandari}, {Johnston}, {Totani}, {Tominaga}, {Yasuda}, {Stappers}, {Barr},
-  {Kramer}, \& {Possenti}}]{bbt+16}
-{Bassa}, C.~G., {Beswick}, R., {Tingay}, S.~J., {et~al.} 2016, \mnras, 463, L36
-
-\bibitem[{{Bertin} \& {Arnouts}(1996)}]{ba96}
-{Bertin}, E., \& {Arnouts}, S. 1996, \aaps, 117, 393
-
-\bibitem[{{Burke-Spolaor} \& {Bannister}(2014)}]{bb14}
-{Burke-Spolaor}, S., \& {Bannister}, K.~W. 2014, \apj, 792, 19
-
-\bibitem[{{Caleb} {et~al.}(2016){Caleb}, {Flynn}, {Bailes}, {Barr}, {Bateman},
-  {Bhandari}, {Campbell-Wilson}, {Green}, {Hunstead}, {Jameson}, {Jankowski},
-  {Keane}, {Ravi}, {van Straten}, \& {Krishnan}}]{cfb+16}
-{Caleb}, M., {Flynn}, C., {Bailes}, M., {et~al.} 2016, \mnras, 458, 718
-
-\bibitem[{{Cardelli} {et~al.}(1989){Cardelli}, {Clayton}, \& {Mathis}}]{ccm89}
-{Cardelli}, J.~A., {Clayton}, G.~C., \& {Mathis}, J.~S. 1989, \apj, 345, 245
-
-\bibitem[{{Champion} {et~al.}(2016){Champion}, {Petroff}, {Kramer}, {Keith},
-  {Bailes}, {Barr}, {Bates}, {Bhat}, {Burgay}, {Burke-Spolaor}, {Flynn},
-  {Jameson}, {Johnston}, {Ng}, {Levin}, {Possenti}, {Stappers}, {van Straten},
-  {Thornton}, {Tiburzi}, \& {Lyne}}]{cpk+16}
-{Champion}, D.~J., {Petroff}, E., {Kramer}, M., {et~al.} 2016, \mnras, 460, L30
-
-\bibitem[{{Chatterjee} {et~al.}(2017){Chatterjee}, {Law}, {Wharton},
-  {Burke-Spolaor}, {Hessels}, {Bower}, {Cordes}, {Tendulkar}, {Bassa},
-  {Demorest}, {Butler}, {Seymour}, {Scholz}, {Abruzzo}, {Bogdanov}, {Kaspi},
-  {Keimpema}, {Lazio}, {Marcote}, {McLaughlin}, {Paragi}, {Ransom}, {Rupen},
-  {Spitler}, \& {van Langevelde}}]{clw+16}
-{Chatterjee}, S., {Law}, C.~J., {Wharton}, R.~S., {et~al.} 2017, \nat, 000, 000
-
-\bibitem[{{Cordes} \& {Lazio}(2002)}]{cl02}
-{Cordes}, J.~M., \& {Lazio}, T.~J.~W. 2002, ArXiv Astrophysics e-prints,
-  astro-ph/0207156
-
-\bibitem[{{Cordes} {et~al.}(2016){Cordes}, {Wharton}, {Spitler}, {Chatterjee},
-  \& {Wasserman}}]{cws+16}
-{Cordes}, J.~M., {Wharton}, R.~S., {Spitler}, L.~G., {Chatterjee}, S., \&
-  {Wasserman}, I. 2016, ArXiv e-prints, arXiv:1605.05890
-
-\bibitem[{{C{\^o}t{\'e}} {et~al.}(2000){C{\^o}t{\'e}}, {Carignan}, \&
-  {Freeman}}]{ccf00}
-{C{\^o}t{\'e}}, S., {Carignan}, C., \& {Freeman}, K.~C. 2000, \aj, 120, 3027
-
-\bibitem[{{Dopita} {et~al.}(2016){Dopita}, {Kewley}, {Sutherland}, \&
-  {Nicholls}}]{dksn16}
-{Dopita}, M.~A., {Kewley}, L.~J., {Sutherland}, R.~S., \& {Nicholls}, D.~C.
-  2016, \apss, 361, 61
-
-\bibitem[{{Fruchter} {et~al.}(2006){Fruchter}, {Levan}, {Strolger},
-  {Vreeswijk}, {Thorsett}, {Bersier}, {Burud}, {Castro Cer{\'o}n},
-  {Castro-Tirado}, {Conselice}, {Dahlen}, {Ferguson}, {Fynbo}, {Garnavich},
-  {Gibbons}, {Gorosabel}, {Gull}, {Hjorth}, {Holland}, {Kouveliotou}, {Levay},
-  {Livio}, {Metzger}, {Nugent}, {Petro}, {Pian}, {Rhoads}, {Riess}, {Sahu},
-  {Smette}, {Tanvir}, {Wijers}, \& {Woosley}}]{fls+06}
-{Fruchter}, A.~S., {Levan}, A.~J., {Strolger}, L., {et~al.} 2006, \nat, 441,
-  463
-
-\bibitem[{{Gaia Collaboration} {et~al.}(2016){Gaia Collaboration}, {Brown},
-  {Vallenari}, {Prusti}, {de Bruijne}, {Mignard}, {Drimmel}, \&
-  {co-authors}}]{bvp+16}
-{Gaia Collaboration}, {Brown}, A.~G.~A., {Vallenari}, A., {et~al.} 2016, ArXiv
-  e-prints
-
-\bibitem[{{Giroletti} {et~al.}(2016){Giroletti}, {Marcote}, {Garrett},
-  {Paragi}, {Yang}, {Hada}, {Muxlow}, \& {Cheung}}]{gmg+16}
-{Giroletti}, M., {Marcote}, B., {Garrett}, M.~A., {et~al.} 2016, \aap, 593, L16
-
-\bibitem[{{Graham} \& {Fruchter}(2015)}]{gf15b}
-{Graham}, J.~F., \& {Fruchter}, A.~S. 2015, ArXiv e-prints, arXiv:1511.01079
-
-\bibitem[{{Haffner} {et~al.}(2009){Haffner}, {Dettmar}, {Beckman}, {Wood},
-  {Slavin}, {Giammanco}, {Madsen}, {Zurita}, \& {Reynolds}}]{hdb+09}
-{Haffner}, L.~M., {Dettmar}, R.-J., {Beckman}, J.~E., {et~al.} 2009, Reviews of
-  Modern Physics, 81, 969
-
-\bibitem[{{Hamuy} {et~al.}(1994){Hamuy}, {Suntzeff}, {Heathcote}, {Walker},
-  {Gigoux}, \& {Phillips}}]{hsh+94}
-{Hamuy}, M., {Suntzeff}, N.~B., {Heathcote}, S.~R., {et~al.} 1994, \pasp, 106,
-  566
-
-\bibitem[{{Hamuy} {et~al.}(1992){Hamuy}, {Walker}, {Suntzeff}, {Gigoux},
-  {Heathcote}, \& {Phillips}}]{hws+92}
-{Hamuy}, M., {Walker}, A.~R., {Suntzeff}, N.~B., {et~al.} 1992, \pasp, 104, 533
-
-\bibitem[{{Hill} {et~al.}(2008){Hill}, {Benjamin}, {Kowal}, {Reynolds},
-  {Haffner}, \& {Lazarian}}]{hbk+08}
-{Hill}, A.~S., {Benjamin}, R.~A., {Kowal}, G., {et~al.} 2008, \apj, 686, 363
-
-\bibitem[{{Horne}(1986)}]{hor86}
-{Horne}, K. 1986, \pasp, 98, 609
-
-\bibitem[{{Hynes}(2002)}]{hyn02}
-{Hynes}, R.~I. 2002, \aap, 382, 752
-
-\bibitem[{{Inoue}(2004)}]{inou04}
-{Inoue}, S. 2004, \mnras, 348, 999
-
-\bibitem[{{Ioka}(2003)}]{ioka03}
-{Ioka}, K. 2003, \apjl, 598, L79
-
-\bibitem[{{Johnston} {et~al.}(2017){Johnston}, {Keane}, {Bhandari}, {Macquart},
-  {Tingay}, {Barr}, {Bassa}, {Beswick}, {Burgay}, {Chandra}, {Honma}, {Kramer},
-  {Petroff}, {Possenti}, {Stappers}, \& {Sugai}}]{jkb+16}
-{Johnston}, S., {Keane}, E.~F., {Bhandari}, S., {et~al.} 2017, \mnras, 465,
-  2143
-
-\bibitem[{{Katz}(2016)}]{katz16}
-{Katz}, J.~I. 2016, Modern Physics Letters A, 31, 1630013
-
-\bibitem[{{Kauffmann} {et~al.}(2003){Kauffmann}, {Heckman}, {Tremonti},
-  {Brinchmann}, {Charlot}, {White}, {Ridgway}, {Brinkmann}, {Fukugita}, {Hall},
-  {Ivezi{\'c}}, {Richards}, \& {Schneider}}]{kht+03}
-{Kauffmann}, G., {Heckman}, T.~M., {Tremonti}, C., {et~al.} 2003, \mnras, 346,
-  1055
-
-\bibitem[{{Keane} {et~al.}(2012){Keane}, {Stappers}, {Kramer}, \&
-  {Lyne}}]{kskl12}
-{Keane}, E.~F., {Stappers}, B.~W., {Kramer}, M., \& {Lyne}, A.~G. 2012, \mnras,
-  425, L71
-
-\bibitem[{{Keane} {et~al.}(2016){Keane}, {Johnston}, {Bhandari}, {Barr},
-  {Bhat}, {Burgay}, {Caleb}, {Flynn}, {Jameson}, {Kramer}, {Petroff},
-  {Possenti}, {van Straten}, {Bailes}, {Burke-Spolaor}, {Eatough}, {Stappers},
-  {Totani}, {Honma}, {Furusawa}, {Hattori}, {Morokuma}, {Niino}, {Sugai},
-  {Terai}, {Tominaga}, {Yamasaki}, {Yasuda}, {Allen}, {Cooke}, {Jencson},
-  {Kasliwal}, {Kaplan}, {Tingay}, {Williams}, {Wayth}, {Chandra}, {Perrodin},
-  {Berezina}, {Mickaliger}, \& {Bassa}}]{kjb+16}
-{Keane}, E.~F., {Johnston}, S., {Bhandari}, S., {et~al.} 2016, \nat, 530, 453
-
-\bibitem[{{Kennicutt} {et~al.}(1994){Kennicutt}, {Tamblyn}, \&
-  {Congdon}}]{ktc1994}
-{Kennicutt}, Jr., R.~C., {Tamblyn}, P., \& {Congdon}, C.~E. 1994, \apj, 435, 22
-
-\bibitem[{{Kewley} \& {Dopita}(2002)}]{kd02}
-{Kewley}, L.~J., \& {Dopita}, M.~A. 2002, \apjs, 142, 35
-
-\bibitem[{{Kewley} {et~al.}(2001){Kewley}, {Dopita}, {Sutherland}, {Heisler},
-  \& {Trevena}}]{kds+01}
-{Kewley}, L.~J., {Dopita}, M.~A., {Sutherland}, R.~S., {Heisler}, C.~A., \&
-  {Trevena}, J. 2001, \apj, 556, 121
-
-\bibitem[{{Kewley} \& {Ellison}(2008)}]{ke08}
-{Kewley}, L.~J., \& {Ellison}, S.~L. 2008, \apj, 681, 1183
-
-\bibitem[{{Kewley} {et~al.}(2002){Kewley}, {Geller}, {Jansen}, \&
-  {Dopita}}]{kgjd2002}
-{Kewley}, L.~J., {Geller}, M.~J., {Jansen}, R.~A., \& {Dopita}, M.~A. 2002,
-  \aj, 124, 3135
-
-\bibitem[{{Kewley} {et~al.}(2006){Kewley}, {Groves}, {Kauffmann}, \&
-  {Heckman}}]{kgkh06}
-{Kewley}, L.~J., {Groves}, B., {Kauffmann}, G., \& {Heckman}, T. 2006, \mnras,
-  372, 961
-
-\bibitem[{{Kobulnicky} \& {Kewley}(2004)}]{kk04}
-{Kobulnicky}, H.~A., \& {Kewley}, L.~J. 2004, \apj, 617, 240
-
-\bibitem[{{Lelli} {et~al.}(2014){Lelli}, {Verheijen}, \& {Fraternali}}]{lvf14}
-{Lelli}, F., {Verheijen}, M., \& {Fraternali}, F. 2014, \aap, 566, A71
-
-\bibitem[{{Leloudas} {et~al.}(2015){Leloudas}, {Schulze}, {Kr{\"u}hler},
-  {Gorosabel}, {Christensen}, {Mehner}, {de Ugarte Postigo}, {Amor{\'{\i}}n},
-  {Th{\"o}ne}, {Anderson}, {Bauer}, {Gallazzi}, {He{\l}miniak}, {Hjorth},
-  {Ibar}, {Malesani}, {Morell}, {Vinko}, \& {Wheeler}}]{lsk+15}
-{Leloudas}, G., {Schulze}, S., {Kr{\"u}hler}, T., {et~al.} 2015, \mnras, 449,
-  917
-
-\bibitem[{{Lorimer} {et~al.}(2007){Lorimer}, {Bailes}, {McLaughlin},
-  {Narkevic}, \& {Crawford}}]{lbm+07}
-{Lorimer}, D.~R., {Bailes}, M., {McLaughlin}, M.~A., {Narkevic}, D.~J., \&
-  {Crawford}, F. 2007, Science, 318, 777
-
-\bibitem[{{Manchester} {et~al.}(2005){Manchester}, {Hobbs}, {Teoh}, \&
-  {Hobbs}}]{mhth05}
-{Manchester}, R.~N., {Hobbs}, G.~B., {Teoh}, A., \& {Hobbs}, M. 2005, \aj, 129,
-  1993
-
-\bibitem[{{Marcote} {et~al.}(2017){Marcote}, {Paragi}, {Hessels}, {Keimpema},
-  \& {van Langevelde}}]{mph+16}
-{Marcote}, B., {Paragi}, Z., {Hessels}, J.~W.~T., {Keimpema}, A., \& {van
-  Langevelde}, H.~J. e.~a. 2017, \apj, 000, 000
-
-\bibitem[{{Masui} {et~al.}(2015){Masui}, {Lin}, {Sievers}, {Anderson}, {Chang},
-  {Chen}, {Ganguly}, {Jarvis}, {Kuo}, {Li}, {Liao}, {McLaughlin}, {Pen},
-  {Peterson}, {Roman}, {Timbie}, {Voytek}, \& {Yadav}}]{mls+15}
-{Masui}, K., {Lin}, H.-H., {Sievers}, J., {et~al.} 2015, \nat, 528, 523
-
-\bibitem[{{Mauch} \& {Sadler}(2007)}]{ms07}
-{Mauch}, T., \& {Sadler}, E.~M. 2007, \mnras, 375, 931
-
-\bibitem[{{McQuinn}(2014)}]{mcqu14}
-{McQuinn}, M. 2014, \apjl, 780, L33
-
-\bibitem[{{Mignard} {et~al.}(2016){Mignard}, {Klioner}, {Lindegren}, {Bastian},
-  {Bombrun}, {Hernandez}, {Hobbs}, {Lammers}, {Michalik}, {Ramos-Lerate},
-  {Biermann}, {Butkevich}, {Comoretto}, {Joliet}, {Holl}, {Hutton}, {Parsons},
-  {Steidelmueller}, {Andrei}, {Bourda}, \& {Charlot}}]{mkl+16}
-{Mignard}, F., {Klioner}, S., {Lindegren}, L., {et~al.} 2016, ArXiv e-prints,
-  arXiv:1609.07255
-
-\bibitem[{{Moffat}(1969)}]{mof69}
-{Moffat}, A.~F.~J. 1969, \aap, 3, 455
-
-\bibitem[{{Murase} {et~al.}(2016){Murase}, {Kashiyama}, \&
-  {M{\'e}sz{\'a}ros}}]{mkm16}
-{Murase}, K., {Kashiyama}, K., \& {M{\'e}sz{\'a}ros}, P. 2016, \mnras, 461,
-  1498
-
-\bibitem[{{Newburgh} {et~al.}(2016){Newburgh}, {Bandura}, {Bucher}, {Chang},
-  {Chiang}, {Cliche}, {Dav{\'e}}, {Dobbs}, {Clarkson}, {Ganga}, {Gogo},
-  {Gumba}, {Gupta}, {Hilton}, {Johnstone}, {Karastergiou}, {Kunz}, {Lokhorst},
-  {Maartens}, {Macpherson}, {Mdlalose}, {Moodley}, {Ngwenya}, {Parra},
-  {Peterson}, {Recnik}, {Saliwanchik}, {Santos}, {Sievers}, {Smirnov},
-  {Stronkhorst}, {Taylor}, {Vanderlinde}, {Van Vuuren}, {Weltman}, \&
-  {Witzemann}}]{nbb+16}
-{Newburgh}, L.~B., {Bandura}, K., {Bucher}, M.~A., {et~al.} 2016, in \procspie,
-  Vol. 9906, Society of Photo-Optical Instrumentation Engineers (SPIE)
-  Conference Series, 99065X
-
-\bibitem[{{Olausen} \& {Kaspi}(2014)}]{ok14}
-{Olausen}, S.~A., \& {Kaspi}, V.~M. 2014, \apjs, 212, 6
-
-\bibitem[{{Papastergis} {et~al.}(2012){Papastergis}, {Cattaneo}, {Huang},
-  {Giovanelli}, \& {Haynes}}]{pch+12}
-{Papastergis}, E., {Cattaneo}, A., {Huang}, S., {Giovanelli}, R., \& {Haynes},
-  M.~P. 2012, \apj, 759, 138
-
-\bibitem[{{Pardo} {et~al.}(2016){Pardo}, {Goulding}, {Greene}, {Somerville},
-  {Gallo}, {Hickox}, {Miller}, {Reines}, \& {Silverman}}]{pgg+16}
-{Pardo}, K., {Goulding}, A.~D., {Greene}, J.~E., {et~al.} 2016, \apj, 831, 203
-
-\bibitem[{{Park} {et~al.}(2016){Park}, {Yang}, {Oonk}, \& {Paragi}}]{pyop16}
-{Park}, S., {Yang}, J., {Oonk}, J.~B.~R., \& {Paragi}, Z. 2016, ArXiv e-prints,
-  arXiv:1611.05986
-
-\bibitem[{{Peng} {et~al.}(2002){Peng}, {Ho}, {Impey}, \& {Rix}}]{phir02}
-{Peng}, C.~Y., {Ho}, L.~C., {Impey}, C.~D., \& {Rix}, H.-W. 2002, \aj, 124, 266
-
-\bibitem[{{Peng} {et~al.}(2010){Peng}, {Ho}, {Impey}, \& {Rix}}]{phir10}
----. 2010, \aj, 139, 2097
-
-\bibitem[{{Perley} {et~al.}(2013){Perley}, {Levan}, {Tanvir}, {Cenko}, {Bloom},
-  {Hjorth}, {Kr{\"u}hler}, {Filippenko}, {Fruchter}, {Fynbo}, {Jakobsson},
-  {Kalirai}, {Milvang-Jensen}, {Morgan}, {Prochaska}, \& {Silverman}}]{plt+13}
-{Perley}, D.~A., {Levan}, A.~J., {Tanvir}, N.~R., {et~al.} 2013, \apj, 778, 128
-
-\bibitem[{{Perley} {et~al.}(2016){Perley}, {Quimby}, {Yan}, {Vreeswijk}, {De
-  Cia}, {Lunnan}, {Gal-Yam}, {Yaron}, {Filippenko}, {Graham}, {Laher}, \&
-  {Nugent}}]{pqy+16}
-{Perley}, D.~A., {Quimby}, R.~M., {Yan}, L., {et~al.} 2016, \apj, 830, 13
-
-\bibitem[{{Petroff} {et~al.}(2015){Petroff}, {Bailes}, {Barr}, {Barsdell},
-  {Bhat}, {Bian}, {Burke-Spolaor}, {Caleb}, {Champion}, {Chandra}, {Da Costa},
-  {Delvaux}, {Flynn}, {Gehrels}, {Greiner}, {Jameson}, {Johnston}, {Kasliwal},
-  {Keane}, {Keller}, {Kocz}, {Kramer}, {Leloudas}, {Malesani}, {Mulchaey},
-  {Ng}, {Ofek}, {Perley}, {Possenti}, {Schmidt}, {Shen}, {Stappers},
-  {Tisserand}, {van Straten}, \& {Wolf}}]{pbb+15}
-{Petroff}, E., {Bailes}, M., {Barr}, E.~D., {et~al.} 2015, \mnras, 447, 246
-
-\bibitem[{{Pettini} \& {Pagel}(2004)}]{pp04}
-{Pettini}, M., \& {Pagel}, B.~E.~J. 2004, \mnras, 348, L59
-
-\bibitem[{{Piro}(2016)}]{piro16}
-{Piro}, A.~L. 2016, \apjl, 824, L32
-
-\bibitem[{{Planck Collaboration} {et~al.}(2016){Planck Collaboration}, {Ade},
-  {Aghanim}, {Arnaud}, {Ashdown}, {Aumont}, {Baccigalupi}, {Banday},
-  {Barreiro}, {Bartlett}, \& et~al.}]{aaa+16}
-{Planck Collaboration}, {Ade}, P.~A.~R., {Aghanim}, N., {et~al.} 2016, \aap,
-  594, A13
-
-\bibitem[{{Ravi} {et~al.}(2015){Ravi}, {Shannon}, \& {Jameson}}]{rsj15}
-{Ravi}, V., {Shannon}, R.~M., \& {Jameson}, A. 2015, \apjl, 799, L5
-
-\bibitem[{{Ravi} {et~al.}(2016){Ravi}, {Shannon}, {Bailes}, {Bannister},
-  {Bhandari}, {Bhat}, {Burke-Spolaor}, {Caleb}, {Flynn}, {Jameson}, {Johnston},
-  {Keane}, {Kerr}, {Tiburzi}, {Tuntsov}, \& {Vedantham}}]{rsb+16}
-{Ravi}, V., {Shannon}, R.~M., {Bailes}, M., {et~al.} 2016, ArXiv e-prints,
-  arXiv:1611.05758
-
-\bibitem[{{Reines} {et~al.}(2013){Reines}, {Greene}, \& {Geha}}]{rgg13}
-{Reines}, A.~E., {Greene}, J.~E., \& {Geha}, M. 2013, \apj, 775, 116
-
-\bibitem[{{Reines} {et~al.}(2014){Reines}, {Plotkin}, {Russell}, {Mezcua},
-  {Condon}, {Sivakoff}, \& {Johnson}}]{rpr+14}
-{Reines}, A.~E., {Plotkin}, R.~M., {Russell}, T.~D., {et~al.} 2014, \apjl, 787,
-  L30
-
-\bibitem[{{Reines} {et~al.}(2011){Reines}, {Sivakoff}, {Johnson}, \&
-  {Brogan}}]{rsjb11}
-{Reines}, A.~E., {Sivakoff}, G.~R., {Johnson}, K.~E., \& {Brogan}, C.~L. 2011,
-  \nat, 470, 66
-
-\bibitem[{{Reynolds}(1977)}]{reyn77}
-{Reynolds}, R.~J. 1977, \apj, 216, 433
-
-\bibitem[{{Schlafly} \& {Finkbeiner}(2011)}]{sf11}
-{Schlafly}, E.~F., \& {Finkbeiner}, D.~P. 2011, \apj, 737, 103
-
-\bibitem[{{Schlafly} {et~al.}(2010){Schlafly}, {Finkbeiner}, {Schlegel},
-  {Juri{\'c}}, {Ivezi{\'c}}, {Gibson}, {Knapp}, \& {Weaver}}]{sfs10}
-{Schlafly}, E.~F., {Finkbeiner}, D.~P., {Schlegel}, D.~J., {et~al.} 2010, \apj,
-  725, 1175
-
-\bibitem[{{Schlegel} {et~al.}(1998){Schlegel}, {Finkbeiner}, \&
-  {Davis}}]{sfd98}
-{Schlegel}, D.~J., {Finkbeiner}, D.~P., \& {Davis}, M. 1998, \apj, 500, 525
-
-\bibitem[{{Scholz} {et~al.}(2016){Scholz}, {Spitler}, {Hessels}, {Chatterjee},
-  {Cordes}, {Kaspi}, {Wharton}, {Bassa}, {Bogdanov}, {Camilo}, {Crawford},
-  {Deneva}, {van Leeuwen}, {Lynch}, {Madsen}, {McLaughlin}, {Mickaliger},
-  {Parent}, {Patel}, {Ransom}, {Seymour}, {Stairs}, {Stappers}, \&
-  {Tendulkar}}]{ssh+16b}
-{Scholz}, P., {Spitler}, L.~G., {Hessels}, J.~W.~T., {et~al.} 2016, \apj, 883,
-  177
-
-\bibitem[{{Spitler} {et~al.}(2014){Spitler}, {Cordes}, {Hessels}, {Lorimer},
-  {McLaughlin}, {Chatterjee}, {Crawford}, {Deneva}, {Kaspi}, {Wharton},
-  {Allen}, {Bogdanov}, {Brazier}, {Camilo}, {Freire}, {Jenet},
-  {Karako-Argaman}, {Knispel}, {Lazarus}, {Lee}, {van Leeuwen}, {Lynch},
-  {Ransom}, {Scholz}, {Siemens}, {Stairs}, {Stovall}, {Swiggum},
-  {Venkataraman}, {Zhu}, {Aulbert}, \& {Fehrmann}}]{sch+14}
-{Spitler}, L.~G., {Cordes}, J.~M., {Hessels}, J.~W.~T., {et~al.} 2014, \apj,
-  790, 101
-
-\bibitem[{{Spitler} {et~al.}(2016){Spitler}, {Scholz}, {Hessels}, {Bogdanov},
-  {Brazier}, {Camilo}, {Chatterjee}, {Cordes}, {Crawford}, {Deneva}, {Ferdman},
-  {Freire}, {Kaspi}, {Lazarus}, {Lynch}, {Madsen}, {McLaughlin}, {Patel},
-  {Ransom}, {Seymour}, {Stairs}, {Stappers}, {van Leeuwen}, \& {Zhu}}]{ssh+16a}
-{Spitler}, L.~G., {Scholz}, P., {Hessels}, J.~W.~T., {et~al.} 2016, \nat, 531,
-  202
-
-\bibitem[{{Thornton} {et~al.}(2013){Thornton}, {Stappers}, {Bailes},
-  {Barsdell}, {Bates}, {Bhat}, {Burgay}, {Burke-Spolaor}, {Champion}, {Coster},
-  {D'Amico}, {Jameson}, {Johnston}, {Keith}, {Kramer}, {Levin}, {Milia}, {Ng},
-  {Possenti}, \& {van Straten}}]{tsb+13}
-{Thornton}, D., {Stappers}, B., {Bailes}, M., {et~al.} 2013, Science, 341, 53
-
-\bibitem[{{Vergani} {et~al.}(2015){Vergani}, {Salvaterra}, {Japelj}, {Le
-  Floc'h}, {D'Avanzo}, {Fernandez-Soto}, {Kr{\"u}hler}, {Melandri}, {Boissier},
-  {Covino}, {Puech}, {Greiner}, {Hunt}, {Perley}, {Petitjean}, {Vinci},
-  {Hammer}, {Levan}, {Mannucci}, {Campana}, {Flores}, {Gomboc}, \&
-  {Tagliaferri}}]{vsj+15}
-{Vergani}, S.~D., {Salvaterra}, R., {Japelj}, J., {et~al.} 2015, \aap, 581,
-  A102
-
-\bibitem[{{Williams} \& {Berger}(2016)}]{wb16}
-{Williams}, P.~K.~G., \& {Berger}, E. 2016, \apjl, 821, L22
 
 \end{thebibliography}
 
