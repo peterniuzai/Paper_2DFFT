@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2018.1.3)  15 MAR 2018 20:47
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2018.1.3)  16 MAR 2018 12:36
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -480,11 +480,7 @@ Class revtex4-1 Info: cite was not loaded (OK!) on input line 50.
 Class revtex4-1 Info: mcite was not loaded (OK!) on input line 50.
 Class revtex4-1 Info: multicol was not loaded (OK!) on input line 50.
 
-(./2DFFT_paper.aux
-
-LaTeX Warning: Label `fig:2DFFT' multiply defined.
-
-)
+(./2DFFT_paper.aux)
 \openout1 = `2DFFT_paper.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 50.
@@ -501,7 +497,8 @@ LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 50.
 LaTeX Font Info:    ... okay on input line 50.
 LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 50.
 LaTeX Font Info:    ... okay on input line 50.
- (/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
+
+(/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count157
 \scratchdimen=\dimen138
@@ -677,92 +674,103 @@ Underfull \hbox (badness 10000) in paragraph at lines 212--214
  []
 
 
-Overfull \hbox (31.4366pt too wide) detected at line 259
-[] []
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 259--263
+Underfull \hbox (badness 10000) in paragraph at lines 259--287
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 259--263
+Underfull \hbox (badness 10000) in paragraph at lines 259--287
 
  []
 
-[3]
-Underfull \hbox (badness 3668) in paragraph at lines 290--291
+
+LaTeX Warning: Reference `eq:1' on page 3 undefined on input line 289.
+
+
+Underfull \hbox (badness 3668) in paragraph at lines 289--290
 []\OT1/cmr/m/n/10 Assuming data out-put from Tran-sient In-co-her-
  []
 
 
-Underfull \hbox (badness 1237) in paragraph at lines 290--291
+Underfull \hbox (badness 1237) in paragraph at lines 289--290
 \OT1/cmr/m/n/10 ent Search back-end are in $(\OML/cmm/m/it/10 f; t\OT1/cmr/m/n/
 10 )$ for-mat with size
  []
 
-<./pictures/1stFFT.png, id=71, 282.05376pt x 268.00125pt>
+[3] <./pictures/1stFFT.png, id=70, 282.05376pt x 268.00125pt>
 File: ./pictures/1stFFT.png Graphic file (type png)
 
 <use ./pictures/1stFFT.png>
-Package pdftex.def Info: ./pictures/1stFFT.png used on input line 319.
+Package pdftex.def Info: ./pictures/1stFFT.png used on input line 318.
 (pdftex.def)             Requested size: 205.92802pt x 195.67198pt.
- [4 <./pictures/1stFFT.png>] (./2DFFT_paper.bbl
+ [4 <./pictures/1stFFT.png>]
+<./pictures/benchmark.png, id=88, 462.528pt x 346.896pt>
+File: ./pictures/benchmark.png Graphic file (type png)
+
+<use ./pictures/benchmark.png>
+Package pdftex.def Info: ./pictures/benchmark.png used on input line 349.
+(pdftex.def)             Requested size: 205.92802pt x 154.44498pt.
+ (./2DFFT_paper.bbl
 
 LaTeX Warning: Empty `thebibliography' environment on input line 5.
 
-) <./pictures/procedure1.png, id=91, 1517.67pt x 915.42pt>
+) <./pictures/procedure1.png, id=90, 1517.67pt x 915.42pt>
 File: ./pictures/procedure1.png Graphic file (type png)
 
 <use ./pictures/procedure1.png>
-Package pdftex.def Info: ./pictures/procedure1.png used on input line 339.
-(pdftex.def)             Requested size: 436.15294pt x 263.07645pt.
- [5] [6 <./pictures/procedure1.png>]
+Package pdftex.def Info: ./pictures/procedure1.png used on input line 356.
+(pdftex.def)             Requested size: 523.38219pt x 315.69453pt.
+
+Overfull \hbox (10.26476pt too wide) in paragraph at lines 356--357
+ [] 
+ []
+
+[5 <./pictures/benchmark.png>] [6 <./pictures/procedure1.png>]
 
 Package natbib Warning: There were undefined citations.
 
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 359.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 376.
 (./2DFFT_paper.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 359.
-Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 359.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 376.
+Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 376.
 
 
-LaTeX Warning: There were multiply-defined labels.
+LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 9392 strings out of 493304
- 127743 string characters out of 6139872
- 276078 words of memory out of 5000000
- 12686 multiletter control sequences out of 15000+600000
- 15747 words of font info for 62 fonts, out of 8000000 for 9000
+ 9410 strings out of 493304
+ 128037 string characters out of 6139872
+ 276082 words of memory out of 5000000
+ 12694 multiletter control sequences out of 15000+600000
+ 16092 words of font info for 63 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
- 36i,9n,37p,914b,370s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 36i,8n,37p,1178b,370s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></us
 r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb></usr/share
 /texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb></usr/share/texliv
 e/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/share/texlive/tex
 mf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dis
-t/fonts/type1/public/amsfonts/cmextra/cmex7.pfb></usr/share/texlive/texmf-dist/
-fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/
-type1/public/amsfonts/cm/cmmi5.pfb></usr/share/texlive/texmf-dist/fonts/type1/p
-ublic/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/a
-msfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts
-/cm/cmr5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6
-.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></u
-sr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share
-/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/share/texlive
-/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf
--dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/share/texlive/texmf-dist/f
-onts/type1/public/amsfonts/cm/cmsy6.pfb></usr/share/texlive/texmf-dist/fonts/ty
-pe1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/pub
-lic/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/am
-sfonts/cm/cmti8.pfb>
-Output written on 2DFFT_paper.pdf (6 pages, 993136 bytes).
+t/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/font
+s/type1/public/amsfonts/cm/cmmi5.pfb></usr/share/texlive/texmf-dist/fonts/type1
+/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public
+/amsfonts/cm/cmmi9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfon
+ts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/c
+mr5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb>
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/sh
+are/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texl
+ive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/share/texlive/texm
+f-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist
+/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/share/texlive/texmf-dist/fonts/
+type1/public/amsfonts/cm/cmsy6.pfb></usr/share/texlive/texmf-dist/fonts/type1/p
+ublic/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/a
+msfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfont
+s/cm/cmti8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cm
+ti9.pfb>
+Output written on 2DFFT_paper.pdf (6 pages, 1044336 bytes).
 PDF statistics:
- 180 PDF objects out of 1000 (max. 8388607)
- 147 compressed objects within 2 object streams
- 47 named destinations out of 1000 (max. 500000)
- 11 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 202 PDF objects out of 1000 (max. 8388607)
+ 164 compressed objects within 2 object streams
+ 55 named destinations out of 1000 (max. 500000)
+ 16 words of extra memory for PDF output out of 10000 (max. 10000000)
 
