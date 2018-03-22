@@ -3,7 +3,9 @@
 \usepackage{upgreek}
 \usepackage{color} 
 \usepackage{amsmath}
-%\usepackage{graphicx}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{algorithm,algorithmic}
 
 %\usepackage{deluxetable}
 %\usepackage{morefloats}
@@ -15,7 +17,7 @@
 
 %\usepackage{mathrsfs}
 
-\def \frb {FRB .0Search Algorithm}
+\def \frb {FRB Search Algorithm}
 \def \halpha {\ensuremath{\mathrm{H\alpha}}}
 \def \hbeta {\ensuremath{\mathrm{H\beta}}}
 
@@ -60,10 +62,10 @@
 \shorttitle{2D-FFT search Algorithm }
 \shortauthors{C.H.Niu~et al.}
 
-\title{Using 2D-FFT to search Fast Radio Burst\footnote{peterniu@nao.cas.cn}}
+\title{Using 2D-FFT to search Fast Radio Burst}%\footnote{peterniu@nao.cas.cn}}
 
 
-\correspondingauthor{Xuelei~Chen}
+%\correspondingauthor{Xuelei~Chen}
 \email{}
 
 \author{C.H. Niu}
@@ -213,53 +215,53 @@ While the noise is still given by Eq.(8), so in this case
 \\ \\
 
 
-\section{Intensity after 2D FFT}
-\label{sec:results}
-The usual Fourier transform is :
-\begin{equation}
-\begin{aligned}
-\widetilde{f}(\omega) & =\frac{1}{2\pi} \int f(t)e^{-i\omega t}dt \\
- f(t) & = \int \widetilde{f}(\omega)e^{i\omega t}d\omega
- \end{aligned}
-\end{equation}
-For$ f(t) = \delta _D(t-t_0), \widetilde{\omega} = \frac{1}{2\pi}e^{-i\omega t_0}$. Using the relation :
-\begin{equation}
-\int d\omega e^{i\omega t_0} = 2\pi \delta _D (t_0)
-\end{equation}
-we find the above indeed form a Fourier pair. However , here we want to use $\nu$ instead of $\omega$, then the Fourier transform pair are:
-\begin{equation}
-\begin{aligned}
-\widetilde{f} (\nu) &= \frac{1}{2\pi}\int f(t) e^{-i2\pi \nu t}dt \\
-f(t) &= 2\pi \int \widetilde{f}(\nu) e^{i2\pi \nu t} d\nu
-\end{aligned}
-\end{equation}
-\underline{ The 2D transform of the signal $I(\nu,t)$ is} 
-\begin{equation}
-\widetilde{I}(f,\tau)=\int d\nu~e^{-2\pi i \nu \tau} \int dt~e^{-2\pi ift}I(t,\nu)
-\end{equation}
-where we denote the Fourier conjugate variable of $\nu,t$ as $\tau,f$ to avoid confusion. For the pulse signal given by Eq.(2),
-\begin{equation}
-\begin{aligned}
-\widetilde{I}(f,\tau) &= \int d\nu e^{-2\pi i\nu \tau}I_0 e^{-2\pi i f(t_0 - \frac{2D}{\nu ^3 _0}\Delta \nu)} \\								
-								&= I_0 e^{-i2\pi f(t_0 + \frac{2D}{\nu ^2 _0})} 
-								\delta_D (\tau - \frac{2Df}{\nu ^3 _0})
-\end{aligned}
-\end{equation} 
-Note $\widetilde{I}(\tau,f)$ is non-zero only on the staight line $\tau - \frac{2Df}{\nu ^2 _0}=0$, and the value is a complex number whose phase angle gives the arrival time. For the pulse with finite width,
-\begin{equation}
-\widetilde{I}(f,\tau) = \int d\nu e^{-2\pi i \nu \tau}\int dt~e^{-2\pi ift}\cdot I_0 \frac{1}{\sqrt{2\pi}\sigma}e^{-\frac{(t-t')^2}{2\sigma ^2}}
-\end{equation}
-where $t'=t_0 - \frac{2D}{\nu _0 ^3}\Delta \nu$.  Thus we could get signal intensity with finite width $\sigma$ after 2D FFT is:
-\begin{equation}
-\begin{aligned}
-\widetilde{I}(f,\tau)  & = \int d\nu~ e^{-2\pi i\nu \tau}I_0  e^{-i2\pi ft'}e^{-\frac{(2\pi f\sigma)^2}{2}} \\
-%&= I_0e^{-i2\pi f(t_0 + \frac{2D}{\nu _0 ^2})}e^{-\frac{(2\pi f\sigma)^2}{2}}\int d\nu~exp[-i2\pi\nu(\tau - \frac{2Df}{\nu ^3_0})] \\
-&= {I_0} e^{-i2\pi f(t_0+\frac{2D}{\nu ^2 _0})}e^{-\frac{(2\pi f\sigma)^2}{2}}\delta _D (\tau - \frac{2Df}{\nu ^3 _0})
-\end{aligned}
-\end{equation}
-Note this is similar to Eq(18) except for the factor $e^{-\frac{(2\pi f \sigma)^2}{2}}$,  {\color{red}this limits the usable range of f to $|f.|<(2\pi\sigma)^{-1}$. }
-\\ \\
-%%%%%%%%%%%%%%%%%%
+%\section{Intensity after 2D FFT}
+%\label{sec:results}
+%The usual Fourier transform is :
+%\begin{equation}
+%\begin{aligned}
+%\widetilde{f}(\omega) & =\frac{1}{2\pi} \int f(t)e^{-i\omega t}dt \\
+% f(t) & = \int \widetilde{f}(\omega)e^{i\omega t}d\omega
+% \end{aligned}
+%\end{equation}
+%For$ f(t) = \delta _D(t-t_0), \widetilde{\omega} = \frac{1}{2\pi}e^{-i\omega t_0}$. Using the relation :
+%\begin{equation}
+%\int d\omega e^{i\omega t_0} = 2\pi \delta _D (t_0)
+%\end{equation}
+%we find the above indeed form a Fourier pair. However , here we want to use $\nu$ instead of $\omega$, then the Fourier transform pair are:
+%\begin{equation}
+%\begin{aligned}
+%\widetilde{f} (\nu) &= \frac{1}{2\pi}\int f(t) e^{-i2\pi \nu t}dt \\
+%f(t) &= 2\pi \int \widetilde{f}(\nu) e^{i2\pi \nu t} d\nu
+%\end{aligned}
+%\end{equation}
+%\underline{ The 2D transform of the signal $I(\nu,t)$ is} 
+%\begin{equation}
+%\widetilde{I}(f,\tau)=\int d\nu~e^{-2\pi i \nu \tau} \int dt~e^{-2\pi ift}I(t,\nu)
+%\end{equation}
+%where we denote the Fourier conjugate variable of $\nu,t$ as $\tau,f$ to avoid confusion. For the pulse signal given by Eq.(2),
+%\begin{equation}
+%\begin{aligned}
+%\widetilde{I}(f,\tau) &= \int d\nu e^{-2\pi i\nu \tau}I_0 e^{-2\pi i f(t_0 - \frac{2D}{\nu ^3 _0}\Delta \nu)} \\								
+%								&= I_0 e^{-i2\pi f(t_0 + \frac{2D}{\nu ^2 _0})} 
+%								\delta_D (\tau - \frac{2Df}{\nu ^3 _0})
+%\end{aligned}
+%\end{equation} 
+%Note $\widetilde{I}(\tau,f)$ is non-zero only on the staight line $\tau - \frac{2Df}{\nu ^2 _0}=0$, and the value is a complex number whose phase angle gives the arrival time. For the pulse with finite width,
+%\begin{equation}
+%\widetilde{I}(f,\tau) = \int d\nu e^{-2\pi i \nu \tau}\int dt~e^{-2\pi ift}\cdot I_0 \frac{1}{\sqrt{2\pi}\sigma}e^{-\frac{(t-t')^2}{2\sigma ^2}}
+%\end{equation}
+%where $t'=t_0 - \frac{2D}{\nu _0 ^3}\Delta \nu$.  Thus we could get signal intensity with finite width $\sigma$ after 2D FFT is:
+%\begin{equation}
+%\begin{aligned}
+%\widetilde{I}(f,\tau)  & = \int d\nu~ e^{-2\pi i\nu \tau}I_0  e^{-i2\pi ft'}e^{-\frac{(2\pi f\sigma)^2}{2}} \\
+%%&= I_0e^{-i2\pi f(t_0 + \frac{2D}{\nu _0 ^2})}e^{-\frac{(2\pi f\sigma)^2}{2}}\int d\nu~exp[-i2\pi\nu(\tau - \frac{2Df}{\nu ^3_0})] \\
+%&= {I_0} e^{-i2\pi f(t_0+\frac{2D}{\nu ^2 _0})}e^{-\frac{(2\pi f\sigma)^2}{2}}\delta _D (\tau - \frac{2Df}{\nu ^3 _0})
+%\end{aligned}
+%\end{equation}
+%Note this is similar to Eq(18) except for the factor $e^{-\frac{(2\pi f \sigma)^2}{2}}$,  {\color{red}this limits the usable range of f to $|f.|<(2\pi\sigma)^{-1}$. }
+%\\ \\
+%%%%%%%%%%%%%%%%%%%
 %\subsection{Transform to polar coordinates}
 %\label{sec:discussion}
 %We can take $\frac{2f}{\nu _0 ^3},\tau$ as the $x,y$ in Cartesian coordinates, then the polar coordinates $\rho,\theta$ can be defined as 
@@ -286,7 +288,7 @@ Note this is similar to Eq(18) except for the factor $e^{-\frac{(2\pi f \sigma)^
 %%%%%%%%%%%%%%%%%%
 
 \section{Implemented 2DFFT on burst search}
-Assuming data output from Transient Incoherent Search backend are in $(f,t)$ format with size $[N_{ch},N_{tsamp}]$. We could get the signal line are showing up as a curve line which are complied with relationship of $f^{-2}\sim t$ in raw data map from eq. (\ref{eq:1}). As the form of curve after 2D-FFT is much more complex than a straight line. Hence we take the 2D-FFT on $(f^{-2},t)$ map. In order to get $(f^{-2},t)$ map, we use interpolation along the frequency axis in $(f,t)$ map. The $(f^{-2},t)$ map still has shape of $[N_{ch},N_{tsamp}]$\label{rebin_shape}, in this case total information could get conservation.
+Assuming data output from Transient Incoherent Search backend are in $(f,t)$ format with size $[N_{ch},N_{tsamp}]$. We could get the signal line are showing up as a curve line which are complied with relationship of $f^{-2}\sim t$ in raw data map from eq. (\ref{eq:Disperse relation}). As the form of curve after 2D-FFT is much more complex than a straight line. Hence we take the 2D-FFT on $(f^{-2},t)$ map. In order to get $(f^{-2},t)$ map, we use interpolation along the frequency axis in $(f,t)$ map. The $(f^{-2},t)$ map still has shape of $[N_{ch},N_{tsamp}]$\label{rebin_shape}, in this case total information could get conservation.
 
 From eq.(\ref{eq:Disperse relation})~,~define $k_1 =- \frac{1}{D} $.~We could rewrite eq.(\ref{eq:Disperse relation}) as 
 \begin{equation}
@@ -319,9 +321,58 @@ As DM always bigger than zero, so $k_2$ is always positive. It indicate signal a
 \caption{Signal on 2DFFT map \label{fig:2DFFT}}
 \end{figure}
 
-For purpose of search transient on 2D-FFT map, we need trace every slope of line that go cross center. It's easier to get each straight which are pass through center from parameter raius and angle  coordinate $(r,\theta)$. In Fig. \ref{fig:2DFFT},  If we make use of quadrant \uppercase\expandafter{\romannumeral1}, we can take center as origin $O$, and vertical or horizontal axis as original axis, then each line go cross center will have radius and angle information. 
+For purpose of search transient on 2D-FFT map, we need trace every slope of line which go cross center. It's easier to get each straight which pass through center from parameter raius and angle  coordinate $(r,\theta)$. Thus it's better to take a coordinate transform.  In Fig. \ref{fig:2DFFT},  If we make use of quadrant \uppercase\expandafter{\romannumeral1}, we can take map center as origin $O$, and horizontal axis as original axis, then each line go cross center will have radius and angle information. 
 
-It's not necessary to take the whole quadrant \uppercase\expandafter{\romannumeral1}, like the yellow part can be cast off. Because signal line go through 2DFFT will be not that long. Data after 2DFFT are in shape of square, $[N_{ch},N_t]$ for example, we can take the radius as ${\min(N_{ch}/2,N_t/2)}$ when we do polar coordinate transform. There are a lot of ways to take polar coordinate transform. But here we are taking interpolation which might be more smooth. After polar coordinate transform, signal line will exist at some exact angle $\theta$. As shows in right top of Fig \ref{fig:Procedure}. 
+%It's not necessary to take the whole quadrant \uppercase\expandafter{\romannumeral1}, like the yellow part can be cast off. Because signal line go through 2DFFT will be not that long. Data after 2DFFT are in shape of square, $[N_{ch},N_t]$ for example, we can take the radius as ${\min(N_{ch}/2,N_t/2)}$ when we do polar coordinate transform. There are a lot of ways to take polar coordinate transform. But here we are taking interpolation which might be more smooth. After polar coordinate transform, signal line will exist at some exact angle $\theta$. As shows in right top of Fig \ref{fig:Procedure}. 
+
+As tiny scale before FFT will decide large structure after FFT. Taking care of direction of FFT, Signal length in 2D-FFT map depend on width of signal line on re-bin map. Similarly, For polarization coordinates transform, the angle resolution could get from the length of signal line on re-bin map.  Note width and length of signal before 2D-FFT is $w_s$ and $l_s$, the length and width of signal after 2D-FFT will be $1/w_s$ and $1/l_s$ separately. Unit of pixel need to be considered when actually process.
+Thus It's not necessary to take the whole data of quadrant \uppercase\expandafter{\romannumeral1}. 
+%Actually,  if DM range is given, only small part of data are useful and 
+%Because length of signal after 2D-FFT will be shortened.  That Data after 2DFFT are in shape of square, $[N_{ch},N_t]$ for example, we can take the radius as ${\min(N_{ch}/2,N_t/2)}$ when we do polar coordinate transform. 
+
+There are a lot of ways to take polar coordinate transform. But here we are taking interpolation which might be more smooth. 
+
+\begin{algorithm}[H]
+\caption{The FDMT Algorithm}
+\label{FDMT}
+Input: $I(f,t)$ input matrix (possibly packed), $t$ axis is continuous in memory.
+
+Output: Packed dispersion measure scores arranged in a two dimensional table  $A_{f_{\min}}^{f_{\max}}(t,\Delta t)$ where $\Delta t$ represents the dispersion measure axis.
+\begin{algorithmic}
+  %\scriptsize
+  \STATE Initiate the table by  $ A_{f}^{f + \frac{f_{\max} - f_{\min}}{N_f}}(t,\Delta t) = \sum_{i=0}^{\Delta t}{I(f,t+i)}$
+  
+  \FOR{iteration $i=1$ to $i=log_2{N_f}$}
+  \FOR{$f_0$ in the range $\left[f_{\min},f_{\max}\right]$ with steps $2^i\delta_f$}
+   
+  \STATE $f_2 = f_0 + 2^i\delta_f$
+  \STATE $f_1 = \frac{f_2 - f_0}{2}$
+  \STATE $C_{f_2,f_0} = \frac{f_1^{-2} - f_0^{-2}}{f_2^{-2} - f_0^{-2}}$
+  \STATE $\Delta t_{\max}(i,f_0) = N_\Delta \frac{f_0^{-2} - (f_0 + 2^i\delta_f)^{-2}} {f_{\min}^{-2} - f_{\max}^{-2}} $
+  \FOR{$\Delta t$ in the range $[0,\Delta t_{\max}(i,f_0)]$}
+  \FOR{$t_0$ in range $[C_{f_2,f_0} \Delta t,N_t]$}
+  \STATE $t_1 = t_0 - C_{f_2,f_0}\Delta t$
+  \STATE
+  $
+  A_{f_0}^{f_2}(t_0,\Delta t) = A_{f_0}^{f_1}(t_0,t_0-t_1) + A_{f_1}^{f_2}(t_1,t_1-t_2)
+  $
+  \ENDFOR
+  \FOR{$t_0$ in the range $[0,C_{f_2,f_0} \Delta t]$}
+    \STATE
+    $
+    A_{f_0}^{f_2}(t_0,\Delta t) = A_{f_0}^{f_1}(t_0,C_{f_2,f_0} \Delta t)
+    $
+    \ENDFOR
+    
+  
+  \ENDFOR
+  \ENDFOR 
+  \ENDFOR
+  
+\end{algorithmic}
+\end{algorithm}
+
+ After polar coordinate transform, signal line will exist at some exact angle $\theta$. As shows in right top of Fig \ref{fig:Procedure}. 
 
 \subsection{Turn signal line into spot}
 As we discussed before, the phase term $e^{-i2\pi vb}$ could disturb the signal. Since phase term is monotonically and data are complex number, if we integrate along radius directly, signal intensity will be blended. We also can't take absolute value then sum,  due to noise will be amplified. A reasonable method is to take another FFT along radius axis, so that the influence of phase term will be eliminated.
@@ -332,13 +383,29 @@ SNR = \frac{Max~Value}{std}
 When we know where the highest SNR is , we can got the angle of it , finally calculate the DM Value from Eq.(\ref{seq:DM Calculate}). 
 The entire procedure are showed by Fig\ref{fig:Procedure} The Data are generated by SIGPROC and parameter are simulated from TianLai Array FRB backend request which Time resolution is 1 millisecond, Band width is 100 MHz and central Frequency is 750 Mhz,  with 1024 Frequency Channels.
 
-\section{Extra advantage of 2DFFT algorithm}
-\subsection{RFI removing}
-\subsection{No DM smearing}
-\section{Detection of observed FRB data}
 
+\subsection{Advantage on RFI removing}
+There are 2 sorts of regular RFI: At certain frequency last long time, At certain time stamp but with large bandwidth, corresponding to horizontal and vertical line separately in image of Re-bin data. After 2D FFT , they will rotate 90$^{\circ}$, but all of them go through center no matter what frequency or time stamp they are. Therefore, Regular type of RFI could be removed simply by discarding data after 2D FFT at horizontal and vertical line that go cross center.%0$^{\circ}$ and -90$^{\circ}$. 
+An example could be seen from Fig. \ref{fig:RFI remove}.
+
+\begin{figure}[ht!]
+\centering
+\subfigure[Add RFI manually on Re-bin map]{
+\epsscale{1.1}
+\plotone{./pictures/RFI_remove-1.png}
+}
+\subfigure[RFI are removed on 2D FFT map]{
+\plotone{./pictures/RFI_remove-2.png}}
+\caption{Plot (a) shows Re-bin map which are add 3 RFI manully: Time domain and frequency domain and short bad data area. Seeing from Plot (b), RFI are removed clearly.  \label{fig:RFI remove}}
+\end{figure}
+
+
+\section{Detection of observed FRB data}
+Observed FRB data are tested through this algorithm. 
 \section{Compute Complexity and benchmark}
 \subsection{Compute Complexity}
+In 2D-FFT algorithm , The most time consuming step is 2D-FFT
+Compared with some Transients algorithm like $Brute Force, Tree,$
 \subsubsection*{tree}
 \subsubsection*{brute force}
 \subsubsection*{FDMT}

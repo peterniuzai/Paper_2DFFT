@@ -33,26 +33,27 @@
 \@writefile{toc}{\contentsline {section}{\numberline {2}Basics of Incoherent Dedispersion}{2}{section.2}}
 \newlabel{sec:obs}{{2}{2}{Basics of Incoherent Dedispersion}{section.2}{}}
 \newlabel{eq:Disperse relation}{{1}{2}{Basics of Incoherent Dedispersion}{equation.2.1}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {3}Intensity after 2D FFT}{3}{section.3}}
-\newlabel{sec:results}{{3}{3}{Intensity after 2D FFT}{section.3}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {4}Implemented 2DFFT on burst search}{4}{section.4}}
-\newlabel{rebin_shape}{{4}{4}{Implemented 2DFFT on burst search}{section.4}{}}
-\newlabel{eq:line function}{{21}{4}{Implemented 2DFFT on burst search}{equation.4.21}{}}
-\newlabel{seq:DM Calculate}{{23}{4}{Implemented 2DFFT on burst search}{equation.4.23}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}polar coordinate transform}{4}{subsection.4.1}}
-\newlabel{sec:polar coordinate transform}{{4.1}{4}{polar coordinate transform}{subsection.4.1}{}}
-\newlabel{fig:2DFFT}{{1}{4}{}{figure.1}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Turn signal line into spot}{4}{subsection.4.2}}
+\@writefile{toc}{\contentsline {section}{\numberline {3}Implemented 2DFFT on burst search}{3}{section.3}}
+\newlabel{rebin_shape}{{3}{3}{Implemented 2DFFT on burst search}{section.3}{}}
+\newlabel{eq:line function}{{14}{3}{Implemented 2DFFT on burst search}{equation.3.14}{}}
+\newlabel{seq:DM Calculate}{{16}{3}{Implemented 2DFFT on burst search}{equation.3.16}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}polar coordinate transform}{3}{subsection.3.1}}
+\newlabel{sec:polar coordinate transform}{{3.1}{3}{polar coordinate transform}{subsection.3.1}{}}
+\newlabel{fig:2DFFT}{{1}{4}{Signal on 2DFFT map}{figure.1}{}}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {1}{\ignorespaces The FDMT Algorithm}}{4}{algorithm.1}}
+\newlabel{FDMT}{{1}{4}{polar coordinate transform}{algorithm.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Turn signal line into spot}{4}{subsection.3.2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Advantage on RFI removing}{4}{subsection.3.3}}
 \bibdata{2DFFT_paperNotes,paper}
-\@writefile{toc}{\contentsline {section}{\numberline {5}Extra advantage of 2DFFT algorithm}{5}{section.5}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}RFI removing}{5}{subsection.5.1}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}No DM smearing}{5}{subsection.5.2}}
-\@writefile{toc}{\contentsline {section}{\numberline {6}Detection of observed FRB data}{5}{section.6}}
-\@writefile{toc}{\contentsline {section}{\numberline {7}Compute Complexity and benchmark}{5}{section.7}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.1}Compute Complexity}{5}{subsection.7.1}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.2}Benchmark}{5}{subsection.7.2}}
-\newlabel{fig:benchmark}{{2}{5}{}{figure.2}{}}
+\newlabel{fig:RFI remove}{{2}{5}{Plot (a) shows Re-bin map which are add 3 RFI manully: Time domain and frequency domain and short bad data area. Seeing from Plot (b), RFI are removed clearly}{figure.2}{}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {Add RFI manually on Re-bin map}}}{5}{figure.2}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {RFI are removed on 2D FFT map}}}{5}{figure.2}}
+\@writefile{toc}{\contentsline {section}{\numberline {4}Detection of observed FRB data}{5}{section.4}}
+\@writefile{toc}{\contentsline {section}{\numberline {5}Compute Complexity and benchmark}{5}{section.5}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Compute Complexity}{5}{subsection.5.1}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}Benchmark}{5}{subsection.5.2}}
+\newlabel{fig:benchmark}{{3}{6}{Benchmark of Transient search software: Sigproc, Sigpyproc, Heimdall , 2DFFT}{figure.3}{}}
+\newlabel{fig:Procedure}{{4}{6}{The whole process of 2DFFT algorithm. Left top is Raw data of FRB data curve in $f(t)$ form which are follow Eq(\ref {eq:Disperse relation}). Left bottom is Re-bin process on Raw data,after this process curve in the Left top will comes to a straight line in $f^{-2}(t)$ form. Mid top is Re-bin Data after 2D FFT. Straight line in Left bottom turn into a straigt line that rotate 90$^{\circ }$ and go through center. As discussed in Sec \ref {sec:polar coordinate transform}, we could only take one quadrant data. Here we take data inside red line area of Mid top. One quadrant data are showed in Mid bottom. In Mid bottom image, Left top point is taken as origin and top horizontal line as origin axis, Then calculate the radius and angle of slope of each pixel and change this image into polar coordinate image of $(radius,angle)$ form as showed in Right top. As phase term influence, interference texture could be found on 2D FFT image. Then final step is doing 1D FFT along radius axis on polar coordinate data, then entire signal line will converge to several spots as showed in Right bottom}{figure.4}{}}
 \bibcite{aaa+15}{{1}{2015}{{{Alam} {et~al.}}}{{{Alam}, {Albareti}, {Allende Prieto}, {Anders}, {Anderson}, {Anderton}, {Andrews}, {Armengaud}, {Aubourg}, {Bailey}, \& et~al.}}}
-\newlabel{fig:Procedure}{{3}{6}{}{figure.3}{}}
 \bibstyle{aasjournal}
-\newlabel{LastPage}{{}{6}{}{}{}}
+\newlabel{LastPage}{{}{7}{}{}{}}
