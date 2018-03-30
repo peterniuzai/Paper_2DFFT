@@ -6,7 +6,7 @@
 \usepackage{graphicx}
 \usepackage{subfigure}
 \usepackage{algorithm,algorithmic}
-
+\usepackage{mathrsfs}
 %\usepackage{deluxetable}
 %\usepackage{morefloats}
 
@@ -325,22 +325,23 @@ For purpose of search transient on 2D-FFT map, we need trace every slope of line
 
 %It's not necessary to take the whole quadrant \uppercase\expandafter{\romannumeral1}, like the yellow part can be cast off. Because signal line go through 2DFFT will be not that long. Data after 2DFFT are in shape of square, $[N_{ch},N_t]$ for example, we can take the radius as ${\min(N_{ch}/2,N_t/2)}$ when we do polar coordinate transform. There are a lot of ways to take polar coordinate transform. But here we are taking interpolation which might be more smooth. After polar coordinate transform, signal line will exist at some exact angle $\theta$. As shows in right top of Fig \ref{fig:Procedure}. 
 
-As tiny scale before FFT will decide large structure after FFT. Taking care of direction of FFT, Signal length in 2D-FFT map depend on width of signal line on re-bin map. Similarly, For polarization coordinates transform, the angle resolution could get from the length of signal line on re-bin map.  Note width and length of signal before 2D-FFT is $w_s$ and $l_s$, the length and width of signal after 2D-FFT will be $1/w_s$ and $1/l_s$ separately. Unit of pixel need to be considered when actually process.
-Thus It's not necessary to take the whole data of quadrant \uppercase\expandafter{\romannumeral1}. 
+As tiny scale before FFT will decide large structure after FFT. Taking care of direction of FFT, Signal length in 2D-FFT map depend on width of signal line on re-bin map. Similarly, For polarization coordinates transform, the angle resolution could get from the length of signal line on re-bin map.  Note width and length of signal before 2D-FFT is $w_s$ and $l_s$, the length and width of signal after 2D-FFT will be $l_{FFT}=1/w_s$ and $w_{FFT}=1/l_s$ separately. Dimension of pixel need to be considered when actually process.
+Thus It's not necessary to take the whole data of quadrant \uppercase\expandafter{\romannumeral1} but pixels who's radius value smaller tan $l_{FFT}$.  Furthermore, if $DM$ range are already set up, the boundary angle of slope $[\theta_{DM_{min}},\theta_{DM_{max}}]$ are also been decided according to Eq \ref{seq:DM Calculate}.  Thus pixel who's angle of slope are beyond boundary could be cast through.
 %Actually,  if DM range is given, only small part of data are useful and 
 %Because length of signal after 2D-FFT will be shortened.  That Data after 2DFFT are in shape of square, $[N_{ch},N_t]$ for example, we can take the radius as ${\min(N_{ch}/2,N_t/2)}$ when we do polar coordinate transform. 
 
 There are a lot of ways to take polar coordinate transform. But here we are taking interpolation which might be more smooth. 
-
+Interpolation algorithm are showed on Algorithm I.
 \begin{algorithm}[H]
-\caption{The FDMT Algorithm}
-\label{FDMT}
-Input: $I(f,t)$ input matrix (possibly packed), $t$ axis is continuous in memory.
+\caption{The Interpolation Algorithm}
+\label{interpolation}
+Input: Data after FFT denote in $\mathcal{F}(f^{-2},t)$ whose shape assume to be $[N_{chan}, N_{samp}]$; $DM$ range that observer want to search; Reasonable width of pulse:$w_s$, Generally take minimum width                                                 value from FRB already known. 
 
-Output: Packed dispersion measure scores arranged in a two dimensional table  $A_{f_{\min}}^{f_{\max}}(t,\Delta t)$ where $\Delta t$ represents the dispersion measure axis.
+Output: Polar coordinate data denote in $\mathcal{P}(r,\theta)$. Shape of data is $[N_r,N_{\theta}]$.
+
 \begin{algorithmic}
   %\scriptsize
-  \STATE Initiate the table by  $ A_{f}^{f + \frac{f_{\max} - f_{\min}}{N_f}}(t,\Delta t) = \sum_{i=0}^{\Delta t}{I(f,t+i)}$
+  \STATE Calculate $\theta$ boundary and $r$ range from given 
   
   \FOR{iteration $i=1$ to $i=log_2{N_f}$}
   \FOR{$f_0$ in the range $\left[f_{\min},f_{\max}\right]$ with steps $2^i\delta_f$}

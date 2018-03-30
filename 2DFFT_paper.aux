@@ -40,11 +40,11 @@
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.1}polar coordinate transform}{3}{subsection.3.1}}
 \newlabel{sec:polar coordinate transform}{{3.1}{3}{polar coordinate transform}{subsection.3.1}{}}
 \newlabel{fig:2DFFT}{{1}{4}{Signal on 2DFFT map}{figure.1}{}}
-\@writefile{loa}{\contentsline {algorithm}{\numberline {1}{\ignorespaces The FDMT Algorithm}}{4}{algorithm.1}}
-\newlabel{FDMT}{{1}{4}{polar coordinate transform}{algorithm.1}{}}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {1}{\ignorespaces The Interpolation Algorithm}}{4}{algorithm.1}}
+\newlabel{interpolation}{{1}{4}{polar coordinate transform}{algorithm.1}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Turn signal line into spot}{4}{subsection.3.2}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Advantage on RFI removing}{4}{subsection.3.3}}
 \bibdata{2DFFT_paperNotes,paper}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Advantage on RFI removing}{5}{subsection.3.3}}
 \newlabel{fig:RFI remove}{{2}{5}{Plot (a) shows Re-bin map which are add 3 RFI manully: Time domain and frequency domain and short bad data area. Seeing from Plot (b), RFI are removed clearly}{figure.2}{}}
 \@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {Add RFI manually on Re-bin map}}}{5}{figure.2}}
 \@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {RFI are removed on 2D FFT map}}}{5}{figure.2}}
@@ -52,8 +52,8 @@
 \@writefile{toc}{\contentsline {section}{\numberline {5}Compute Complexity and benchmark}{5}{section.5}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Compute Complexity}{5}{subsection.5.1}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {5.2}Benchmark}{5}{subsection.5.2}}
-\newlabel{fig:benchmark}{{3}{6}{Benchmark of Transient search software: Sigproc, Sigpyproc, Heimdall , 2DFFT}{figure.3}{}}
-\newlabel{fig:Procedure}{{4}{6}{The whole process of 2DFFT algorithm. Left top is Raw data of FRB data curve in $f(t)$ form which are follow Eq(\ref {eq:Disperse relation}). Left bottom is Re-bin process on Raw data,after this process curve in the Left top will comes to a straight line in $f^{-2}(t)$ form. Mid top is Re-bin Data after 2D FFT. Straight line in Left bottom turn into a straigt line that rotate 90$^{\circ }$ and go through center. As discussed in Sec \ref {sec:polar coordinate transform}, we could only take one quadrant data. Here we take data inside red line area of Mid top. One quadrant data are showed in Mid bottom. In Mid bottom image, Left top point is taken as origin and top horizontal line as origin axis, Then calculate the radius and angle of slope of each pixel and change this image into polar coordinate image of $(radius,angle)$ form as showed in Right top. As phase term influence, interference texture could be found on 2D FFT image. Then final step is doing 1D FFT along radius axis on polar coordinate data, then entire signal line will converge to several spots as showed in Right bottom}{figure.4}{}}
+\newlabel{fig:benchmark}{{3}{5}{Benchmark of Transient search software: Sigproc, Sigpyproc, Heimdall , 2DFFT}{figure.3}{}}
 \bibcite{aaa+15}{{1}{2015}{{{Alam} {et~al.}}}{{{Alam}, {Albareti}, {Allende Prieto}, {Anders}, {Anderson}, {Anderton}, {Andrews}, {Armengaud}, {Aubourg}, {Bailey}, \& et~al.}}}
+\newlabel{fig:Procedure}{{4}{7}{The whole process of 2DFFT algorithm. Left top is Raw data of FRB data curve in $f(t)$ form which are follow Eq(\ref {eq:Disperse relation}). Left bottom is Re-bin process on Raw data,after this process curve in the Left top will comes to a straight line in $f^{-2}(t)$ form. Mid top is Re-bin Data after 2D FFT. Straight line in Left bottom turn into a straigt line that rotate 90$^{\circ }$ and go through center. As discussed in Sec \ref {sec:polar coordinate transform}, we could only take one quadrant data. Here we take data inside red line area of Mid top. One quadrant data are showed in Mid bottom. In Mid bottom image, Left top point is taken as origin and top horizontal line as origin axis, Then calculate the radius and angle of slope of each pixel and change this image into polar coordinate image of $(radius,angle)$ form as showed in Right top. As phase term influence, interference texture could be found on 2D FFT image. Then final step is doing 1D FFT along radius axis on polar coordinate data, then entire signal line will converge to several spots as showed in Right bottom}{figure.4}{}}
 \bibstyle{aasjournal}
 \newlabel{LastPage}{{}{7}{}{}{}}
