@@ -288,7 +288,7 @@ While the noise is still given by Eq.(8), so in this case
 %%%%%%%%%%%%%%%%%%
 
 \section{Implemented 2DFFT on burst search}
-Assuming data output from Transient Incoherent Search backend are in $(f,t)$ format with size $[N_{ch},N_{tsamp}]$. We could get the signal line are showing up as a curve line which are complied with relationship of $f^{-2}\sim t$ in raw data map from eq. (\ref{eq:Disperse relation}). As the form of curve after 2D-FFT is much more complex than a straight line. Hence we take the 2D-FFT on $(f^{-2},t)$ map. In order to get $(f^{-2},t)$ map, we use interpolation along the frequency axis in $(f,t)$ map. The $(f^{-2},t)$ map still has shape of $[N_{ch},N_{tsamp}]$\label{rebin_shape}, in this case total information could get conservation.
+Assuming data output from Transient Incoherent Search backend are in $(f,t)$ format with size $[N_{ch},N_{tsamp}]$. We could get the signal line are showing up as a curve line which are complied with relationship of $f^{-2}\sim t$ in raw data map from eq. (\ref{eq:Disperse relation}). As the form of curve after 2D-FFT is much more complex than a straight line. Hence we take the 2D-FFT on $(f^{-2},t)$ map. In order to get $(f^{-2},t)$ map, we use interpolation along the frequency axis in $(f,t)$ map. The total pixel number of $(f^{-2},t)$ map keep same, so that total information could get conservation. In this case, re-bin data still has shape of $[N_{ch},N_{tsamp}]$\label{rebin_shape}, 
 
 From eq.(\ref{eq:Disperse relation})~,~define $k_1 =- \frac{1}{D} $.~We could rewrite eq.(\ref{eq:Disperse relation}) as 
 \begin{equation}
@@ -311,67 +311,75 @@ And the $b$ comes to module factor in $e^{-i2\pi vb}$. It is still straight but 
 
 For the phase term $e^{-i2\pi vb}$, it will modulate the signal intensity monotonically along straight line of 2D-FFT map. if we sum along straight line directly, we might not get the highest signal noise ratio. An effective and feasible method is to take a second FFT along straight line, then whole signal will turn into a spot. The whole process will take 4 steps to accomplish, we called them : Re-bin, 2D-FFT, Polar transform, 1D-FFT. Data after these process called map with process suffix separately,e.g. data after Re-bin  Re-bin map.
 
+
+\begin{figure*}
+
+\centering
+\includegraphics[width=180mm]{./pictures/procedure1.png}
+\caption{The whole process of 2DFFT algorithm. Left top is Raw data of FRB data curve in $f(t)$ form which are follow Eq(\ref{eq:Disperse relation}). Left bottom is Re-bin process on Raw data,after this process curve in the Left top will comes to a straight line in $f^{-2}(t)$ form. Mid top is Re-bin Data after 2D FFT. Straight line in Left bottom turn into a straigt line that rotate 90$^{\circ}$ and go through center. As discussed in Sec \ref{sec:polar coordinate transform}, we could only take one quadrant data. Here we take data inside red line area of Mid top. One quadrant data are showed in Mid bottom. In Mid bottom image, Left top point is taken as origin and top horizontal line as origin axis, Then calculate the radius and angle of slope of each pixel and change this image into polar coordinate image of $(radius,angle)$ form as showed in Right top. As phase term influence, interference 	texture could be found on 2D FFT image. Then final step is doing 1D FFT along radius axis on polar coordinate data, then entire signal line will converge to several spots as showed in Right bottom.  \label{fig:Procedure}}
+\end{figure*}
+
 \subsection{polar coordinate transform}\label{sec:polar coordinate transform}
 
 As DM always bigger than zero, so $k_2$ is always positive. It indicate signal after 2D-FFT is a straight line which will only appear in 1/2 of 2DFFT map. For example, Fig.\ref{fig:2DFFT} shows a signal line location after 2DFFT, it won't show up in quadrant \uppercase\expandafter{\romannumeral2} and  \uppercase\expandafter{\romannumeral4}, but only quadrant \uppercase\expandafter{\romannumeral1} and \uppercase\expandafter{\romannumeral3}. nevertheless quadrant \uppercase\expandafter{\romannumeral1} and \uppercase\expandafter{\romannumeral3} are conjugate to each other, we can only take 1 of them.
 
-\begin{figure}[ht!]
+\begin{figure}
 \epsscale{1}
 \plotone{./pictures/1stFFT.png}
 \caption{Signal on 2DFFT map \label{fig:2DFFT}}
 \end{figure}
 
-For purpose of search transient on 2D-FFT map, we need trace every slope of line which go cross center. It's easier to get each straight which pass through center from parameter raius and angle  coordinate $(r,\theta)$. Thus it's better to take a coordinate transform.  In Fig. \ref{fig:2DFFT},  If we make use of quadrant \uppercase\expandafter{\romannumeral1}, we can take map center as origin $O$, and horizontal axis as original axis, then each line go cross center will have radius and angle information. 
+For purpose of search transient on 2D-FFT map, we need trace every slope of line which go cross center. It's easier to get each straight which pass through center from raius and angle of slope space $(r,\theta)$. Thus it's better to take a coordinate transform.  In Fig. \ref{fig:2DFFT},  If we make use of quadrant \uppercase\expandafter{\romannumeral1}, we can take map center as origin $O$, and horizontal axis as original axis, then each line go cross center will have radius and angle information. 
 
 %It's not necessary to take the whole quadrant \uppercase\expandafter{\romannumeral1}, like the yellow part can be cast off. Because signal line go through 2DFFT will be not that long. Data after 2DFFT are in shape of square, $[N_{ch},N_t]$ for example, we can take the radius as ${\min(N_{ch}/2,N_t/2)}$ when we do polar coordinate transform. There are a lot of ways to take polar coordinate transform. But here we are taking interpolation which might be more smooth. After polar coordinate transform, signal line will exist at some exact angle $\theta$. As shows in right top of Fig \ref{fig:Procedure}. 
 
 As tiny scale before FFT will decide large structure after FFT. Taking care of direction of FFT, Signal length in 2D-FFT map depend on width of signal line on re-bin map. Similarly, For polarization coordinates transform, the angle resolution could get from the length of signal line on re-bin map.  Note width and length of signal before 2D-FFT is $w_s$ and $l_s$, the length and width of signal after 2D-FFT will be $l_{FFT}=1/w_s$ and $w_{FFT}=1/l_s$ separately. Dimension of pixel need to be considered when actually process.
-Thus It's not necessary to take the whole data of quadrant \uppercase\expandafter{\romannumeral1} but pixels who's radius value smaller tan $l_{FFT}$.  Furthermore, if $DM$ range are already set up, the boundary angle of slope $[\theta_{DM_{min}},\theta_{DM_{max}}]$ are also been decided according to Eq \ref{seq:DM Calculate}.  Thus pixel who's angle of slope are beyond boundary could be cast through.
+Thus It's not necessary to take the whole data of quadrant \uppercase\expandafter{\romannumeral1} but pixels whose radius value smaller tan $l_{FFT}$.  Furthermore, if $DM$ range are already set up, the boundary angle of slope $[\theta_{DM_{min}},\theta_{DM_{max}}]$ are also been decided according to Eq \ref{seq:DM Calculate}.  Thus pixel whose angle of slope are beyond boundary could be cast through.
 %Actually,  if DM range is given, only small part of data are useful and 
 %Because length of signal after 2D-FFT will be shortened.  That Data after 2DFFT are in shape of square, $[N_{ch},N_t]$ for example, we can take the radius as ${\min(N_{ch}/2,N_t/2)}$ when we do polar coordinate transform. 
 
 There are a lot of ways to take polar coordinate transform. But here we are taking interpolation which might be more smooth. 
-Interpolation algorithm are showed on Algorithm I.
-\begin{algorithm}[H]
-\caption{The Interpolation Algorithm}
-\label{interpolation}
-Input: Data after FFT denote in $\mathcal{F}(f^{-2},t)$ whose shape assume to be $[N_{chan}, N_{samp}]$; $DM$ range that observer want to search; Reasonable width of pulse:$w_s$, Generally take minimum width                                                 value from FRB already known. 
-
-Output: Polar coordinate data denote in $\mathcal{P}(r,\theta)$. Shape of data is $[N_r,N_{\theta}]$.
-
-\begin{algorithmic}
-  %\scriptsize
-  \STATE Calculate $\theta$ boundary and $r$ range from given 
-  
-  \FOR{iteration $i=1$ to $i=log_2{N_f}$}
-  \FOR{$f_0$ in the range $\left[f_{\min},f_{\max}\right]$ with steps $2^i\delta_f$}
-   
-  \STATE $f_2 = f_0 + 2^i\delta_f$
-  \STATE $f_1 = \frac{f_2 - f_0}{2}$
-  \STATE $C_{f_2,f_0} = \frac{f_1^{-2} - f_0^{-2}}{f_2^{-2} - f_0^{-2}}$
-  \STATE $\Delta t_{\max}(i,f_0) = N_\Delta \frac{f_0^{-2} - (f_0 + 2^i\delta_f)^{-2}} {f_{\min}^{-2} - f_{\max}^{-2}} $
-  \FOR{$\Delta t$ in the range $[0,\Delta t_{\max}(i,f_0)]$}
-  \FOR{$t_0$ in range $[C_{f_2,f_0} \Delta t,N_t]$}
-  \STATE $t_1 = t_0 - C_{f_2,f_0}\Delta t$
-  \STATE
-  $
-  A_{f_0}^{f_2}(t_0,\Delta t) = A_{f_0}^{f_1}(t_0,t_0-t_1) + A_{f_1}^{f_2}(t_1,t_1-t_2)
-  $
-  \ENDFOR
-  \FOR{$t_0$ in the range $[0,C_{f_2,f_0} \Delta t]$}
-    \STATE
-    $
-    A_{f_0}^{f_2}(t_0,\Delta t) = A_{f_0}^{f_1}(t_0,C_{f_2,f_0} \Delta t)
-    $
-    \ENDFOR
-    
-  
-  \ENDFOR
-  \ENDFOR 
-  \ENDFOR
-  
-\end{algorithmic}
-\end{algorithm}
+%Interpolation algorithm are showed on Algorithm I.
+%\begin{algorithm}[H]
+%\caption{The Interpolation Algorithm}
+%\label{interpolation}
+%Input: Data after FFT denote in $\mathcal{F}(f^{-2},t)$ whose shape assume to be $[N_{chan}, N_{samp}]$; $DM$ range that observer want to search; Reasonable width of pulse:$w_s$, Generally take minimum width                                                 value from FRB already known. 
+%
+%Output: Polar coordinate data denote in $\mathcal{P}(r,\theta)$. Shape of data is $[N_r,N_{\theta}]$.
+%
+%\begin{algorithmic}
+%  %\scriptsize
+%  \STATE Calculate $\theta$ boundary and $r$ range from given 
+%  
+%  \FOR{iteration $i=1$ to $i=log_2{N_f}$}
+%  \FOR{$f_0$ in the range $\left[f_{\min},f_{\max}\right]$ with steps $2^i\delta_f$}
+%   
+%  \STATE $f_2 = f_0 + 2^i\delta_f$
+%  \STATE $f_1 = \frac{f_2 - f_0}{2}$
+%  \STATE $C_{f_2,f_0} = \frac{f_1^{-2} - f_0^{-2}}{f_2^{-2} - f_0^{-2}}$
+%  \STATE $\Delta t_{\max}(i,f_0) = N_\Delta \frac{f_0^{-2} - (f_0 + 2^i\delta_f)^{-2}} {f_{\min}^{-2} - f_{\max}^{-2}} $
+%  \FOR{$\Delta t$ in the range $[0,\Delta t_{\max}(i,f_0)]$}
+%  \FOR{$t_0$ in range $[C_{f_2,f_0} \Delta t,N_t]$}
+%  \STATE $t_1 = t_0 - C_{f_2,f_0}\Delta t$
+%  \STATE
+%  $
+%  A_{f_0}^{f_2}(t_0,\Delta t) = A_{f_0}^{f_1}(t_0,t_0-t_1) + A_{f_1}^{f_2}(t_1,t_1-t_2)
+%  $
+%  \ENDFOR
+%  \FOR{$t_0$ in the range $[0,C_{f_2,f_0} \Delta t]$}
+%    \STATE
+%    $
+%    A_{f_0}^{f_2}(t_0,\Delta t) = A_{f_0}^{f_1}(t_0,C_{f_2,f_0} \Delta t)
+%    $
+%    \ENDFOR
+%    
+%  
+%  \ENDFOR
+%  \ENDFOR 
+%  \ENDFOR
+%  
+%\end{algorithmic}
+%\end{algorithm}
 
  After polar coordinate transform, signal line will exist at some exact angle $\theta$. As shows in right top of Fig \ref{fig:Procedure}. 
 
@@ -379,14 +387,14 @@ Output: Polar coordinate data denote in $\mathcal{P}(r,\theta)$. Shape of data i
 As we discussed before, the phase term $e^{-i2\pi vb}$ could disturb the signal. Since phase term is monotonically and data are complex number, if we integrate along radius directly, signal intensity will be blended. We also can't take absolute value then sum,  due to noise will be amplified. A reasonable method is to take another FFT along radius axis, so that the influence of phase term will be eliminated.
 After this we could get Signal Noise Ratio by 
 \begin{equation*}
-SNR = \frac{Max~Value}{std}
+SNR = \frac{Max~Value }{std}
 \end{equation*}
-When we know where the highest SNR is , we can got the angle of it , finally calculate the DM Value from Eq.(\ref{seq:DM Calculate}). 
+When we know where the highest SNR is , we can got the slope of it , finally calculate the DM Value from Eq.(\ref{seq:DM Calculate}). 
 The entire procedure are showed by Fig\ref{fig:Procedure} The Data are generated by SIGPROC and parameter are simulated from TianLai Array FRB backend request which Time resolution is 1 millisecond, Band width is 100 MHz and central Frequency is 750 Mhz,  with 1024 Frequency Channels.
 
 
 \subsection{Advantage on RFI removing}
-There are 2 sorts of regular RFI: At certain frequency last long time, At certain time stamp but with large bandwidth, corresponding to horizontal and vertical line separately in image of Re-bin data. After 2D FFT , they will rotate 90$^{\circ}$, but all of them go through center no matter what frequency or time stamp they are. Therefore, Regular type of RFI could be removed simply by discarding data after 2D FFT at horizontal and vertical line that go cross center.%0$^{\circ}$ and -90$^{\circ}$. 
+There are two sorts of regular RFI: At certain frequency last long time, At certain time stamp but with large bandwidth, corresponding to horizontal and vertical line separately in image of Re-bin data. After 2D FFT , they will rotate 90$^{\circ}$, but all of them go through center no matter what frequency or time stamp they are. Therefore, Regular type of RFI could be removed simply by discarding data after 2D FFT at horizontal and vertical line that go cross center.%0$^{\circ}$ and -90$^{\circ}$. 
 An example could be seen from Fig. \ref{fig:RFI remove}.
 
 \begin{figure}[ht!]
@@ -405,8 +413,9 @@ An example could be seen from Fig. \ref{fig:RFI remove}.
 Observed FRB data are tested through this algorithm. 
 \section{Compute Complexity and benchmark}
 \subsection{Compute Complexity}
-In 2D-FFT algorithm , The most time consuming step is 2D-FFT
-Compared with some Transients algorithm like $Brute Force, Tree,$
+In general, the compute complexity of transient search algorithm is compute dependency on number of time samples $'N_t'$, number of frequency channels $'N_{\nu}'$ and number of DM $'N_{DM}'$ of observation. In 2D-FFT algorithm , The most time consuming step is 2D-FFT. Though a second 1-D FFT are executed on $(r,\theta)$ data, this doesn't change due to $N_t$,$N_{\nu}$, or $N_{DM}$. Because data shape after polar coordinate transform is only decided by supposed signal width $w_s$ and assumed signal length $l_s$ which are constant during a observation. The scale need to process are much smaller than 2D-FFT . Thus the compute complexity got from this algorithm are mainly caused by 2D-FFT which are $2N_t N_{\nu} \log_2(N_t N_{\nu})$.
+
+Compared with some Transients search algorithm like $Brute Force$, $Tree$, $FDMT$, This algorithm doesn't have simplest compute complexity. Take Tree algorithm for example, this method will twice the complexity.  However there are advantages that we might be interested.
 \subsubsection*{tree}
 \subsubsection*{brute force}
 \subsubsection*{FDMT}
@@ -419,12 +428,13 @@ Compared with some Transients algorithm like $Brute Force, Tree,$
 \end{figure} 
  
 \bibliography{paper}
-\begin{figure}[ht!]
-\epsscale{1.2}
-\plotone{./pictures/procedure1.png}
-\caption{The whole process of 2DFFT algorithm. Left top is Raw data of FRB data curve in $f(t)$ form which are follow Eq(\ref{eq:Disperse relation}). Left bottom is Re-bin process on Raw data,after this process curve in the Left top will comes to a straight line in $f^{-2}(t)$ form. Mid top is Re-bin Data after 2D FFT. Straight line in Left bottom turn into a straigt line that rotate 90$^{\circ}$ and go through center. As discussed in Sec \ref{sec:polar coordinate transform}, we could only take one quadrant data. Here we take data inside red line area of Mid top. One quadrant data are showed in Mid bottom. In Mid bottom image, Left top point is taken as origin and top horizontal line as origin axis, Then calculate the radius and angle of slope of each pixel and change this image into polar coordinate image of $(radius,angle)$ form as showed in Right top. As phase term influence, interference 	texture could be found on 2D FFT image. Then final step is doing 1D FFT along radius axis on polar coordinate data, then entire signal line will converge to several spots as showed in Right bottom.  \label{fig:Procedure}}
-\end{figure}
-
+%\begin{deluxetable*}{lccc}  % <--- column justification (center/left/right)
+%\begin{figure}[ht!]
+%\epsscale{1.2}
+%\plotone{./pictures/procedure1.png}
+%\caption{The whole process of 2DFFT algorithm. Left top is Raw data of FRB data curve in $f(t)$ form which are follow Eq(\ref{eq:Disperse relation}). Left bottom is Re-bin process on Raw data,after this process curve in the Left top will comes to a straight line in $f^{-2}(t)$ form. Mid top is Re-bin Data after 2D FFT. Straight line in Left bottom turn into a straigt line that rotate 90$^{\circ}$ and go through center. As discussed in Sec \ref{sec:polar coordinate transform}, we could only take one quadrant data. Here we take data inside red line area of Mid top. One quadrant data are showed in Mid bottom. In Mid bottom image, Left top point is taken as origin and top horizontal line as origin axis, Then calculate the radius and angle of slope of each pixel and change this image into polar coordinate image of $(radius,angle)$ form as showed in Right top. As phase term influence, interference 	texture could be found on 2D FFT image. Then final step is doing 1D FFT along radius axis on polar coordinate data, then entire signal line will converge to several spots as showed in Right bottom.  \label{fig:Procedure}}
+%\end{figure}
+%\end{deluxetable*}
 
 \begin{thebibliography}{}
 \expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi

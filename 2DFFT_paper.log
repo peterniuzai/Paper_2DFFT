@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  30 MAR 2018 08:29
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  1 APR 2018 21:25
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -742,92 +742,90 @@ Underfull \hbox (badness 1237) in paragraph at lines 291--292
 10 )$ for-mat with size
  []
 
-[3] <./pictures/1stFFT.png, id=62, 282.05376pt x 268.00125pt>
+<./pictures/procedure1.png, id=42, 1517.67pt x 915.42pt>
+File: ./pictures/procedure1.png Graphic file (type png)
+
+<use ./pictures/procedure1.png>
+Package pdftex.def Info: ./pictures/procedure1.png used on input line 318.
+(pdftex.def)             Requested size: 512.1496pt x 308.91997pt.
+ [3]
+<./pictures/1stFFT.png, id=67, 282.05376pt x 268.00125pt>
 File: ./pictures/1stFFT.png Graphic file (type png)
 
 <use ./pictures/1stFFT.png>
-Package pdftex.def Info: ./pictures/1stFFT.png used on input line 320.
+Package pdftex.def Info: ./pictures/1stFFT.png used on input line 328.
 (pdftex.def)             Requested size: 205.92802pt x 195.67198pt.
-Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on in
-put line 336.
  [4pdfTeX warning (ext4): destination with the same identifier (name{figure.1})
  has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.391 
-       <./pictures/1stFFT.png>]
-<./pictures/RFI_remove-1.png, id=101, 542.025pt x 275.1078pt>
+l.340 
+      pdfTeX warning (ext4): destination with the same identifier (name{figure.
+2}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.340 
+       <./pictures/procedure1.png> <./pictures/1stFFT.png>]
+<./pictures/RFI_remove-1.png, id=83, 542.025pt x 275.1078pt>
 File: ./pictures/RFI_remove-1.png Graphic file (type png)
 
 <use ./pictures/RFI_remove-1.png>
-Package pdftex.def Info: ./pictures/RFI_remove-1.png used on input line 397.
+Package pdftex.def Info: ./pictures/RFI_remove-1.png used on input line 405.
 (pdftex.def)             Requested size: 226.52208pt x 114.97357pt.
 
-<./pictures/RFI_remove-2.png, id=103, 462.528pt x 267.8808pt>
+<./pictures/RFI_remove-2.png, id=85, 462.528pt x 267.8808pt>
 File: ./pictures/RFI_remove-2.png Graphic file (type png)
 
 <use ./pictures/RFI_remove-2.png>
-Package pdftex.def Info: ./pictures/RFI_remove-2.png used on input line 399.
+Package pdftex.def Info: ./pictures/RFI_remove-2.png used on input line 407.
 (pdftex.def)             Requested size: 205.92802pt x 119.26584pt.
+ [5pdfTeX warning (ext4): destination with the same identifier (name{figure.3})
+ has been already used, duplicate ignored
 
-<./pictures/benchmark.png, id=104, 462.528pt x 346.896pt>
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.421 \subsubsection*{FDMT}
+                            <./pictures/RFI_remove-1.png> <./pictures/RFI_remov
+e-2.png>] <./pictures/benchmark.png, id=104, 462.528pt x 346.896pt>
 File: ./pictures/benchmark.png Graphic file (type png)
 
 <use ./pictures/benchmark.png>
-Package pdftex.def Info: ./pictures/benchmark.png used on input line 417.
+Package pdftex.def Info: ./pictures/benchmark.png used on input line 426.
 (pdftex.def)             Requested size: 205.92802pt x 154.44498pt.
- (./2DFFT_paper.bbl [5pdfTeX warning (ext4): destination with the same identifi
-er (name{figure.2}) has been already used, duplicate ignored
-
-\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
-                                                  \fi \fi 
-l.1 \begin{thebibliography}{}
-                             pdfTeX warning (ext4): destination with the same i
-dentifier (name{figure.3}) has been already used, duplicate ignored
-
-\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
-                                                  \fi \fi 
-l.1 \begin{thebibliography}{}
-                              <./pictures/RFI_remove-1.png> <./pictures/RFI_rem
-ove-2.png> <./pictures/benchmark.png>]
+ (./2DFFT_paper.bbl
 
 LaTeX Warning: Empty `thebibliography' environment on input line 5.
 
-) <./pictures/procedure1.png, id=126, 1517.67pt x 915.42pt>
-File: ./pictures/procedure1.png Graphic file (type png)
-
-<use ./pictures/procedure1.png>
-Package pdftex.def Info: ./pictures/procedure1.png used on input line 424.
-(pdftex.def)             Requested size: 523.38219pt x 315.69453pt.
-
-Overfull \hbox (10.26476pt too wide) in paragraph at lines 424--425
- [] 
- []
-
-[6] [7pdfTeX warning (ext4): destination with the same identifier (name{figure.
-4}) has been already used, duplicate ignored
+) [6pdfTeX warning (ext4): destination with the same identifier (name{figure.4}
+) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.440 
-       <./pictures/procedure1.png>]
+l.438 
+       <./pictures/benchmark.png>] [7]
 
 Package natbib Warning: There were undefined citations.
 
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 444.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 454.
 (./2DFFT_paper.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 444.
-Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 444.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 454.
+Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 454.
+
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right .
+
+
  ) 
 Here is how much of TeX's memory you used:
- 9903 strings out of 493014
- 135602 string characters out of 6133351
- 286355 words of memory out of 5000000
- 13227 multiletter control sequences out of 15000+600000
+ 9837 strings out of 493014
+ 134854 string characters out of 6133351
+ 290440 words of memory out of 5000000
+ 13180 multiletter control sequences out of 15000+600000
  17081 words of font info for 69 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 36i,8n,37p,1192b,750s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 36i,8n,37p,1192b,370s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
 ></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb><
 /usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb></u
@@ -835,27 +833,25 @@ sr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></u
 sr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></us
 r/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr
 /local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/l
-ocal/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/loc
-al/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local
-/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/local/t
-exlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/tex
-live/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/local/texliv
-e/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/2
-016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2016
-/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2016/te
-xmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texlive/2016/texmf
--dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2016/texmf-
-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/local/texlive/2016/texmf-di
-st/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2016/texmf-dist
-/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2016/texmf-dist/f
-onts/type1/public/amsfonts/cm/cmsy9.pfb></usr/local/texlive/2016/texmf-dist/fon
-ts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2016/texmf-dist/font
-s/type1/public/amsfonts/cm/cmti8.pfb></usr/local/texlive/2016/texmf-dist/fonts/
-type1/public/amsfonts/cm/cmti9.pfb>
-Output written on 2DFFT_paper.pdf (7 pages, 2364474 bytes).
+ocal/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/loc
+al/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/local
+/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/t
+exlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/local/texl
+ive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive
+/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/20
+16/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2016/
+texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texlive/2016/tex
+mf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2016/texm
+f-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/local/texlive/2016/texmf-
+dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2016/texmf-di
+st/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2016/texmf-dist
+/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2016/texmf-dist/
+fonts/type1/public/amsfonts/cm/cmti8.pfb></usr/local/texlive/2016/texmf-dist/fo
+nts/type1/public/amsfonts/cm/cmti9.pfb>
+Output written on 2DFFT_paper.pdf (7 pages, 2336004 bytes).
 PDF statistics:
- 232 PDF objects out of 1000 (max. 8388607)
- 187 compressed objects within 2 object streams
- 66 named destinations out of 1000 (max. 500000)
+ 202 PDF objects out of 1000 (max. 8388607)
+ 159 compressed objects within 2 object streams
+ 47 named destinations out of 1000 (max. 500000)
  26 words of extra memory for PDF output out of 10000 (max. 10000000)
 

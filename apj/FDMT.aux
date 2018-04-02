@@ -1,0 +1,105 @@
+\relax 
+\citation{HandbookOfPulsarAstronomy}
+\newlabel{FirstPage}{{}{1}{}{}{}}
+\@writefile{toc}{\contentsline {abstract}{ABSTRACT}{1}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {1}Introduction}{1}{}}
+\newlabel{sec:Introduction}{{1}{1}{}{}{}}
+\newlabel{eq:Dt}{{1}{1}{}{}{}}
+\newlabel{eq:DtD}{{2}{1}{}{}{}}
+\citation{LOFARPulsar}
+\citation{LorimerBurst,FRBS}
+\citation{PetroffFRBsNullDetection}
+\@writefile{toc}{\contentsline {section}{\numberline {2}Sensitivity analysis of incoherent dedispersion}{2}{}}
+\newlabel{sec:SensitivityIncoherentDedispersion}{{2}{2}{}{}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces A dispersed signal and its dispersion transform (FDMT), based on simulated data. The top panel shows a 0.1ms wide dispersed pulse with $D=40\tmspace  +\thinmuskip {.1667em} {\rm  pc}\tmspace  +\thinmuskip {.1667em} {\rm  cm}^{-3}$. The bottom panel shows a zoom in on the significant part of the dedispersion transform. Notice that the Y axis has units of time because the dispersion measure is parametrized by the total time delay between the pulses entrance and exit. Note that because the pulse is so thin, any slight error on the dispersion path will immediately result in significant loss of the pulse power.}}{2}{}}
+\newlabel{fig:InputOutput}{{1}{2}{}{}{}}
+\citation{TreeDedispersion}
+\citation{GPUsub-bandDedispersion}
+\citation{GPUDedispersion}
+\citation{FPGADedispersion}
+\citation{RadonGotsDruckmuller,RadonBrady}
+\citation{GPUDedispersion}
+\citation{GPUDedispersion}
+\gdef \LT@i {\LT@entry 
+    {8}{108.93199pt}\LT@entry 
+    {8}{122.06001pt}\LT@entry 
+    {2}{51.68393pt}\LT@entry 
+    {8}{66.3581pt}}
+\gdef \deluxe@table@width@i {-349.03403pt}
+\citation{GPUDedispersion}
+\citation{TreeDedispersion}
+\@writefile{toc}{\contentsline {section}{\numberline {3}Existing algorithms for incoherent dedispersion}{3}{}}
+\newlabel{sec:ExistingMethods}{{3}{3}{}{}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4}The FDMT Algorithm}{3}{}}
+\newlabel{sec:FDMTAlgorithm}{{4}{3}{}{}{}}
+\newlabel{parametrization}{{13}{3}{}{}{}}
+\newlabel{AlgorithmComparisonTable}{{1}{4}{}{}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\\Algorithm comparison }}{4}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Illustration of a single iteration of the FDMT algorithm: On the left side, the input frequency vs. time input table is drawn. An example dispersion curve is highlighted on purple. The input table is divided methodically to two sub-bands. The right table shows the final dedispersion transform of the input (left), where the integral over the purple dispersion curve (left) is marked by the purple cell on the right. On the middle, the dispersion measure transform of the two sub-bands (which are assumed to be calculated in the previous iteration) is drawn, where each of the two sub-bands contains in each cell the sum of the unique dispersion trail with exit point $t_0$ and total delay $\Delta t$ through the corresponding sub-bands. The cells that contain the partial sums of the two halves of the purple dispersion curve on the left are highlighted in purple. Highlighted in red, is a row in the dispersion tables that contributes to the calculation of the red cells on the right. Notice that we can add the lines highlighted in red as vectors, in order to implement the algorithm in a vectorized form. Highlighted in orange, are the cells that use the alternative addition rule, in the case when the dispersion trail exits the boundaries of the input table. }}{4}{}}
+\newlabel{fig:AdditionRule}{{2}{4}{}{}{}}
+\newlabel{Eq:Cf2f0}{{16}{4}{}{}{}}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {1}{\ignorespaces The FDMT Algorithm}}{5}{}}
+\newlabel{FDMT}{{1}{5}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Computational Complexity}{5}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Implementation details}{5}{}}
+\newlabel{subsec:ImplementataionDetailsFDMT}{{4.2}{5}{}{}{}}
+\newlabel{subsubsec:PulseProfile}{{4.2}{6}{}{}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5}Eliminating shifts by FFT'ing the time axis}{6}{}}
+\newlabel{sec:FDMTFFT}{{5}{6}{}{}{}}
+\citation{GPUDedispersion,GPUsub-bandDedispersion}
+\citation{GPUDedispersion,GPUsub-bandDedispersion}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {2}{\ignorespaces The FFT--FDMT Algorithm}}{7}{}}
+\newlabel{FDMTFFT}{{2}{7}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Comments on the Implementation of the FFT-FDMT algorithm}{7}{}}
+\newlabel{subsec:FDMTFFTPulseProfile}{{5.1}{7}{}{}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {6}Run time and Benchmarking}{7}{}}
+\newlabel{sec:RuntimeAndBenchmarking}{{6}{7}{}{}{}}
+\citation{GPUsub-bandDedispersion}
+\citation{GPUDedispersion}
+\citation{GPUsub-bandDedispersion}
+\citation{GPUDedispersion}
+\gdef \LT@ii {\LT@entry 
+    {8}{133.25734pt}\LT@entry 
+    {8}{130.30312pt}\LT@entry 
+    {2}{82.01353pt}\LT@entry 
+    {2}{88.32196pt}}
+\gdef \deluxe@table@width@ii {-433.89595pt}
+\@writefile{toc}{\contentsline {section}{\numberline {7}Bridging the gap between coherent and incoherent dedispersion}{8}{}}
+\newlabel{sec:CoherentIncoherentHybrid}{{7}{8}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.1}Hybrid algorithm for dedispersion}{8}{}}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {3}{\ignorespaces Coherent hybrid FDMT dedispersion algorithm}}{8}{}}
+\newlabel{alg:AlgorithmCoherent}{{3}{8}{}{}{}}
+\citation{LOFARPulsar}
+\newlabel{RuntimeComparisonTable}{{2}{9}{}{}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {2}{\\Runtime comparison }}{9}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.2}Implications}{9}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {8}FDMT for radio interferometers}{9}{}}
+\newlabel{sec:DedispersionInterferometers}{{8}{9}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {8.1}The standard approaches to pulse blind search with interferometers}{9}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {8.2}The proposed solution}{9}{}}
+\newlabel{Eq:InterferometerFXScore}{{44}{10}{}{}{}}
+\newlabel{eqn:NoChromatic}{{51}{10}{}{}{}}
+\bibcite{GPUDedispersion}{{1}{2012}{{Barsdell et al.}}{{}}}
+\bibcite{RadonBrady}{{2}{1998}{{Brady }}{{}}}
+\bibcite{FPGADedispersion}{{3}{2013}{{Clarke et al.}}{{}}}
+\bibcite{DedispersionInterferometers}{{4}{2014}{{Clarke et al.}}{{}}}
+\bibcite{RadonGotsDruckmuller}{{5}{1996}{{Gotz \& Druckmuller}}{{}}}
+\bibcite{sub-bandDedispersion}{{6}{1996}{{Manchester et al.}}{{}}}
+\bibcite{GPUsub-bandDedispersion}{{7}{2011}{{Magro et al.}}{{}}}
+\bibcite{DetectingPulsarsByGiantPulses}{{8}{2003}{{McLaughlin \& Cordes}}{{}}}
+\bibcite{LorimerBurst}{{9}{2007}{{Lorimer et al.}}{{}}}
+\bibcite{HandbookOfPulsarAstronomy}{{10}{2012}{{Lorimer \& Kramer}}{{}}}
+\bibcite{PetroffFRBsNullDetection}{{11}{2014}{{Petroff et al.}}{{}}}
+\bibcite{TreeDedispersion}{{12}{1974}{{Taylor}}{{}}}
+\bibcite{DedispersionInterferometersCaseStudy}{{13}{2011}{{Thompson et al.}}{{}}}
+\bibcite{FRBS}{{14}{2013}{{Thornton et al.}}{{}}}
+\bibcite{LOFARPulsar}{{15}{2010}{{van Leeuwen \& Stappers}}{{}}}
+\bibdata{FDMTNotes}
+\bibstyle{apsrev4-1}
+\citation{REVTEX41Control}
+\citation{apsrev41Control}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {4}{\ignorespaces Finding short pulses with interferometers}}{11}{}}
+\newlabel{InterferometersAlgorithm}{{4}{11}{}{}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {9}Conclusion}{11}{}}
+\newlabel{sec:Conclusion}{{9}{11}{}{}{}}
+\newlabel{LastPage}{{}{11}{}{}{}}
