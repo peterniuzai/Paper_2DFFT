@@ -164,7 +164,7 @@ denote $\Delta　\nu \equiv \nu - \nu_0$, and assume that the spectrum is not to
 I(t,\nu) & \approx I_0\delta_D(t-t_s-\frac{D}{\nu_0^2}(1-2\frac{\Delta\nu}{\nu_0}) ) \\
 		 & = I_0\delta_D(t -t_0 +\frac{2D}{\nu_0^3}\Delta\nu)
 \end{aligned} 
-\end{equation}
+\end{equation} \label{eq:linear assumpution}
 where $t_0$ is the arrival time of the signal at thre reference frequency $\nu_0$. \\
 	Now consider an integral of this signal between frequency $\nu_1 $ and $\nu_2$ , the signal strength would be
 \begin{equation}
@@ -411,13 +411,19 @@ An example could be seen from Fig. \ref{fig:RFI remove}.
 
 \section{Detection of observed FRB data}
 Observed FRB data are tested through this algorithm. 
-\section{Compute Complexity and benchmark}
-\subsection{Compute Complexity}
-In general, the compute complexity of transient search algorithm is compute dependency on number of time samples $'N_t'$, number of frequency channels $'N_{\nu}'$ and number of DM $'N_{DM}'$ of observation. In 2D-FFT algorithm , The most time consuming step is 2D-FFT. Though a second 1-D FFT are executed on $(r,\theta)$ data, this doesn't change due to $N_t$,$N_{\nu}$, or $N_{DM}$. Because data shape after polar coordinate transform is only decided by supposed signal width $w_s$ and assumed signal length $l_s$ which are constant during a observation. The scale need to process are much smaller than 2D-FFT . Thus the compute complexity got from this algorithm are mainly caused by 2D-FFT which are $2N_t N_{\nu} \log_2(N_t N_{\nu})$.
+%\section{Compute Complexity and benchmark}
+\section{Incoherent De-dispersion algorithms and Compute Complexity}
+There are a lot of incoherent transient search algorithm already in use, But I'd like to difference them into 4 types: 1) $Brute force$ 2) $Tree algorith$ , 3) $Image processing$ 4) $Machine Learning$.  
 
-Compared with some Transients search algorithm like $Brute Force$, $Tree$, $FDMT$, This algorithm doesn't have simplest compute complexity. Take Tree algorithm for example, this method will twice the complexity.  However there are advantages that we might be interested.
+$Brute Force$ is implemented in a lot of software like $SIGPROC$, $HEIMDALL$. In general, the compute complexity of transient search algorithm is compute dependency on number of time samples $'N_t'$, number of frequency channels $'N_{\nu}'$ and number of DM $'N_{DM}'$ of observation. The basics of $Brute Force$ is to shift time delays back for each frequency channel according to Eq\ref{eq:Disperse relation}. As every DM are processed with every time sample and frequency channel, so the total compute complexity is $(N_t N_{\nu} N_{DM})$. 
+
+Different with $Brute Force$ algorithm, Talor proposed $Tree$ algorithm \ref{} to accelarate $Brute Force$ de-disperse algorithm. Under asumption of Eq \ref{eq:linear assumpution}, Tree algorithm trace signal across a straight line and reuse some element to get rid of redundant calculation. It has same mechanisim as FFT and compute complexity is $(N_t N_{\nu} \log_2{N_{\nu}})$.	
+
+ In 2D-FFT algorithm , The most time consuming step is 2D-FFT. Though a second 1-D FFT are executed on $(r,\theta)$ data, this doesn't change due to $N_t$,$N_{\nu}$, or $N_{DM}$. Because data shape after polar coordinate transform is only decided by supposed signal width $w_s$ and assumed signal length $l_s$ which are constant during a observation. The scale need to process are much smaller than 2D-FFT . Thus the compute complexity got from this algorithm are mainly caused by 2D-FFT which are $2N_t N_{\nu} \log_2(N_t N_{\nu})$. Table 1 shows comparation with some Transients search algorithm like $Brute Force$, $Tree$, $FDMT$. This algorithm doesn't have simplest compute complexity.  Take Tree algorithm for example, this method will twice the complexity.  However there are advantages that we might be interested. 
+
 \subsubsection*{tree}
 \subsubsection*{brute force}
+
 \subsubsection*{FDMT}
 \subsubsection*{2DFFT}
 \subsection{Benchmark}

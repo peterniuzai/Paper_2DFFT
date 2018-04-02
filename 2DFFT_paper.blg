@@ -1,8 +1,13 @@
-This is BibTeX, Version 0.99d (TeX Live 2013/Debian)
+This is BibTeX, Version 0.99d (TeX Live 2015/Debian)
 Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: 2DFFT_paper.aux
+I couldn't open database file paper.bib
+---line 52 of file 2DFFT_paper.aux
+ : \bibdata{2DFFT_paperNotes,paper
+ :                                }
+I'm skipping whatever remains of this command
 The style file: aasjournal.bst
-I found no \bibdata command---while reading file 2DFFT_paper.aux
+Database file #1: 2DFFT_paperNotes.bib
 Warning--I didn't find a database entry for "lbm+07"
 Warning--I didn't find a database entry for "tsb+13"
 Warning--I didn't find a database entry for "bb14"
@@ -26,7 +31,7 @@ Warning--I didn't find a database entry for "mph+16"
 Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
 You've used 0 entries,
             3222 wiz_defined-function locations,
-            672 strings with 4495 characters,
+            674 strings with 4516 characters,
 and the built_in function-call counts, 22 in all, are:
 = -- 0
 > -- 0
