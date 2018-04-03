@@ -1,68 +1,88 @@
-\documentclass[twocolumn]{aastex61}
-\pdfoutput=1 
-\usepackage{upgreek}
-\usepackage{color} 
+%\documentclass[preprint]{aastex}
+\documentclass[iop]{emulateapj}
 \usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{epstopdf}
 \usepackage{graphicx}
-\usepackage{subfigure}
+\usepackage{float}
+%\usepackage{caption}
+%\usepackage{subcaption}
+\usepackage{natbib}
+\usepackage{footnote}
 \usepackage{algorithm,algorithmic}
-\usepackage{mathrsfs}
-%\usepackage{deluxetable}
-%\usepackage{morefloats}
+\usepackage{bbold}
+\usepackage{subfigure}
 
-%\usepackage{amssymb}
+%\usepackage{upgreek}
+%\usepackage{color} 
 %\usepackage{amsmath}
-%\usepackage{epstopdf}
-%\usepackage{color}
-
+%\usepackage{graphicx}
+%
+%\usepackage{algorithm,algorithmic}
 %\usepackage{mathrsfs}
 
-\def \frb {FRB Search Algorithm}
-\def \halpha {\ensuremath{\mathrm{H\alpha}}}
-\def \hbeta {\ensuremath{\mathrm{H\beta}}}
+%% preprint2 produces a double-column, single-spaced document:
 
+%% \documentclass[preprint2]{aastex}
 
-\newcommand{\be}{\begin{eqnarray}}
-\newcommand{\ee}{\end{eqnarray}}
-\newcommand{\etal}{et al.}
+%% Sometimes a paper's abstract is too long to fit on the
+%% title page in preprint2 mode. When that is the case,
+%% use the longabstract style option.
 
+%% \documentclass[preprint2,longabstract]{aastex}
 
-\newcommand{\Halpha}{\rm H\alpha}
-\newcommand{\EM}{{\rm EM}}
-\newcommand{\DM}{{\rm DM}}
-\newcommand{\SM}{{\rm SM}}
-\newcommand{\SFR}{\ensuremath{\mathrm{SFR}}}
+%% If you want to create your own macros, you can do so
+%% using \newcommand. Your macros should appear before
+%% the \begin{document} command.
+%%
+%% If you are submitting to a journal that translates manuscripts
+%% into SGML, you need to follow certain guidelines when preparing
+%% your macros. See the AASTeX v5.x Author Guide
+%% for information.
 
-\newcommand{\DMhatzero}{\rm \widehat{\DM}}
-\newcommand{\DMhatFRB}{\rm \widehat{\DM}({\rm FRB})}
+%\newcommand\plotthree[3]{{\typeout{Plotthree included the files #1 #2 #3}\centering\leavevmode\columnwidth=.25\columnwidth
+%\includegraphics*[width={\eps@scaling\columnwidth}]{#1}\hfil\includegraphics*[width={\eps@scaling\columnwidth}]{#2}\includegraphics*[width={\eps@scaling\columnwidth}]{#3}}}
 
-\newcommand{\Ss}{S({\rm\halpha})_{\rm s}}
-\newcommand{\EMs}{{\rm EM}_{\rm s}}
-\newcommand{\EMsHalpha}{{\rm EM}(\halpha)_{\rm s}}
-\newcommand{\EMsHbeta}{{\rm EM}(\hbeta)_{\rm s}}
-\newcommand{\DMsHalpha}{{\rm DM}(\halpha)_{\rm s}}
-\newcommand{\DMs}{\widehat{\rm DM}_{\rm s}}
+\newcommand\ora[1]{\overrightarrow{#1}}
+\newcommand\abs[1]{\left|{#1}\right|}
+\newcommand\norm[1]{\left\|{#1}\right\|}
 
+\newcommand{\vdag}{(v)^\dagger}
+\newcommand{\myemail}{bzackay@gmail.com}
 
-\newcommand{\EMDM}{{\rm EM_{\rm DM}}}
-\newcommand{\EMSM}{{\rm EM_{\rm SM}}}
+%% You can insert a short comment on the title page using the command below.
 
-\turnoffedit
+\slugcomment{submitted to APJ}
+
+%% If you wish, you may supply running head information, although
+%% this information may be modified by the editorial offices.
+%% The left head contains a list of authors,
+%% usually a maximum of three (otherwise use et al.).  The right
+%% head is a modified title of up to roughly 44 characters.
+%% Running heads will not print in the manuscript style.
+
+\shorttitle{Fast discrete Dispersion Measure Transform}
+\shortauthors{Zackay \& Ofek}
+
+%% This is the end of the preamble.  Indicate the beginning of the
+%% paper itself with \begin{document}.
 
 \begin{document}
 
-%\setlength{\fboxsep}{0pt}%
-%\setlength{\fboxrule}{0.5pt}%
+%% LaTeX will automatically break titles if they run longer than
+%% one line. However, you may use \\ to force a line break if
+%% you desire.
 
-%\received{\today}
+
+
+\title{Using 2D-FFT to search Fast Radio Burst}%\footnote{peterniu@nao.cas.cn}}
+
 \revised{\today}
 %\accepted{\today}
 %\submitjournal{ApJ}
 
 \shorttitle{2D-FFT search Algorithm }
 \shortauthors{C.H.Niu~et al.}
-
-\title{Using 2D-FFT to search Fast Radio Burst}%\footnote{peterniu@nao.cas.cn}}
 
 
 %\correspondingauthor{Xuelei~Chen}
@@ -75,49 +95,96 @@ Luoyu Road,Wuhan, China}
 Datun(A) Road,No.30,Beijing, China}
 \affil{University of California Berkeley, Campbell Hall 339, Berkeley CA 94720}
 
-\author{Y.C. Li}
-\affil{National Astronomy Observatory , Chinese Academy of Sciences \\
-Datun(A) Road,No.30,Beijing, China}
-\author{S.F. Zuo}
-\affil{National Astronomy Observatory , Chinese Academy of Sciences \\
-Datun(A) Road,No.30,Beijing, China}
+%\author{Y.C. Li}
+%\affil{National Astronomy Observatory , Chinese Academy of Sciences \\
+%Datun(A) Road,No.30,Beijing, China}
+%\author{S.F. Zuo}
+%\affil{National Astronomy Observatory , Chinese Academy of Sciences \\
+%Datun(A) Road,No.30,Beijing, China}
+%
+%\author{F.Q. Wu}
+%\affil{National Astronomy Observatory , Chinese Academy of Sciences \\
+%Datun(A) Road,No.30,Beijing, China}
+%
+%\author{Ue-li Pen}
+%\affil{CITA}
+%\affil{National Astronomy Observatory , Chinese Academy of Sciences \\
+%Datun(A) Road,No.30,Beijing, China}
+%
+%\author{X.L. Chen}
+%\affil{National Astronomy Observatory , Chinese Academy of Sciences \\
+%Datun(A) Road,No.30,Beijing, China}
+%% Use \author, \affil, and the \and command to format
+%% author and affiliation information.
+%% Note that \email has replaced the old \authoremail command
+%% from AASTeX v4.0. You can use \email to mark an email address
+%% anywhere in the paper, not just in the front matter.
+%% As in the title, use \\ to force line breaks.
 
-\author{F.Q. Wu}
-\affil{National Astronomy Observatory , Chinese Academy of Sciences \\
-Datun(A) Road,No.30,Beijing, China}
+	
+%% Notice that each of these authors has alternate affiliations, which
+%% are identified by the \altaffilmark after each name.  Specify alternate
+%% affiliation information with \altaffiltext, with one command per each
+%% affiliation.
 
-\author{Ue-li Pen}
-\affil{CITA}
-\affil{National Astronomy Observatory , Chinese Academy of Sciences \\
-Datun(A) Road,No.30,Beijing, China}
+%\altaffiltext{1}{Visiting Astronomer, Cerro Tololo Inter-American Observatory.
+%CTIO is operated by AURA, Inc.\ under contract to the National Science
+%Foundation.}
+%\altaffiltext{2}{Society of Fellows, Harvard University.}
+%\altaffiltext{3}{present address: Center for Astrophysics,
+%    60 Garden Street, Cambridge, MA 02138}
+%\altaffiltext{4}{Visiting Programmer, Space Telescope Science Institute}
+%\altaffiltext{5}{Patron, Alonso's Bar and Grill}
 
-\author{X.L. Chen}
-\affil{National Astronomy Observatory , Chinese Academy of Sciences \\
-Datun(A) Road,No.30,Beijing, China}
-
-
-
-
-
-
+%% Mark off your abstract in the ``abstract'' environment. In the manuscript
+%% style, abstract will output a Received/Accepted line after the
+%% title and affiliation information. No date will appear since the author
+%% does not have this information. The dates will be filled in by the
+%% editorial office after submission.
 
 \begin{abstract}
-
 Fast Radio Burst have been found from pulsar data for many years. There are several FRB search algorithm like tree algorithm, FDMT et. Here we proposed a different FRB searching algorithm which basically trace a curve in frequency-time image. This algorithm is mainly realized by two dimensional Fast Fourier Transform. We take a 2D FFT on the $f^{-2}(t)$ data map, Then trace the signal along the angle of straight line. In this searching method, it's easier to remove RFI in large scale and will bring a speed up benefit in well-developed 2D FFT library both in CPU and GPU code. \\
 
 
-Fast Radio Burst is a high energy radio signal found in the Universe. The first one is found by Lorimer Duncn in 2007, now people always call it as Lormeter burst. Like Pulsar, It’s a wide band radio sginal, when it go through the inter stellar or inter galaxy medium, the higher frequency will go faster than lower frequency. When Signal go through dense of ISM  The origin of FRB is still unclear, there are lots of theories trying to describe what FRB is.  \\
-
-
-
-
-
-
-% We discuss the implications of the first FRB host being a low-metallicity dwarf galaxy for source models, future searches for FRB hosts, and FRB rates.
+%Astronomical radio bursts disperse while traveling through the interstellar medium.
+%To optimally detect a short-duration signal within a frequency band, we have to precisely compensate for the pulse dispersion, which is a computationally demanding task.
+%We present the Fast Dispersion Measure Transform (FDMT) algorithm for optimal detection of such signals.
+%Our algorithm has a low theoretical complexity of
+%$2N_fN_t+ N_tN_d\log_2(N_f)$ where $N_f$, $N_t$ and $N_d$ are the numbers of frequency bins, time bins,
+%and dispersion measure bins, respectively.
+%Unlike previously suggested fast algorithms our algorithm conserves the sensitivity of brute force dedispersion.
+%Our tests indicate that this algorithm, running on a standard desktop computer, and implemented in a high-level
+%programming language, is already faster than the state of the art dedispersion codes running on graphical processing units (GPUs). 
+%We also present a variant of the algorithm that can be efficiently implemented on GPUs.
+%The latter algorithm's computation and data transport requirements are similar to those of two-dimensional FFT,
+%indicating that incoherent dedispersion can now be considered a non-issue while planning future surveys.
+%We further present a fast algorithm for sensitive dedispersion of pulses shorter than normally allowed by incoherent dedispersion. In typical cases this algorithm is orders of magnitude faster than coherent dedispersion by convolution.
+%We analyze the computational complexity of pulsed signal searches by radio interferometers.
+%We conclude that, using our suggested algorithms, maximally sensitive blind searches for 
+%such pulses is feasible using existing facilities.
+%We provide an implementation of these algorithms in Python and MATLAB.
+%Astronomical radio bursts disperse while traveling through the interstellar medium. (i.e, the arrival time is frequency dependent). To optimally detect a short-duration signal within a broad frequency band, we have to precisely compensate for the pulse dispersion.    
+%Detecting signals with an unknown dispersion measure is a computationally demanding task.
+%We present the novel Fast Dispersion Measure Transform (FDMT) algorithm for optimal detection of such signals.
+%Our algorithm has a low theoretical complexity of $2N_fN_t+ N_tN_d\log_2(N_f)$ where $N_f$ and $N_t$ are the numbers of frequency bins and time bins of the input data, respectively, and $N_d$ is the number of dispersion measure bins in the output.
+%Unlike previously suggested fast algorithms our algorithm conserves the sensitivity of brute force dedispersion.
+%Our tests indicate that this algorithm, running on a standard desktop computer, and implemented in a high-level programming language, is already faster than the state of the art dedispersion codes running on graphical processing units (GPUs).  
+%We also present a variant of the algorithm that can be efficiently implemented on GPUs. 
+%The latter algorithm's computation and data transport requirements are similar to those of two-dimensional FFT, indicating that incoherent dedispersion can now be considered a non-issue while planning future surveys.
+%We further present an algorithm for accurate and efficient dedispersion of pulses shorter than normally allowed by incoherent dedispersion. We show that for any pulse length ($t_p$) that is longer than the receiver sampling interval ($1/\nu$, where $\nu$ is the sampling frequency), our algorithm is as sensitive as coherent dedispersion, and is faster by a factor of $t_p\nu$ relative to coherent dedispersion by convolution.
+%This translates to a significant increase in sensitivity to short duration pulses.
+%We close by analyzing the computational complexity of short pulse searches by modern radio interferometers using our hybrid algorithm, and we arrive at the conclusion that blind searches for pulses with unknown dispersion measures could be performed at maximal sensitivity with existing facilities.
+%We provide an implementation of these algorithms in Python and MATLAB.
+%and we time the same benchmarks as in \citep{GPUDedispersion}
 
 \end{abstract}
 
-\keywords{2DFFT ,FAST radio burst }
+%% Keywords should appear after the \end{abstract} command. The uncommented
+%% example has been keyed in ApJ style. See the instructions to authors
+%% for the journal to which you are submitting your paper to determine
+%% what keyword punctuation is appropriate.
+
+\keywords{2DFFT ,algorithm, Fast radio burst}
 
 \section{Introduction}
  \label{sec:intro}
@@ -130,9 +197,9 @@ A plethora of source models have been proposed to explain the properties of FRBs
 Since the only evidence to claim an extragalactic origin for FRBs has been the anomalously high DM, some models also attempted to explain the excess DM as a part of the model, thus allowing FRBs to be Galactic. All FRBs observed to date have been detected with single dish radio telescopes, for which the localization is of order arcminutes, insufficient to obtain an unambiguous association with any object. To date, no independent information about their redshift, environment, and source could be obtained due to the lack of an accurate localization of FRBs. \citet{kjb+16} attempted to identify the host of FRB\,150418 on the basis of a fading radio source in the field that was localized to a $z=0.492$ galaxy. However, later work identified the radio source as a variable active galactic nucleus (AGN) that may not be related to the source \citep{wb16,bbt+16,gmg+16,jkb+16}.
 
 %\subsection{Interferometric Localization of \frb}
- Repeated radio bursts were observed from the location of the Arecibo-detected \frb\ \citep{ssh+16a,ssh+16b}, with the same DM as the first detection, indicating a common source. As discussed by \citet{ssh+16a}, it is unclear whether the repetition makes \frb\ unique among known FRBs, or whether radio telescopes other than Arecibo lack the sensitivity to readily detect repeat bursts from other known FRBs.
+Repeated radio bursts were observed from the location of the Arecibo-detected , with the same DM as the first detection, indicating a common source. As discussed by, it is unclear whether the repetition makes unique among known FRBs, or whether radio telescopes other than Arecibo lack the sensitivity to readily detect repeat bursts from other known FRBs.
 
-\citet{clw+16} used the Karl G. Jansky Very Large Array (VLA) to directly localize the repeated bursts from \frb\ with 100-mas precision and reported an unresolved, persistent radio source and an extended optical counterpart at the location with a chance coincidence probability of $\approx 3\times10^{-4}$ --- the first unambiguous identification of multi-wavelength counterparts to FRBs. Independently, \citet{mph+16} used the European VLBI Network (EVN) to localize the bursts and the persistent source and showed that both are co-located within $\sim12$ milliarcseconds.
+\citet{clw+16} used the Karl G. Jansky Very Large Array (VLA) to directly localize the repeated bursts from  with 100-mas precision and reported an unresolved, persistent radio source and an extended optical counterpart at the location with a chance coincidence probability of $\approx 3\times10^{-4}$ --- the first unambiguous identification of multi-wavelength counterparts to FRBs. Independently,  used the European VLBI Network (EVN) to localize the bursts and the persistent source and showed that both are co-located within $\sim12$ milliarcseconds.
 
 Here we report a new algorithm to search FRBs . 
 
@@ -389,13 +456,66 @@ After this we could get Signal Noise Ratio by
 \begin{equation*}
 SNR = \frac{Max~Value }{std}
 \end{equation*}
-When we know where the highest SNR is , we can got the slope of it , finally calculate the DM Value from Eq.(\ref{seq:DM Calculate}). 
-The entire procedure are showed by Fig\ref{fig:Procedure} The Data are generated by SIGPROC and parameter are simulated from TianLai Array FRB backend request which Time resolution is 1 millisecond, Band width is 100 MHz and central Frequency is 750 Mhz,  with 1024 Frequency Channels.
+When we know where the highest SNR is , we can got the slope of it , finally calculate the DM value from Eq.(\ref{seq:DM Calculate}). 
+The entire procedure are showed by Fig\ref{fig:Procedure}. Data are generated by SIGPROC $fake$ command and parameter are simulated from TianLai Array FRB backend request which Time resolution is 1 millisecond, Band width is 100 MHz and central Frequency is 750 Mhz,  with 1024 Frequency Channels.
 
+
+
+
+\section{Detection of observed FRB data}
+Observed FRB data are tested through this algorithm. 
+%\section{Compute Complexity and benchmark}
+
+\section{Algorithm Analysis}
+There are a lot of incoherent transient search algorithm already in use, But I'd like to difference them into three types: $brute~force$ , $tree$ ,  $image processing$. \\
+
+\subsection{Incoherent De-dispersion algorithms and Compute Complexity}
+
+\subsubsection*{brute force}
+$Brute~force$ is implemented in a lot of software like SIGPROC, HEIMDALL. In general, the compute complexity of transient search algorithm is compute dependency on number of time samples $'N_t'$, number of frequency channels $'N_{\nu}'$ and number of DM $'N_{DM}'$ of observation. The basics of $brute force$ is to shift time delays back for each frequency channel according to Eq\ref{eq:Disperse relation}. As every DM are processed with every time sample and frequency channel, so the total compute complexity is $(N_t N_{\nu} N_{DM})$. It has the slowest compute complexity along the 3 types, However it is easier to paralleliz and implement on GPUs which are good at high performance computing. HEIMDALL is an example to take use GPU to De-disperse. It has been used for a lot of real-time survey like UTMOST \ref{} and ??? and already detected lots of FRB instances. \\
+
+\subsubsection*{tree}
+Different with $brute~force$ algorithm, Talor proposed $tree$ algorithm \ref{} to accelarate $brute force$ de-disperse algorithm. Under asumption of Eq \ref{eq:linear assumpution}, Tree algorithm trace signal across a straight line and reuse some element to get rid of redundant calculation. It has same mechanisim as FFT and compute complexity is $(N_t N_{\nu} \log_2{N_{\nu}})$.	Though Tree algorithm is much faster than $brute~orce$, it is difficult at pratical application. The result are iterative at each step, This algorithm has worse  parallelism. Signal line are aproximate linear, so tree algorithm also have detective sensitivity loss problem. Advanced 'tree' method are brought out. People are using sub frequency band to get curve more like straigt and thus parallel compute could be achieved. Moreover, 'FDMT' are proposed to get accurate curve calculated in decent subband. In 'FDMT' algorithm, the compute complexity is $\max \{N_tN_{DM}\log_2(N_{\nu}),2N_{\nu}N_t\}$.\\
+
+\subsubsection*{2DFFT}
+Algorithm disscuessed in this paper is belong to $image processing$ way to De-disperse. This type of algorithm foucus on finding a signal line on given $(f,t)$ data. Excpet algorithm talked in this paper, there are a lot of ways to complish this algorithm, like radnom transform and machine learning. The compute complexity is varied with different implement method. For 2D-FFT algorithm talked in this papaer, The most time consuming step is 2D-FFT. Though a second 1-D FFT are executed on $(r,\theta)$ data, this doesn't change due to $N_t$,$N_{\nu}$, or $N_{DM}$. Because data shape after polar coordinate transform is only decided by supposed signal width $w_s$ and assumed signal length $l_s$ which are constant during a observation. The scale need to process are much smaller than 2D-FFT . Thus the compute complexity got from this algorithm are mainly caused by 2D-FFT which are $2N_t N_{\nu} \log_2(N_t N_{\nu})$. \\
+
+\begin{deluxetable*}{lcccc}[H]  % <--- column justification (center/left/right)
+\tablecolumns{5}
+\tablecaption{Algorithm comparison \label{AlgorithmComparisonTable}}
+\tablehead{   % column headings
+  \colhead{} &
+  \colhead{2DFFT} &
+  \colhead{Brute force} &
+  \colhead{Tree} &
+  \colhead{FDMT} 
+}
+\startdata
+Computational complexity & $2N_t N_{\nu} \log_2(N_t N_{\nu})$ & $N_{\nu}N_tN_{DM} $& $N_{\nu}N_t\log_2(N_{\nu})$ & $\max\{N_tN_{DM}\log_2(N_{\nu}),2N_{\nu}N_t\}$ \\
+DM smearing & No & Yes & Yes & Yes \\
+Parallelization friendly & Yes & Yes & No & Yes
+\enddata
+\end{deluxetable*}
+
+
+ 2DFFT algorithm doesn't have simplest compute complexity.  Take Tree algorithm for example, this method will twice the complexity.  However there are some advantages that we might be interested. No matter $brute~force$ or $tree$ algorithm, DM smearing problem cann't be get rid off. Because the signal line cover more than 1 time sample at single frequency channel at higher DM value. But in image processing way to de-disperse, we are searching a line in the graphic, the DM smearing problem could be solved. Thereby we might achive higher detective sensibility. For pulsear transient searching, this algorithm also include the folding step, as pulses have same DM value and will shows in the same location after 2DFFT. Paraller process are also compatible for 2DFFT algorithm, we could cut $[N_{\nu},N_t]$ data along time axis into $N_{thread}$ data chunks of shape $[N_{\nu},N_t^{'}]$. Note $N_t^{'}$ might not big enough to ensure signal line at largest DM value locate in single data chunck, Then an extra search along slope should be implemented.  Table \ref{AlgorithmComparisonTable} shows comparation with some transients search algorithm like $brute~force$, $tree$, $FDMT$. 
+
+
+
+
+\subsection{Benchmark between different Algorithms}
+\begin{figure}[ht!]
+\epsscale{1}
+\plotone{./pictures/benchmark.png}
+\caption{Benchmark of Transient search software: Sigproc, Sigpyproc, Heimdall , 2DFFT \label{fig:benchmark}}
+\end{figure} 
+This 
 
 \subsection{Advantage on RFI removing}
 There are two sorts of regular RFI: At certain frequency last long time, At certain time stamp but with large bandwidth, corresponding to horizontal and vertical line separately in image of Re-bin data. After 2D FFT , they will rotate 90$^{\circ}$, but all of them go through center no matter what frequency or time stamp they are. Therefore, Regular type of RFI could be removed simply by discarding data after 2D FFT at horizontal and vertical line that go cross center.%0$^{\circ}$ and -90$^{\circ}$. 
 An example could be seen from Fig. \ref{fig:RFI remove}.
+
+\section{Discussion}
 
 \begin{figure}[ht!]
 \centering
@@ -409,130 +529,65 @@ An example could be seen from Fig. \ref{fig:RFI remove}.
 \end{figure}
 
 
-\section{Detection of observed FRB data}
-Observed FRB data are tested through this algorithm. 
-%\section{Compute Complexity and benchmark}
-\section{Incoherent De-dispersion algorithms and Compute Complexity}
-There are a lot of incoherent transient search algorithm already in use, But I'd like to difference them into 4 types: 1) $Brute force$ 2) $Tree algorith$ , 3) $Image processing$ 4) $Machine Learning$.  
+	
 
-$Brute Force$ is implemented in a lot of software like $SIGPROC$, $HEIMDALL$. In general, the compute complexity of transient search algorithm is compute dependency on number of time samples $'N_t'$, number of frequency channels $'N_{\nu}'$ and number of DM $'N_{DM}'$ of observation. The basics of $Brute Force$ is to shift time delays back for each frequency channel according to Eq\ref{eq:Disperse relation}. As every DM are processed with every time sample and frequency channel, so the total compute complexity is $(N_t N_{\nu} N_{DM})$. 
-
-Different with $Brute Force$ algorithm, Talor proposed $Tree$ algorithm \ref{} to accelarate $Brute Force$ de-disperse algorithm. Under asumption of Eq \ref{eq:linear assumpution}, Tree algorithm trace signal across a straight line and reuse some element to get rid of redundant calculation. It has same mechanisim as FFT and compute complexity is $(N_t N_{\nu} \log_2{N_{\nu}})$.	
-
- In 2D-FFT algorithm , The most time consuming step is 2D-FFT. Though a second 1-D FFT are executed on $(r,\theta)$ data, this doesn't change due to $N_t$,$N_{\nu}$, or $N_{DM}$. Because data shape after polar coordinate transform is only decided by supposed signal width $w_s$ and assumed signal length $l_s$ which are constant during a observation. The scale need to process are much smaller than 2D-FFT . Thus the compute complexity got from this algorithm are mainly caused by 2D-FFT which are $2N_t N_{\nu} \log_2(N_t N_{\nu})$. Table 1 shows comparation with some Transients search algorithm like $Brute Force$, $Tree$, $FDMT$. This algorithm doesn't have simplest compute complexity.  Take Tree algorithm for example, this method will twice the complexity.  However there are advantages that we might be interested. 
-
-\subsubsection*{tree}
-\subsubsection*{brute force}
-
-\subsubsection*{FDMT}
-\subsubsection*{2DFFT}
-\subsection{Benchmark}
-\begin{figure}[ht!]
-\epsscale{1}
-\plotone{./pictures/benchmark.png}
-\caption{Benchmark of Transient search software: Sigproc, Sigpyproc, Heimdall , 2DFFT \label{fig:benchmark}}
-\end{figure} 
  
-\bibliography{paper}
-%\begin{deluxetable*}{lccc}  % <--- column justification (center/left/right)
-%\begin{figure}[ht!]
-%\epsscale{1.2}
-%\plotone{./pictures/procedure1.png}
-%\caption{The whole process of 2DFFT algorithm. Left top is Raw data of FRB data curve in $f(t)$ form which are follow Eq(\ref{eq:Disperse relation}). Left bottom is Re-bin process on Raw data,after this process curve in the Left top will comes to a straight line in $f^{-2}(t)$ form. Mid top is Re-bin Data after 2D FFT. Straight line in Left bottom turn into a straigt line that rotate 90$^{\circ}$ and go through center. As discussed in Sec \ref{sec:polar coordinate transform}, we could only take one quadrant data. Here we take data inside red line area of Mid top. One quadrant data are showed in Mid bottom. In Mid bottom image, Left top point is taken as origin and top horizontal line as origin axis, Then calculate the radius and angle of slope of each pixel and change this image into polar coordinate image of $(radius,angle)$ form as showed in Right top. As phase term influence, interference 	texture could be found on 2D FFT image. Then final step is doing 1D FFT along radius axis on polar coordinate data, then entire signal line will converge to several spots as showed in Right bottom.  \label{fig:Procedure}}
-%\end{figure}
-%\end{deluxetable*}
+
+
+
 
 \begin{thebibliography}{}
 \expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
-\providecommand{\url}[1]{\href{#1}{#1}}
 
-\bibitem[{{Alam} {et~al.}(2015){Alam}, {Albareti}, {Allende Prieto}, {Anders},
-  {Anderson}, {Anderton}, {Andrews}, {Armengaud}, {Aubourg}, {Bailey}, \&
-  et~al.}]{aaa+15}
-{Alam}, S., {Albareti}, F.~D., {Allende Prieto}, C., {et~al.} 2015, \apjs, 219,
-  12
+%\bibitem[Bannister \& Cornwell(2011)]{Chirpolator} Bannister, K.~W., \& Cornwell, T.~J.\ 2011, \apjs, 196, 16
+
+\bibitem[Barsdell et al.(2012)]{GPUDedispersion} Barsdell, B.~R., Bailes, M., Barnes, D.~G., \& Fluke, C.~J.\ 2012, \mnras, 422, 379  
+
+\bibitem[Brady (1998)]{RadonBrady}
+ Brady, Martin L. "A fast discrete approximation algorithm for the Radon transform." SIAM Journal on Computing 27, no. 1 (1998): 107-119.
+
+\bibitem[Clarke et al.(2013)]{FPGADedispersion} Clarke, N., Macquart, J.-P., \& Trott, C.\ 2013, \apjs, 205, 4 
+
+\bibitem[Clarke et al.(2014)]{DedispersionInterferometers} Clarke, N., D'Addario, L., Navarro, R., \& Trinh, J.\ 2014, Journal of Astronomical Instrumentation , 3, 50004 
+
+
+\bibitem[Gotz \& Druckmuller(1996)]{RadonGotsDruckmuller}	Gotz, W. A., and H. J. Druckmuller. "A fast digital Radon transform. An efficient means for evaluating the Hough transform." Pattern Recognition 29, no. 4 (1996): 711-718.
+
+
+\bibitem[Manchester et al.(1996)]{sub-bandDedispersion} Manchester, R.~N., 
+Lyne, A.~G., D'Amico, N., et al.\ 1996, \mnras, 279, 1235
+
+
+\bibitem[Magro et al.(2011)]{GPUsub-bandDedispersion} Magro, A., Karastergiou, 
+A., Salvini, S., et al.\ 2011, \mnras, 417, 2642
+
+
+\bibitem[McLaughlin 
+\& Cordes(2003)]{DetectingPulsarsByGiantPulses} McLaughlin, M.~A., \& Cordes, J.~M.\ 2003, \apj, 596, 982 
+
+\bibitem[Lorimer et al.(2007)]{LorimerBurst} Lorimer, D.~R., Bailes, 
+M., McLaughlin, M.~A., Narkevic, D.~J., 
+\& Crawford, F.\ 2007, Science, 318, 777
+
+\bibitem[Lorimer 
+\& Kramer(2012)]{HandbookOfPulsarAstronomy} Lorimer, D.~R., \& Kramer, M.\ 2012, Handbook of Pulsar Astronomy, by D.~R.~Lorimer , M.~Kramer, Cambridge, UK: Cambridge University Press, 2012,
+
+\bibitem[Petroff et al.(2014)]{PetroffFRBsNullDetection} Petroff, E., van 
+Straten, W., Johnston, S., et al.\ 2014, \apjl, 789, L26  
+
+\bibitem[Taylor(1974)]{TreeDedispersion} Taylor, J.~H.\ 1974, \aaps, 15, 367 
+
+\bibitem[Thompson et al.(2011)]{DedispersionInterferometersCaseStudy} Thompson, D.~R., Wagstaff, K.~L., Brisken, W.~F., et al.\ 2011, \apj, 735, 98 
+
+\bibitem[Thornton et al.(2013)]{FRBS} Thornton, D., 
+Stappers, B., Bailes, M., et al.\ 2013, Science, 341, 53
+
+\bibitem[van Leeuwen \& Stappers(2010)]{LOFARPulsar}
+ van Leeuwen, J., \& Stappers, B.~W.\ 2010, \aap, 509, A7
+
 
 \end{thebibliography}
 
-
-
-
 \end{document}
-
-
-
-%\begin{figure*}
-%  \center
-%  \includegraphics[width=0.9\textwidth]{nustar_regions}
-%  \includegraphics[clip=true,trim=0.3in 0.3in 1.1in 0.8in,width=0.45\textwidth]{backgrounds_A}
-%  \includegraphics[clip=true,trim=0.3in 0.3in 1.1in 0.8in,width=0.45\textwidth]{backgrounds_B}
-%  \caption{}
-%  \label{fig:nustar_regions}
-%\end{figure*}
-
-
-%\begin{deluxetable}{lcccc}
-%  \centering
-%  \tablecolumns{5} 
-%  \tablecaption{X-ray Observations of \igr\ in 2014.\label{tab:obs}}
-%  \tablewidth{0pt}
-%  \tabletypesize{\footnotesize}
-%  \tablehead{
-%    \colhead{Obs ID/Rev\tablenotemark{a}}   &
-%    \multicolumn{2}{c}{Obs Time (UT)\tablenotemark{b}} & 
-%    \colhead{Exp}      &
-%    \colhead{Rate}\\
-%    \colhead{}  &
-%    \colhead{Start}                    &
-%    \colhead{End}                    &
-%    \colhead{(ks)}                 &
-%    \colhead{(cts/s)}
-%  }
-%  \startdata 
-%  \sidehead{\nustar}           %MJD-OBS            TELAPSE  
-%  80001046002 & 10-10 08:51:07 & 10-11 00:46:07 & 29.4& 3.5--4  \\  %56940.38413696764  5.562777499043941E+04
-
-%  \sidehead{\integral}
-%  1458        & 09-21 19:03:49 & 09-24 04:25:41 & 28.7  & 3.1\\  
-
-% \enddata
-%\tablecomments{}
-%\tablenotetext{a}{}
-%\tablenotetext{b}{}
-%\tablenotetext{p}{}
-%\end{deluxetable}
-
-%\begin{deluxetable}{clcc}
-%  \centering
-%  \tablecolumns{4} 
-%  \tablecaption{Optical Observations of \frb \label{tab:obs}}
-%  \tablewidth{0pt}
-%  \tabletypesize{\footnotesize}
-%  \tablehead{
-%    % Date, Filt/Grating, Exposure, Conditions 
-%    \colhead{Date}   &
-%    \colhead{Filter/} & 
-%    \colhead{Exposure}      &
-%    \colhead{Conditions}\\
-%    \colhead{UTC}  &
-%    \colhead{Grating}  &
-%    \colhead{(s)} &
-%    \colhead{\texttt{IQ},\texttt{CC},\texttt{WV},\texttt{BG}\tablenotemark{a}}                 
-%  }
-%  \startdata 
-% % \sidehead{\nustar}           %MJD-OBS            TELAPSE  
-% % 80001046002 & 10-10 08:51:07 & 10-11 00:46:07 & 29.4& 3.5--4  \\  %56940.38413696764  5.562777499043941E+04
-%2016-10-24 & $r^\prime$ & 500 & 20,70,50,50\\
-%2016-10-25 & $r^\prime$ & 750 & 70,70,20,20\\
-%2016-11-02 & $i^\prime$ & 1200 & 20,50,20,20\\
-%2016-11-02 & $z^\prime$ & 1800 & 70,50,20,20\\
-%2016-11-09 & R400/675\tablenotemark{b} & 7200 & 20,50,100,20\\
-%2016-11-10 & R400/690\tablenotemark{b} & 5400 & 70,50,100,20\\
-%2016-11-10 & R400/675\tablenotemark{b} & 3600 & 70,50,100,20\\
-% \enddata
-%%\tablecomments{}
-%\tablenotetext{a}{Image quality (\texttt{IQ}), Cloud Cover (\texttt{CC}), Water Vapor (\texttt{WV}), and Sky Background (\texttt{BG}) conditions in percentiles for the Gemini North Observatory site on Mauna Kea. \texttt{IQ}20 and \texttt{IQ}70 correspond to 0\farcs50 and 0\farcs75 zenith seeing in $i^\prime$ band, respectively. \texttt{BG}20 and \texttt{BG}50 correspond to sky surface brightness of $\upmu_V > 21.3\,\mathrm{mag\,arcsec^{-2}}$ and $ > 20.7\,\mathrm{mag\,arcsec^{-2}}$, respectively. }
-%\tablenotetext{b}{Grating and central wavelength in nm.}
-%\end{deluxetable}
 
 
