@@ -1,11 +1,4 @@
 \relax 
-\citation{lbm+07,tsb+13,bb14,kskl12,rsj15,pbb+15,kjb+16,cpk+16,rsb+16}
-\citation{sch+14}
-\citation{mls+15}
-\citation{katz16}
-\citation{kjb+16}
-\citation{wb16,bbt+16,gmg+16,jkb+16}
-\citation{clw+16}
 \newlabel{FirstPage}{{}{1}{}{}{}}
 \@writefile{toc}{\contentsline {abstract}{ABSTRACT}{1}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {1}Introduction}{1}{}}
@@ -18,12 +11,11 @@
 \newlabel{rebin_shape}{{3}{2}{}{}{}}
 \newlabel{eq:line function}{{14}{2}{}{}{}}
 \newlabel{seq:DM Calculate}{{16}{2}{}{}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces The whole process of 2DFFT algorithm. Left top is Raw data of FRB data curve in $f(t)$ form which are follow Eq(1{}{}{}\hbox {}). Left bottom is Re-bin process on Raw data,after this process curve in the Left top will comes to a straight line in $f^{-2}(t)$ form. Mid top is Re-bin Data after 2D FFT. Straight line in Left bottom turn into a straigt line that rotate 90$^{\circ }$ and go through center. As discussed in Sec 3.1{}{}{}\hbox {}, we could only take one quadrant data. Here we take data inside red line area of Mid top. One quadrant data are showed in Mid bottom. In Mid bottom image, Left top point is taken as origin and top horizontal line as origin axis, Then calculate the radius and angle of slope of each pixel and change this image into polar coordinate image of $(radius,angle)$ form as showed in Right top. As phase term influence, interference texture could be found on 2D FFT image. Then final step is doing 1D FFT along radius axis on polar coordinate data, then entire signal line will converge to several spots as showed in Right bottom. }}{3}{}}
-\newlabel{fig:Procedure}{{1}{3}{}{}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.1}polar coordinate transform}{3}{}}
 \newlabel{sec:polar coordinate transform}{{3.1}{3}{}{}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Signal on 2DFFT map }}{3}{}}
-\newlabel{fig:2DFFT}{{2}{3}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Turn signal line into spot}{3}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4}Detection of observed FRB data}{3}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5}Incoherent De-dispersion Algorithm Analysis}{3}{}}
 \gdef \LT@i {\LT@entry 
     {8}{108.93199pt}\LT@entry 
     {8}{80.41022pt}\LT@entry 
@@ -31,11 +23,10 @@
     {8}{66.05246pt}\LT@entry 
     {8}{129.55519pt}}
 \gdef \deluxe@table@width@i {-437.49037pt}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Turn signal line into spot}{4}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {4}Detection of observed FRB data}{4}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {5}Incoherent De-dispersion Algorithm Analysis}{4}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Benchmark between different Algorithms}{4}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}Advantage on RFI removing}{4}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces The whole process of 2DFFT algorithm. Left top is Raw data of FRB data curve in $f(t)$ form which are follow Eq(1{}{}{}\hbox {}). Left bottom is Re-bin process on Raw data,after this process curve in the Left top will comes to a straight line in $f^{-2}(t)$ form. Mid top is Re-bin Data after 2D FFT. Straight line in Left bottom turn into a straigt line that rotate 90$^{\circ }$ and go through center. As discussed in Sec 3.1{}{}{}\hbox {}, we could only take one quadrant data. Here we take data inside red line area of Mid top. One quadrant data are showed in Mid bottom. In Mid bottom image, Left top point is taken as origin and top horizontal line as origin axis, Then calculate the radius and angle of slope of each pixel and change this image into polar coordinate image of $(radius,angle)$ form as showed in Right top. As phase term influence, interference texture could be found on 2D FFT image. Then final step is doing 1D FFT along radius axis on polar coordinate data, then entire signal line will converge to several spots as showed in Right bottom. }}{4}{}}
+\newlabel{fig:Procedure}{{1}{4}{}{}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Signal on 2DFFT map }}{4}{}}
+\newlabel{fig:2DFFT}{{2}{4}{}{}{}}
 \bibcite{GPUDedispersion}{{1}{2012}{{Barsdell et al.}}{{}}}
 \bibcite{RadonBrady}{{2}{1998}{{Brady }}{{}}}
 \bibcite{FPGADedispersion}{{3}{2013}{{Clarke et al.}}{{}}}
@@ -57,8 +48,10 @@
 \citation{apsrev41Control}
 \newlabel{AlgorithmComparisonTable}{{1}{5}{}{}{}}
 \@writefile{lot}{\contentsline {table}{\numberline {1}{\\Algorithm comparison }}{5}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Benchmark between different Algorithms}{5}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Benchmark of Transient search software: Sigproc, Sigpyproc, Heimdall , 2DFFT }}{5}{}}
 \newlabel{fig:benchmark}{{3}{5}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}Advantage on RFI removing}{5}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {6}Discussion}{5}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Plot (a) shows Re-bin map which are add 3 RFI manully: Time domain and frequency domain and short bad data area. Seeing from Plot (b), RFI are removed clearly. }}{5}{}}
 \newlabel{fig:RFI remove}{{4}{5}{}{}{}}

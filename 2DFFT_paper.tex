@@ -75,7 +75,7 @@
 
 
 
-\title{Using 2D-FFT to search Fast Radio Burst}%\footnote{peterniu@nao.cas.cn}}
+\title{ 2D-FFT to search Fast Radio Burst}%\footnote{peterniu@nao.cas.cn}}
 
 \revised{\today}
 %\accepted{\today}
@@ -188,26 +188,12 @@ Fast Radio Burst have been found from pulsar data for many years. There are seve
 
 \section{Introduction}
  \label{sec:intro}
-Fast radio bursts (FRBs) are bright ($\sim$Jy) and short ($\sim$ms) bursts of radio emission that have dispersion measures (DMs) in excess of the line of sight DM contribution expected from the electron distribution of our Galaxy. To date 18 FRBs have been reported
-%\footnote{\url{http://www.astronomy.swin.edu.au/pulsar/frbcat/}} \citep{pbj+16}
- --- most of them detected at the Parkes telescope \citep{lbm+07,tsb+13,bb14,kskl12,rsj15,pbb+15,kjb+16,cpk+16,rsb+16} and one each at the Arecibo \citep{sch+14} and Green Bank telescopes \citep{mls+15}. 
+Fast Radio burst is a radio transient which has short time scale ($\sim$ ms) but with high energy ($\sim$ Jys). It was first found by D.Lorimer in 2007 and that burst always been called Lorimer burst. FRB was believed only take place only once until FRB121102 was observed repeatedly which is first found by Aricebo then observed by VLA and GBT separately. Except the repeater,  other FRBs are never shown up during latter observation. As so fat, 34 FRBs events have been published. Most of then are observed by single dish like Parks ,aricebo and GBT, more cheering thing is that interferometer telescope Array are beginning to capture FRBs. Single dish has advantage of better sensitivity , but interferometer could form multi-beam to get larger Filed of views and more accurate localization. In 2016,  VLA observed the repeater and localize the Repeater at $\leq 3 \arcsec$ with interferometer. and Monlonglo observatory which is a productive interferometer telescope array that has caught 6 FRBs in 2 years.  
 
-A plethora of source models have been proposed to explain the properties of FRBs \citep[see e.g.][for a brief review]{katz16}. According to the models, the excess DM for FRBs may be intrinsic to the source, placing it within the Galaxy; it may arise mostly from the intergalactic medium, placing a source of FRBs at cosmological distances ($z\sim0.2-1$) or it may arise from the host galaxy, placing a source of FRBs at extragalactic, but not necessarily cosmological, distances ($\sim100$\,Mpc).
+  Same as other radio transient, FRB's frequency components was dispersed when it propagate through Inter Galactic Medium (IGM). In map of Spectrum varied with time, higher frequency component of transient signal will arrive earlier than lower part. Before integrate frequency components in 1 spectrum,  an process called De-disperse is required in order to get entire Intensity of signal. There are four basic trends for De-dispersion algorithm: I. Brute Force II. Tree III. Image processing IV. Machine Learning. Brute Force and Tree method are discussed in Section 5.  Image processing is like search signal line on image. it can be achieved by Radon transform or Hough transform. Machine learning is a heated topic recently, and there are a lot of work imply Machine learning into transient search. In this paper, I'd like to introduce how to use 2D-FFT to search transients signal.  Instead of search signal in I(f,t) map, this method are concentrated on search signal in Fourier transform space. There are already some previous work on this. Ait-Allal first has implement this on GPU to search Pulsar signals, and Schmid analysed this method theoretically. In this paper, we contributed on improve sensitivity of this method by different line track on Fourier space and additional 1-D FFT step . We also provide pipeline here which are written in Python and parallel friendly in MPI. This pipeline has been tested from simulated data and some known FRB data. Process speed and sensitivity of this pipeline looks like slightly worse than Heimdall but acceptable.  Standard Filterbank can be input of this pipeline, however, Sigpyproc software are required to be installed ahead. 
+  
+  This Paper are composite as follows, some basics of incoherent 2D-FFT De-dispersion is re-deducted in Sec 2. The detailed implementation of 2D-FFT algorithm are shown in section 3. We give some results on already know FRBs are presented in section 4. in sec 5, we introduce some algorithm and it's application in software then give Benchmark and sensitivity test between this pipeline and Heimdall. In sec 6, we conclude this work and make some prospect.
 
-Since the only evidence to claim an extragalactic origin for FRBs has been the anomalously high DM, some models also attempted to explain the excess DM as a part of the model, thus allowing FRBs to be Galactic. All FRBs observed to date have been detected with single dish radio telescopes, for which the localization is of order arcminutes, insufficient to obtain an unambiguous association with any object. To date, no independent information about their redshift, environment, and source could be obtained due to the lack of an accurate localization of FRBs. \citet{kjb+16} attempted to identify the host of FRB\,150418 on the basis of a fading radio source in the field that was localized to a $z=0.492$ galaxy. However, later work identified the radio source as a variable active galactic nucleus (AGN) that may not be related to the source \citep{wb16,bbt+16,gmg+16,jkb+16}.
-
-%\subsection{Interferometric Localization of \frb}
-Repeated radio bursts were observed from the location of the Arecibo-detected , with the same DM as the first detection, indicating a common source. As discussed by, it is unclear whether the repetition makes unique among known FRBs, or whether radio telescopes other than Arecibo lack the sensitivity to readily detect repeat bursts from other known FRBs.
-
-\citet{clw+16} used the Karl G. Jansky Very Large Array (VLA) to directly localize the repeated bursts from  with 100-mas precision and reported an unresolved, persistent radio source and an extended optical counterpart at the location with a chance coincidence probability of $\approx 3\times10^{-4}$ --- the first unambiguous identification of multi-wavelength counterparts to FRBs. Independently,  used the European VLBI Network (EVN) to localize the bursts and the persistent source and showed that both are co-located within $\sim12$ milliarcseconds.
-
-Here we report a new algorithm to search FRBs . 
-
-%In Section~\ref{sec:obs}, we discuss the observations and data analysis. In Section~\ref{sec:results}, we identify the counterpart as the host galaxy of the FRB and present its redshift and spectral characteristics. In Section~\ref{sec:discussion}, we discuss the physical properties of the environment and the implications for source models for FRBs.
-
-%Constraining the multitude of FRB models is complicated by the difficulty in localizing FRBs, as all have been found in beams of single dish radio telescopes, which are several arcminutes in diameter. Realtime detection and rapid multi-wavelength follow-up have so far been unsuccessful \citep{pbb+15,kjb+16}.
-
-%\textit{Paragraph on repeating FRB 121102 and VLA localization.}
 
 
 \section{Basics of Incoherent Dedispersion}
@@ -221,7 +207,7 @@ where D is the dispersion measure times a dispersion constant. Thus , We may mod
 \begin{equation}
 I(t,\nu)=I_0(\nu)\delta_D(t-t_s -\frac{D}{\nu^2})  
 \end{equation}
-Where $\delta D$ is the Dirac delta function, $t_s$ marks the signal starting time for infinitely high frequency. If the bandwidth is small, we can approximate
+Where $\delta D$ is the Dirac delta function, $t_s$ marks the signal starting time for infinitely high frequency. Not like keep quadratic term  approximation did by Schmid, Here only keep first order to made SNR analysis.  If the bandwidth is small, we can approximate
 \begin{equation*}
 \frac{D}{\nu^{2}}\approx\frac{D}{\nu_0^2}(1-2\frac{\nu-\nu_0}{\nu_0})
 \end{equation*}
@@ -355,7 +341,7 @@ While the noise is still given by Eq.(8), so in this case
 %%%%%%%%%%%%%%%%%%
 
 \section{Implemented 2DFFT on burst search}
-Assuming data output from Transient Incoherent Search backend are in $(f,t)$ format with size $[N_{ch},N_{tsamp}]$. We could get the signal line are showing up as a curve line which are complied with relationship of $f^{-2}\sim t$ in raw data map from eq. (\ref{eq:Disperse relation}). As the form of curve after 2D-FFT is much more complex than a straight line. Hence we take the 2D-FFT on $(f^{-2},t)$ map. In order to get $(f^{-2},t)$ map, we use interpolation along the frequency axis in $(f,t)$ map. The total pixel number of $(f^{-2},t)$ map keep same, so that total information could get conservation. In this case, re-bin data still has shape of $[N_{ch},N_{tsamp}]$\label{rebin_shape}, 
+The previous work that search Transients on frequency space\ref are considering take 2DFFT directly on spectrum vaired with time map $I(f,t)$.  Schmid did some approximate in qudratic term, but residual still get lower amplitude. In real implementation of 2DFFT algorithm,  we straight the curve first . Assuming data output from Transient Incoherent Search backend are in $I(f,t)$ format with size $[N_{ch},N_{tsamp}]$. We could get the signal line are showing up as a curve line which are complied with relationship of $f^{-2}\sim t$ in raw data map from eq. (\ref{eq:Disperse relation}).  Through interpolation along the frequency axis in $(f,t)$ map , we turn $I(f,t)$ into $I(f^(-1),t)$, then take the 2D-FFT on $( In order to gf^{-2},t)$ map.This step we call it $re-bin$. The total pixel number of $(f^{-2},t)$ map keep same, so that total information could get conservation. In this case, re-bin data still has shape of $[N_{ch},N_{tsamp}]$\label{rebin_shape}, 
 
 From eq.(\ref{eq:Disperse relation})~,~define $k_1 =- \frac{1}{D} $.~We could rewrite eq.(\ref{eq:Disperse relation}) as 
 \begin{equation}
@@ -376,7 +362,7 @@ DM = -\frac{1}{C}\cdot\frac{T}{\max(f^{-2}) - \min(f^{-2})}\cdot k_2 \label{seq:
 
 And the $b$ comes to module factor in $e^{-i2\pi vb}$. It is still straight but perpendicular to previous straight. Furthermore,  wherever the signal arise in raw data map , it always go cross the center of 2D-FFT map. Take advantage of these property, we could search transient signal on 2D-FFT map along specific angle. 
 
-For the phase term $e^{-i2\pi vb}$, it will modulate the signal intensity monotonically along straight line of 2D-FFT map. if we sum along straight line directly, we might not get the highest signal noise ratio. An effective and feasible method is to take a second FFT along straight line, then whole signal will turn into a spot. The whole process will take 4 steps to accomplish, we called them : Re-bin, 2D-FFT, Polar transform, 1D-FFT. Data after these process called map with process suffix separately,e.g. data after Re-bin  Re-bin map.
+For the phase term $e^{-i2\pi vb}$, it will modulate the signal intensity monotonically along straight line of 2D-FFT map. if we sum along straight line directly on amplitude of data , we might not get the highest signal noise ratio. An effective and feasible method is to take a second FFT along straight line, then whole signal will turn into a spot. Note this will process on conjugate data after 2D-FFT, in this case the noise will be averaged down. The whole process will take 4 steps to accomplish, we called them : Re-bin, 2D-FFT, Polar transform, 1D-FFT. To be easy statement,  Data after these process called 'map' with process suffix separately,e.g. data after Re-bin  Re-bin map.
 
 
 \begin{figure*}
@@ -457,7 +443,7 @@ After this we could get Signal Noise Ratio by
 SNR = \frac{Max~Value }{std}
 \end{equation*}
 When we know where the highest SNR is , we can got the slope of it , finally calculate the DM value from Eq.(\ref{seq:DM Calculate}). 
-The entire procedure are showed by Fig\ref{fig:Procedure}. Data are generated by SIGPROC $fake$ command and parameter are simulated from TianLai Array FRB backend request which Time resolution is 1 millisecond, Band width is 100 MHz and central Frequency is 750 Mhz,  with 1024 Frequency Channels.
+The entire procedure are showed by Fig\ref{fig:Procedure}. Data are generated by SIGPROC $fake$ command and parameter are simulated from TianLai Array FRB backend request which Time resolution is 0.1 millisecond, Band width is 100 MHz and central Frequency is 750 Mhz,  with 2048 Frequency Channels.
 
 
 
@@ -467,18 +453,18 @@ Observed FRB data are tested through this algorithm.
 %\section{Compute Complexity and benchmark}
 
 \section{Incoherent De-dispersion Algorithm Analysis}
-There are a lot of incoherent transient search algorithm already in use, But I'd like to difference them into three types: $brute~force$ , $tree$ ,  $image~processing$. \\
+There are a lot of incoherent transient search algorithm already in use, But I'd like to difference them into three types: $brute~force$ , $tree$ ,  $image~processing$,$machine~learning$. \\
 
 %\subsection{Algorithm Compute Complexity}
 
 \subsubsection*{brute force}
-$Brute~force$ is implemented in a lot of software like SIGPROC, HEIMDALL. In general, the compute complexity of transient search algorithm is compute dependency on number of time samples $'N_t'$, number of frequency channels $'N_{\nu}'$ and number of DM $'N_{DM}'$ of observation. The basics of $brute~force$ is to shift time delays back for each frequency channel according to Eq\ref{eq:Disperse relation}. As every DM are processed with every time sample and frequency channel, so the total compute complexity is $(N_t N_{\nu} N_{DM})$. It has the slowest compute complexity along the 3 types, However it is easier to parallel and implement on GPUs which are good at high performance computing. HEIMDALL is an example to take use GPU to De-disperse. It has been used for a lot of real-time survey like UTMOST \ref{} and ??? and already detected lots of FRB instances. \\
+$Brute~force$ is implemented in a lot of software like SIGPROC, HEIMDALL. In general, the compute complexity of transient search algorithm is compute dependency on number of time samples $'N_t'$, number of frequency channels $'N_{\nu}'$ and number of DM $'N_{DM}'$ of observation. The basics of $brute~force$ is to shift time delays back for each frequency channel according to Eq\ref{eq:Disperse relation}. As every DM are processed with every time sample and frequency channel, so the total compute complexity is $(N_t N_{\nu} N_{DM})$. It has the slowest compute complexity along the 3 types, However it is easier to parallel and implement on GPUs which are good at high performance computing. HEIMDALL is an example to take use GPU to De-disperse. It has been used for a lot of real-time survey like UTMOST \ref{} and ??? and already detected lots of FRB instances. It's also the one who has best compatibility for phase of pulses.   \\
 
 \subsubsection*{tree}
 Different with $brute~force$ algorithm, Talor proposed $tree$ algorithm \ref{} to accelerate $brute force$ de-disperse algorithm. Under assumption of Eq \ref{eq:linear assumption}, Tree algorithm trace signal across a straight line and reuse some element to get rid of redundant calculation. It has same mechanism as FFT and compute complexity is $(N_t N_{\nu} \log_2{N_{\nu}})$.	Though Tree algorithm is much faster than $brute~orce$, it is difficult at piratical application. The result are iterative at each step, This algorithm has worse  parallelism. Signal line are approximate linear, so tree algorithm also have detective sensitivity loss problem. Advanced 'tree' method are brought out. People are using sub frequency band to get curve more like straigt and thus parallel compute could be achieved. Moreover, $FDMT$ algorithm are proposed to get accurate curve calculated in decent subband \ref{}. In $FDMT$ algorithm, the compute complexity is $\max \{N_tN_{DM}\log_2(N_{\nu}),2N_{\nu}N_t\}$.\\
 
 \subsubsection*{2DFFT}
-Algorithm discussed in this paper is kind of $image~processing$ way to De-disperse. This type of algorithm focus on finding a signal line on given $(f,t)$ data. Except algorithm talked in this paper, there are a lot of ways to accomplish this algorithm, like radon transform and machine learning. The compute complexity is varied with different implement method. For 2D-FFT algorithm talked in this paper, The most time consuming step is 2D-FFT. Though a second 1-D FFT are executed on $(r,\theta)$ data, this doesn't change complexity due to $N_t$,$N_{\nu}$, or $N_{DM}$. Because data shape after polar coordinate transform is only decided by supposed signal width $w_s$ and assumed signal length $l_s$ which are constant during a observation. The scale need to process are much smaller than 2D-FFT . Thus the compute complexity got from this algorithm are mainly caused by 2D-FFT which are $2N_t N_{\nu} \log_2(N_t N_{\nu})$. \\
+Algorithm discussed in this paper is kind of $image~processing$ way to De-disperse. This type of algorithm focus on finding a signal line on given $(f,t)$ data. Except algorithm talked in this paper, there are a lot of ways to accomplish this algorithm, like radon transform and machine learning. The compute complexity is varied with different implement method. For 2D-FFT algorithm talked in this paper, The most time consuming step is 2D-FFT. Though second 1-D FFT are executed on $(r,\theta)$ data, this doesn't change complexity due to $N_t$,$N_{\nu}$, or $N_{DM}$. Because data shape after polar coordinate transform is only decided by supposed signal width $w_s$ and assumed signal length $l_s$ which are constant during a observation. The scale need to process are much smaller than 2D-FFT . Thus the compute complexity got from this algorithm are mainly caused by 2D-FFT which are $2N_t N_{\nu} \log_2(N_t N_{\nu})$. \\
 
 \begin{deluxetable*}{lcccc}[H]  % <--- column justification (center/left/right)
 \tablecolumns{5}
@@ -498,7 +484,8 @@ Parallelization friendly & Yes & Yes & No & Yes
 \end{deluxetable*}
 
 
-2DFFT algorithm doesn't have simplest compute complexity.  Take Tree algorithm for example, this method will twice the complexity.  However there are some advantages that we might be interested. No matter $brute~force$ or $tree$ algorithm, DM smearing problem can't be get rid off. Because the signal line go through more than 1 time sample at single frequency channel at higher DM value. But in image processing way to de-disperse, we are searching a line in the graphic, so that DM smearing problem could be solved. Thereby we might achieve higher detective sensibility. For pulsar transient searching, this algorithm also include the folding step, as pulses have same DM value and will shows in the same location after 2DFFT. Parallel process are also compatible for 2DFFT algorithm, we could cut $[N_{\nu},N_t]$ data along time axis into $N_{thread}$ data chunks of shape $[N_{\nu},N_t^{'}]$. Note $N_t^{'}$ might not big enough to ensure signal line at largest DM value locate in single data chunk, Then an extra search along slope should be implemented.  Table \ref{AlgorithmComparisonTable} shows comparison with some transients search algorithm like $brute~force$, $tree$, $FDMT$. 
+2DFFT algorithm doesn't have simplest compute complexity.  Take Tree algorithm for example, this method will twice the complexity.  However there are some advantages that we might be interested. No matter $brute~force$ or $tree$ algorithm, DM smearing problem can't be get rid off. Because the signal line go through more than 1 time sample at single frequency channel at higher DM value. But in image processing way to de-disperse, we are searching a line in the graphic, so that DM smearing problem could be solved. Thereby we might achieve higher detective sensibility. For pulsar transient searching, this algorithm also include the folding step, as pulses have same DM value and will shows in the same location after 2DFFT. Parallel process are also compatible for 2DFFT algorithm, we could cut $[N_{\nu},N_t]$ data along time axis into $N_{thread}$ data chunks of shape $[N_{\nu},N_t^{'}]$. Note $N_t^{'}$ might not big enough to ensure signal line at largest DM value locate in single data chunk, Then an extra search along slope should be implemented.  Table \ref{AlgorithmComparisonTable} shows comparison with some transients search algorithm like $brute~force$, $tree$, $FDMT$.  
+	Previous work Ait-Allal find this algorithm has great advantage on RFI mitigation, but in this paper , We found Sensitivity is also remarkable. We take 
 
 
 

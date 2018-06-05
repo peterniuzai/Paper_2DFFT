@@ -1,9 +1,9 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  17 MAY 2018 21:56
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  17 MAY 2018 22:02
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**"Note_Set_14 .tex"
-(./Note_Set_14 .tex
+**Note_May_18.tex
+(./Note_May_18.tex
 LaTeX2e <2016/03/31>
 Babel <3.9r> and hyphenation patterns for 83 language(s) loaded.
 (./aastex61.cls
@@ -463,32 +463,32 @@ LaTeX Info: Redefining \[ on input line 2739.
 LaTeX Info: Redefining \] on input line 2740.
 )
 Class revtex4-1 Info: Unrecognized array package. Please update this document c
-lass! (Proceeding with fingers crossed.) on input line 11.
+lass! (Proceeding with fingers crossed.) on input line 10.
 Class revtex4-1 Info: Patching unrecognized longtable package. (Proceeding with
- fingers crossed) on input line 11.
-Class revtex4-1 Info: Robustifying \LaTeX's \boldmath command on input line 11.
+ fingers crossed) on input line 10.
+Class revtex4-1 Info: Robustifying \LaTeX's \boldmath command on input line 10.
 
-Class revtex4-1 Info: cite was not loaded (OK!) on input line 11.
-Class revtex4-1 Info: mcite was not loaded (OK!) on input line 11.
-Class revtex4-1 Info: multicol was not loaded (OK!) on input line 11.
+Class revtex4-1 Info: cite was not loaded (OK!) on input line 10.
+Class revtex4-1 Info: mcite was not loaded (OK!) on input line 10.
+Class revtex4-1 Info: multicol was not loaded (OK!) on input line 10.
 
-(./Note_Set_14 .aux)
-\openout1 = `"Note_Set_14 .aux"'.
+(./Note_May_18.aux)
+\openout1 = `Note_May_18.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 11.
-LaTeX Font Info:    ... okay on input line 11.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 11.
-LaTeX Font Info:    ... okay on input line 11.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 11.
-LaTeX Font Info:    ... okay on input line 11.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 11.
-LaTeX Font Info:    ... okay on input line 11.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 11.
-LaTeX Font Info:    ... okay on input line 11.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 11.
-LaTeX Font Info:    ... okay on input line 11.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 11.
-LaTeX Font Info:    ... okay on input line 11.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 10.
+LaTeX Font Info:    ... okay on input line 10.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 10.
+LaTeX Font Info:    ... okay on input line 10.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 10.
+LaTeX Font Info:    ... okay on input line 10.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 10.
+LaTeX Font Info:    ... okay on input line 10.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 10.
+LaTeX Font Info:    ... okay on input line 10.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 10.
+LaTeX Font Info:    ... okay on input line 10.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 10.
+LaTeX Font Info:    ... okay on input line 10.
 
 (/usr/local/texlive/2016/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
@@ -519,7 +519,7 @@ File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
 \AtBeginShipoutBox=\box57
-Package hyperref Info: Link coloring ON on input line 11.
+Package hyperref Info: Link coloring ON on input line 10.
 
 (/usr/local/texlive/2016/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
@@ -529,22 +529,22 @@ Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 )
 \c@section@level=\count163
 )
-LaTeX Info: Redefining \ref on input line 11.
-LaTeX Info: Redefining \pageref on input line 11.
-LaTeX Info: Redefining \nameref on input line 11.
-\openout3 = `"Note_Set_14 Notes.bib"'.
+LaTeX Info: Redefining \ref on input line 10.
+LaTeX Info: Redefining \pageref on input line 10.
+LaTeX Info: Redefining \nameref on input line 10.
+\openout3 = `Note_May_18Notes.bib'.
 
-LaTeX Font Info:    Try loading font information for U+lasy on input line 13.
+LaTeX Font Info:    Try loading font information for U+lasy on input line 14.
 
 (/usr/local/texlive/2016/texmf-dist/tex/latex/base/ulasy.fd
 File: ulasy.fd 1998/08/17 v2.2e LaTeX symbol font definitions
 )
-LaTeX Font Info:    Try loading font information for U+msa on input line 13.
+LaTeX Font Info:    Try loading font information for U+msa on input line 14.
 
 (/usr/local/texlive/2016/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 13.
+LaTeX Font Info:    Try loading font information for U+msb on input line 14.
 
 (/usr/local/texlive/2016/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
@@ -560,21 +560,21 @@ Package pdftex.def Info: ./pictures/rebin.png used on input line 20.
 File: ./pictures/nbin_DM_50.png Graphic file (type png)
 
 <use ./pictures/nbin_DM_50.png>
-Package pdftex.def Info: ./pictures/nbin_DM_50.png used on input line 29.
+Package pdftex.def Info: ./pictures/nbin_DM_50.png used on input line 27.
 (pdftex.def)             Requested size: 218.07646pt x 109.96136pt.
 
 <./pictures/nbin_DM_100.png, id=16, 1020.4524pt x 514.5624pt>
 File: ./pictures/nbin_DM_100.png Graphic file (type png)
 
 <use ./pictures/nbin_DM_100.png>
-Package pdftex.def Info: ./pictures/nbin_DM_100.png used on input line 29.
+Package pdftex.def Info: ./pictures/nbin_DM_100.png used on input line 27.
 (pdftex.def)             Requested size: 218.07646pt x 109.96136pt.
 
 <./pictures/nbin_1000.png, id=17, 579.16376pt x 656.4525pt>
 File: ./pictures/nbin_1000.png Graphic file (type png)
 
 <use ./pictures/nbin_1000.png>
-Package pdftex.def Info: ./pictures/nbin_1000.png used on input line 31.
+Package pdftex.def Info: ./pictures/nbin_1000.png used on input line 29.
 (pdftex.def)             Requested size: 87.22925pt x 98.86429pt.
  [2 <./pictures/rebin.png> <./pictures/nbin_DM_50.png> <./pictures/nbin_DM_100.
 png> <./pictures/nbin_1000.png (PNG copy)>]
@@ -582,35 +582,35 @@ png> <./pictures/nbin_1000.png (PNG copy)>]
 File: ./pictures/histogram.png Graphic file (type png)
 
 <use ./pictures/histogram.png>
-Package pdftex.def Info: ./pictures/histogram.png used on input line 53.
+Package pdftex.def Info: ./pictures/histogram.png used on input line 51.
 (pdftex.def)             Requested size: 436.15294pt x 290.76869pt.
 
 <./pictures/interpolation.png, id=37, 1517.67pt x 1011.78pt>
 File: ./pictures/interpolation.png Graphic file (type png)
 
 <use ./pictures/interpolation.png>
-Package pdftex.def Info: ./pictures/interpolation.png used on input line 55.
+Package pdftex.def Info: ./pictures/interpolation.png used on input line 53.
 (pdftex.def)             Requested size: 436.15294pt x 290.76869pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 81--82
+Underfull \hbox (badness 10000) in paragraph at lines 79--80
 
  []
 
 [3] [4 <./pictures/histogram.png> <./pictures/interpolation.png>] [5] [6]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 133.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 131.
 
-(./Note_Set_14 .aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 133.
-Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 133.
+(./Note_May_18.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 131.
+Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 131.
  ) 
 Here is how much of TeX's memory you used:
  9264 strings out of 493014
- 127402 string characters out of 6133351
+ 127388 string characters out of 6133351
  269063 words of memory out of 5000000
  12664 multiletter control sequences out of 15000+600000
  13124 words of font info for 53 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 36i,7n,37p,661b,367s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 36i,7n,37p,658b,367s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb>
 </usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb>
 </usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><
@@ -628,7 +628,7 @@ texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2016/t
 exmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2016/tex
 mf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2016/texm
 f-dist/fonts/type1/public/amsfonts/cm/cmti9.pfb>
-Output written on "Note_Set_14 .pdf" (6 pages, 2542442 bytes).
+Output written on Note_May_18.pdf (6 pages, 2542439 bytes).
 PDF statistics:
  145 PDF objects out of 1000 (max. 8388607)
  108 compressed objects within 2 object streams

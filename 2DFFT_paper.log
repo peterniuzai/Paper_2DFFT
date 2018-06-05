@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  18 APR 2018 10:05
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  4 JUN 2018 23:21
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -438,200 +438,137 @@ Underfull \hbox (badness 10000) in paragraph at lines 146--147
   
  []
 
-
-Package natbib Warning: Citation `lbm+07' on page 1 undefined on input line 193
-.
-
-
-Package natbib Warning: Citation `tsb+13' on page 1 undefined on input line 193
-.
-
-
-Package natbib Warning: Citation `bb14' on page 1 undefined on input line 193.
-
-
-Package natbib Warning: Citation `kskl12' on page 1 undefined on input line 193
-.
-
-
-Package natbib Warning: Citation `rsj15' on page 1 undefined on input line 193.
-
-
-
-Package natbib Warning: Citation `pbb+15' on page 1 undefined on input line 193
-.
-
-
-Package natbib Warning: Citation `kjb+16' on page 1 undefined on input line 193
-.
-
-
-Package natbib Warning: Citation `cpk+16' on page 1 undefined on input line 193
-.
-
-
-Package natbib Warning: Citation `rsb+16' on page 1 undefined on input line 193
-.
-
-
-Package natbib Warning: Citation `sch+14' on page 1 undefined on input line 193
-.
-
-
-Package natbib Warning: Citation `mls+15' on page 1 undefined on input line 193
-.
-
-
-Package natbib Warning: Citation `katz16' on page 1 undefined on input line 195
-.
-
-
-Package natbib Warning: Citation `kjb+16' on page 1 undefined on input line 197
-.
-
-
-Package natbib Warning: Citation `wb16' on page 1 undefined on input line 197.
-
-
-Package natbib Warning: Citation `bbt+16' on page 1 undefined on input line 197
-.
-
-
-Package natbib Warning: Citation `gmg+16' on page 1 undefined on input line 197
-.
-
-
-Package natbib Warning: Citation `jkb+16' on page 1 undefined on input line 197
-.
-
-
-Package natbib Warning: Citation `clw+16' on page 1 undefined on input line 202
-.
-
+[1{/usr/local/texlive/2016/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
 Missing character: There is no ã in font cmr10!
 Missing character: There is no € in font cmr10!
 Missing character: There is no € in font cmr10!
-[1{/usr/local/texlive/2016/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-Underfull \hbox (badness 10000) in paragraph at lines 281--283
+
+Underfull \hbox (badness 10000) in paragraph at lines 267--269
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 281--283
+Underfull \hbox (badness 10000) in paragraph at lines 267--269
 
  []
 
 
-Underfull \hbox (badness 4995) in paragraph at lines 358--359
-[]\OT1/cmr/m/n/10 Assuming data out-put from Tran-sient In-co-her-
- []
+LaTeX Warning: Reference `a' on page 2 undefined on input line 344.
 
-
-Underfull \hbox (badness 1635) in paragraph at lines 358--359
-\OT1/cmr/m/n/10 ent Search back-end are in $(\OML/cmm/m/it/10 f; t\OT1/cmr/m/n/
-10 )$ for-mat with size
- []
-
-<./pictures/procedure1.png, id=19, 1517.67pt x 915.42pt>
+[2] <./pictures/procedure1.png, id=24, 1517.67pt x 915.42pt>
 File: ./pictures/procedure1.png Graphic file (type png)
 
 <use ./pictures/procedure1.png>
-Package pdftex.def Info: ./pictures/procedure1.png used on input line 385.
+Package pdftex.def Info: ./pictures/procedure1.png used on input line 371.
 (pdftex.def)             Requested size: 512.1496pt x 308.91997pt.
- [2]
+
 <./pictures/1stFFT.png, id=25, 282.05376pt x 268.00125pt>
 File: ./pictures/1stFFT.png Graphic file (type png)
 
 <use ./pictures/1stFFT.png>
-Package pdftex.def Info: ./pictures/1stFFT.png used on input line 395.
+Package pdftex.def Info: ./pictures/1stFFT.png used on input line 381.
 (pdftex.def)             Requested size: 208.47804pt x 198.0929pt.
- [3 <./pictures/procedure1.png> <./pictures/1stFFT.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 470--471
+
+Underfull \hbox (badness 3503) in paragraph at lines 456--457
+[]\OT1/cmr/m/n/10 There are a lot of in-co-her-ent tran-sient search
+ []
+
+
+Underfull \hbox (badness 2662) in paragraph at lines 456--457
+\OT1/cmr/m/n/10 al-go-rithm al-ready in use, But I'd like to dif-fer-
+ []
+
+
+Underfull \hbox (badness 1014) in paragraph at lines 456--457
+\OT1/cmr/m/n/10 ence them into three types: $\OML/cmm/m/it/10 brute []force$ \O
+T1/cmr/m/n/10 , $\OML/cmm/m/it/10 tree$ \OT1/cmr/m/n/10 ,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 456--457
 
  []
 
 
-LaTeX Warning: Reference `' on page 4 undefined on input line 475.
+LaTeX Warning: Reference `' on page 3 undefined on input line 461.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 475--476
+Underfull \hbox (badness 10000) in paragraph at lines 461--462
 
  []
 
 
-LaTeX Warning: Reference `' on page 4 undefined on input line 478.
+LaTeX Warning: Reference `' on page 3 undefined on input line 464.
 
 
-LaTeX Warning: Reference `eq:linear assumption' on page 4 undefined on input li
-ne 478.
+LaTeX Warning: Reference `eq:linear assumption' on page 3 undefined on input li
+ne 464.
 
 
-LaTeX Warning: Reference `' on page 4 undefined on input line 478.
+LaTeX Warning: Reference `' on page 3 undefined on input line 464.
 
 
-Underfull \hbox (badness 1281) in paragraph at lines 478--479
+Underfull \hbox (badness 1281) in paragraph at lines 464--465
 \OT1/cmr/m/n/10 trace sig-nal across a straight line and reuse some
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 478--479
+Underfull \hbox (badness 10000) in paragraph at lines 464--465
 
  []
 
 
-Underfull \hbox (badness 5652) in paragraph at lines 481--482
+Underfull \hbox (badness 5652) in paragraph at lines 467--468
 []\OT1/cmr/m/n/10 Algorithm dis-cussed in this pa-per is kind of
  []
 
 
-Underfull \hbox (badness 1342) in paragraph at lines 481--482
+Underfull \hbox (badness 1342) in paragraph at lines 467--468
 \OML/cmm/m/it/10 image []processing$ \OT1/cmr/m/n/10 way to De-disperse. This t
 ype
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 481--482
+Underfull \hbox (badness 10000) in paragraph at lines 467--468
 
  []
 
-<./pictures/benchmark.png, id=34, 462.528pt x 346.896pt>
+[3] [4 <./pictures/procedure1.png> <./pictures/1stFFT.png>]
+<./pictures/benchmark.png, id=38, 462.528pt x 346.896pt>
 File: ./pictures/benchmark.png Graphic file (type png)
 
 <use ./pictures/benchmark.png>
-Package pdftex.def Info: ./pictures/benchmark.png used on input line 509.
+Package pdftex.def Info: ./pictures/benchmark.png used on input line 496.
 (pdftex.def)             Requested size: 208.47804pt x 156.36111pt.
- [4]
+
 <./pictures/RFI_remove-1.png, id=40, 542.025pt x 275.1078pt>
 File: ./pictures/RFI_remove-1.png Graphic file (type png)
 
 <use ./pictures/RFI_remove-1.png>
-Package pdftex.def Info: ./pictures/RFI_remove-1.png used on input line 525.
+Package pdftex.def Info: ./pictures/RFI_remove-1.png used on input line 512.
 (pdftex.def)             Requested size: 229.32712pt x 116.39664pt.
 
 <./pictures/RFI_remove-2.png, id=41, 462.528pt x 267.8808pt>
 File: ./pictures/RFI_remove-2.png Graphic file (type png)
 
 <use ./pictures/RFI_remove-2.png>
-Package pdftex.def Info: ./pictures/RFI_remove-2.png used on input line 527.
+Package pdftex.def Info: ./pictures/RFI_remove-2.png used on input line 514.
 (pdftex.def)             Requested size: 208.47804pt x 120.74553pt.
- (./2DFFT_paper.bbl)
-
-Package natbib Warning: There were undefined citations.
-
-[5 <./pictures/benchmark.png> <./pictures/RFI_remove-1.png> <./pictures/RFI_rem
-ove-2.png>] (./2DFFT_paper.aux)
+ (./2DFFT_paper.bbl) [5 <./pictures/benchmark.png> <./pictures/RFI_remove-1.png
+> <./pictures/RFI_remove-2.png>]
+(./2DFFT_paper.aux)
 
 LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 5460 strings out of 493014
- 73186 string characters out of 6133351
- 166911 words of memory out of 5000000
- 8891 multiletter control sequences out of 15000+600000
+ 5441 strings out of 493014
+ 73028 string characters out of 6133351
+ 168842 words of memory out of 5000000
+ 8872 multiletter control sequences out of 15000+600000
  11831 words of font info for 48 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 42i,9n,28p,1233b,471s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 42i,9n,28p,1702b,471s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
 ></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb><
 /usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><
@@ -655,7 +592,7 @@ st/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2016/texmf-dist
 onts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2016/texmf-dist/fo
 nts/type1/public/amsfonts/cm/cmti8.pfb></usr/local/texlive/2016/texmf-dist/font
 s/type1/public/amsfonts/cm/cmti9.pfb>
-Output written on 2DFFT_paper.pdf (5 pages, 2339391 bytes).
+Output written on 2DFFT_paper.pdf (5 pages, 2339865 bytes).
 PDF statistics:
  121 PDF objects out of 1000 (max. 8388607)
  82 compressed objects within 1 object stream

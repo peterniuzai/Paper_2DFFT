@@ -7,12 +7,12 @@
 \usepackage{graphicx}
 \usepackage{amsmath}  
 
-
 \begin{document}
 \title{Note 2018 May 18 (Talk to Duncan)}
+
+
 \section{General Idea of 2D-FFT Algorithm}
 \subsection{Rebin Data}
-
 As the data matrix has a uniform f axis,The dispersion is a curve. We interpolate the frequency
 axis and change it into wave square axis. Thus the dispersion should be a line in the matrix. 
 \begin{figure}[ht!]
@@ -20,8 +20,6 @@ axis and change it into wave square axis. Thus the dispersion should be a line i
 \plotone{./pictures/rebin.png}
 \caption{Rebin process.\label{fig:rebin}}
 \end{figure}
-
-
 As we tested before , fix other things, only change the bins number $N_{bin}$, we find out when $N_{bin}$ is equal to how many frequency channel $N_{ch}$, the SNR get it's max value.
 To keep the information conservation, The data after changed should have same pixels as before in order to obtain the most information.At DM=100 (last time is DM=50), SNR varied with Nbins looks like:
 \begin{figure}[ht!]
